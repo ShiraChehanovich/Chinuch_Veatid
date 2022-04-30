@@ -11,4 +11,8 @@ function App() {
   );
 }
 
+<<<<<<< HEAD
+=======
+export default App;
+>>>>>>> main
 
