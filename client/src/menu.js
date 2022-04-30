@@ -1,12 +1,12 @@
 import logo from './logo.svg';
-import './App.css';
-import { Login } from './components/Login';
+//import './App.css';
+import { Teacher_file } from './components/Teacher_file';
 
 function App() {
   return (
-    <div className="App">
-      חינוך ועתיד
-      <Login />
+    <div>
+      תפריט
+      <Teacher_file />
     </div>
   );
 }
