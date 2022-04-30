@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+<<<<<<< Updated upstream
 import React from 'react';
 import  Signup  from './components/Signup'
 import { Container } from 'react-bootstrap';
@@ -15,6 +16,18 @@ function App() {
         </div>
     </Container>
     </AuthProvider>
+=======
+import { Login } from './components/Login';
+import { Teacher_file } from './components/Teacher_file';
+import { Student_file } from './components/Student_file';
+
+function App() {
+  return (
+    <div className="App">
+      חינוך ועתיד
+      <Student_file />
+    </div>
+>>>>>>> Stashed changes
   );
 }
 
