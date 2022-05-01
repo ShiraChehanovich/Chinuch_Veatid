@@ -1,13 +1,20 @@
 import logo from './logo.svg';
 import './App.css';
-import { Login } from './components/Login';
+import React from 'react';
+import  Signup  from './components/Signup'
+import { Container } from 'react-bootstrap';
+import { AuthProvider } from './components/context/AuthContext';
 
 function App() {
   return (
-    <div className="App">
-      חינוך ועתיד
-      <Login />
-    </div>
+    <AuthProvider>
+    <Container className="d-flex align-items-center justify-content-center"
+    style={{ minHeight: "100vh" }}>
+        <div className="w-100" style={{ maxWidth: "400px" }}>
+            <Signup /> 
+        </div>
+    </Container>
+    </AuthProvider>
   );
 }
 
