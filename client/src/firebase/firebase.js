@@ -1,7 +1,24 @@
 // Import the functions you need from the SDKs you need
 //import "firebase/auth"
 import { initializeApp } from "firebase/app";
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  collection,
+  addDoc,
+  getDoc,
+  onSnapshot,
+  query,
+  where,
+  getDocs,
+  orderBy,
+  limit,
+} from "firebase/firestore/lite";
 import { getAnalytics } from "firebase/analytics";
+import { addDoc, collection, getDoc, getDocs, getFirestore, query, setDoc, where } from 'firebase/firestore/lite';
+import { ThemeConsumer } from "react-bootstrap/esm/ThemeProvider";
+import { async } from "@firebase/util";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -21,6 +38,83 @@ const firebaseConfig = {
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+
+const firestore = getFirestore();
+
+const speciaLOfTheDay = doc(firestore, 'dailySpecial/2022-08-5')
+function writeDailySpecial() {
+  const docData = {
+    description: 'A delicious vanilla late',
+    price: 3.99,
+    milk: 'Whole',
+    vegan: false,
+  };
+  setDoc(speciaLOfTheDay, docData, { merge: true });
+  ThemeConsumer(() => {
+    console.log('This valu has been written to the database');
+  })
+    .catch((error) => {
+      console.log('I got an error! ${error}');
+    });
+}
+
+const ordersCollection = collection(firestore, 'orders');
+
+async function addNewDocument() {
+  const newDoc = await addDoc(ordersCollection, {
+    customer: 'Arthur',
+    drink: 'latte',
+  });
+  console.log('your doc was created at ${newDoc.path}');
+}
+
+async function readSingleDocument() {
+  const mySnapshot = await getDoc(speciaLOfTheDay);
+  if (mySnapshot.exists()) {
+    const docData = mySnapshot.data();
+    console.log('My data is ${JSON.stringify(docData)}');
+  }
+}
+
+let dailSpecialUnsubscribe;
+
+function listenToADocument() {
+  dailSpecialUnsubscribe = onSnapshot(speciaLOfTheDay, docSnapshot => {
+    if (docSnapshot.exists()) {
+      const docData = docSnapshot.data();
+      console.log('In realtime, docData is ${JSON.stringify(docData)}');
+    }
+  });
+}
+
+function cancelMyListenerAtTheAppropriateTime() {
+  dailSpecialUnsubscribe();
+}
+
+function queryForDocuments() {
+  const customerOrdersQuery = query(
+    collection(firestore, 'orders'),
+    where('drink', '==', 'latte'),
+    orderBy('price'),
+    limit(10),
+  );
+
+  //const querySnapshot = await getDocs(customerOrdersQuery);
+  onSnapshot(customerOrdersQuery,(querySnapshot)=>{
+    querySnapshot.forEach((snap) => {
+      console.log(
+        'Ducument ${snap.id} contains ${JSON.stringify(snap.data())}')
+    });
+  })
+}
+
+
+console.log('hellow there, FireBase!');
+writeDailySpecial();
+addNewDocument();
+readSingleDocument();
+listenToADocument();
+queryForDocuments();
 
 
 //maybe:
