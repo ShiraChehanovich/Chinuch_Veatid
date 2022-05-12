@@ -11,11 +11,11 @@ export default function Signup(){
     const {signup} = useAuth()
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
-    //const navigate = useNavigate()
+    //const history = useHistory()
+    const navigate = useNavigate()
 
     async function  handleSubmit(e) {
         e.preventDefault()
-        //navigate("/stutable")
         if (passwordRef.current.value !== passwordConfirmRef.current.value) {
             return setError("Passwords do not match")
         }
@@ -23,6 +23,8 @@ export default function Signup(){
             setError("")
             setLoading(true)
             await signup(emailRef.current.value, passwordRef.current.value)
+            //history.push("/")
+            navigate("/Dashboard")
         } catch{
             setError("Failed to create an account")
         }

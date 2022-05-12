@@ -3,6 +3,7 @@
 import React from 'react';
 import  Signup  from './components/Signup'
 import Login from './components/Login';
+import Dashboard from './components/Dashboard';
 import { Container } from 'react-bootstrap';
 import { AuthProvider } from './components/context/AuthContext';
 
@@ -18,6 +19,7 @@ function App() {
                 <Routes>
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/dashboard" element={<Dashboard />} />
                 </Routes>
               </AuthProvider>
             </Router>

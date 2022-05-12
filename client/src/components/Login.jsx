@@ -10,15 +10,17 @@ export default function Login(){
     const {login} = useAuth()
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
-    //const navigate = useNavigate()
+    //const history = useHistory()
+    const navigate = useNavigate()
 
-    async function  handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault()
-        //navigate("/stutable")
         try{
             setError("")
             setLoading(true)
             await login(emailRef.current.value, passwordRef.current.value)
+            //history.push("/")
+            navigate("/Dashboard")//not working!
         } catch{
             setError("Failed to sign in")
         }
