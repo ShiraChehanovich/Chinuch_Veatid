@@ -24,16 +24,16 @@ export default function Signup(){
             setLoading(true)
             await signup(emailRef.current.value, passwordRef.current.value)
             //history.push("/")
-            navigate("/Dashboard")
+            navigate("/main ")
         } catch(err){            
-            setError("Failed to create an account: "+ err)
+            setError(err)
         }
         setLoading(false)
      }
 
     return (
         <>
-        <Card>
+        <Card style={{ maxWidth: "400px" }}>
             <Card.Body>
             <h2 className="text-center mb-4">הירשם</h2>
             {error && <Alert variant="danger">{error}</Alert>}

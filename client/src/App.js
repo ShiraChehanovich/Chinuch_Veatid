@@ -9,15 +9,15 @@ import { AuthProvider } from './components/context/AuthContext';
 
 import { BrowserRouter as Router,Switch, Route, Routes } from "react-router-dom"
 import Table from './components/Table';
-import PrivateRoute from './components/PrivateRoute';
 import ForgotPassword from './components/ForgotPassword';
 
+import Main from './components/Main';
 
 function App() {
   return (
       <Container className="d-flex align-items-center justify-content-center"
-      style={{ minHeight: "100vh" }}>
-          <div className="w-100" style={{ maxWidth: "400px" }}>
+      style={{ minHeight: "100vh" ,alignContent: 'center'}}>
+          <div className="w-100" >
             <Router>
               <AuthProvider>
                 <Routes>
@@ -26,6 +26,8 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/table" element={<Table />} />
+                <Route path="/main" element={<Main />} />
                 </Routes>
               </AuthProvider>
             </Router>

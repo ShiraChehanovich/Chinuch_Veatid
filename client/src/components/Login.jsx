@@ -21,16 +21,16 @@ export default function Login(){
             setLoading(true)
             await login(emailRef.current.value, passwordRef.current.value)
             //history.push("/")
-            navigate("/Dashboard")
+            navigate("/main ")
         } catch(err){
-            setError("Failed to sign in: " + err)
+            setError(err)
         }
         setLoading(false)
      }
 
     return (
         <>
-        <Card>
+        <Card style={{ maxWidth: "400px" }}>
             <Card.Body>
             <h2 className="text-center mb-4">כניסה לחשבון</h2>
             {error && <Alert variant="danger">{error}</Alert>}
