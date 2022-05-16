@@ -19,7 +19,6 @@ export default function Dashboard() {
         catch{
             setError("Failed to log out")
         }
-
     }
   return (
     <>

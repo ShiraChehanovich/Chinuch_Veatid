@@ -7,8 +7,11 @@ import Dashboard from './components/Dashboard';
 import { Container } from 'react-bootstrap';
 import { AuthProvider } from './components/context/AuthContext';
 
-import { BrowserRouter as Router, Switch, Route, Routes } from "react-router-dom"
+import { BrowserRouter as Router,Switch, Route, Routes } from "react-router-dom"
 import Table from './components/Table';
+import PrivateRoute from './components/PrivateRoute';
+import ForgotPassword from './components/ForgotPassword';
+
 
 function App() {
   return (
@@ -18,11 +21,11 @@ function App() {
             <Router>
               <AuthProvider>
                 <Routes>
-                <Route exact path="/" element={<Login />} />
+                <Route exact path="/" element={<Login />}/>
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/forgot-password" element={<ForgotPassword />} />
                 <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/table" element={<Table />} />
                 </Routes>
               </AuthProvider>
             </Router>

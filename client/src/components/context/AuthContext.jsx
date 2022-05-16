@@ -46,7 +46,9 @@ export function AuthProvider({ children }) {
     const value = {
         currentUser,
         login,
-        signup
+        signup,
+        logout,
+        resetPassword
     }
 
     return (
