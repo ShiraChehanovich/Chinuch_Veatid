@@ -8,6 +8,7 @@ import { Container } from 'react-bootstrap';
 import { AuthProvider } from './components/context/AuthContext';
 
 import { BrowserRouter as Router, Switch, Route, Routes } from "react-router-dom"
+import Table from './components/Table';
 
 function App() {
   return (
@@ -17,9 +18,11 @@ function App() {
             <Router>
               <AuthProvider>
                 <Routes>
+                <Route exact path="/" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/table" element={<Table />} />
                 </Routes>
               </AuthProvider>
             </Router>
