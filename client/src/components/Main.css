@@ -7,19 +7,31 @@ h1{
   .flex-container {
     display: flex;
     flex-wrap: nowrap;
-    background-color: linear-gradient(to bottom right, #e8f8f6,rgb(255, 255, 255));
+    background-color: linear-gradient(to bottom right, #e8f8f6,rgb(14, 132, 132));
+    /* border-color: gray;
+    border-style: solid; */
     /* justify-content: left; */
   }
   
   .flex-container > div {
+    flex-direction: row-reverse;
     border-width: 1px 1px 1px 1px;
     /* border-color: gray; */
     /* border-style: solid; */
     width: 100%;
-    margin: 20px; 
+    /* margin: 2px;  */
     /* text-align: center; */
     line-height: 15px;
     font-size: 15px;
+    /* border-color: rgb(151, 20, 20);
+    border-style: solid; */
+    align-items: flex-start;
+  }
+
+  img {
+    align-content: right;
+    /* border-color: gray;
+    border-style: solid; */
   }
 
   
@@ -87,11 +99,10 @@ h1{
     .location
     {
       align-content : left;
-      border-radius: 50%;
+      /* border-radius: 50%; */
     }
 
     .right-aligned
     {
-      align-content :unset
-      ;
+      align-items :right;
     }

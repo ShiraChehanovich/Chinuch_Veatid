@@ -12,9 +12,31 @@ import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 
+import { useState } from 'react'
+import { Card, Button, Alert } from "react-bootstrap"
+import { useNavigate } from 'react-router-dom'
+import { useAuth } from './context/AuthContext'
+import { Link } from "react-router-dom"
+
 export default function DashboardMenu() {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = React.useState('');
   const open = Boolean(anchorEl);
+
+  const [error, setError] = useState("")
+  const { currentUser, logout  } = useAuth()
+  const navigate = useNavigate()
+  async function handleLogout(){
+    setError('')
+    try{
+        await logout()
+        navigate("/login")
+    }
+    catch(err){
+        setError("Failed to log out: "+ err)
+        console.log(err)
+    }
+}
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -61,13 +83,13 @@ export default function DashboardMenu() {
               content: '""',
               display: 'block',
               position: 'absolute',
-              top: 0,
+              //top: 0,
               right: 14,
               width: 10,
               height: 10,
               bgcolor: 'background.paper',
               transform: 'translateY(-50%) rotate(45deg)',
-              zIndex: 0,
+            //   zIndex: 0,
             },
           },
         }}
@@ -94,7 +116,7 @@ export default function DashboardMenu() {
           Settings
         </MenuItem>
         <MenuItem>
-          <ListItemIcon>
+          <ListItemIcon onClick={handleLogout}>
             <Logout fontSize="small" />
           </ListItemIcon>
           Logout

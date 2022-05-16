@@ -16,7 +16,7 @@ function Menu() {
   );
 }
 
-export default App;
+export default Menu;
 
 
 
