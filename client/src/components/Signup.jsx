@@ -26,7 +26,7 @@ export default function Signup(){
             //history.push("/")
             navigate("/Dashboard")
         } catch(err){            
-            setError("Failed to create an account")
+            setError("Failed to create an account: "+ err)
         }
         setLoading(false)
      }

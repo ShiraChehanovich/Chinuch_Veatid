@@ -19,8 +19,8 @@ export default function ForgotPassword(){
             setLoading(true)
             await resetPassword(emailRef.current.value)
             setMessage("בדוק את תיבת הדואר שלך להמשך התהליך")
-        } catch{
-            setError("Failed to reset password")
+        } catch(err){
+            setError("Failed to reset password: " + err)
         }
         setLoading(false)
      }
