@@ -56,9 +56,9 @@ export default function Signup(){
             </Form>
             </Card.Body>
         </Card>
-        <div className="w-100 text-center mt-2">
+        {/* <div className="w-100 text-center mt-2">
             יש לך חשבון? <Link to = "/login">היכנס</Link>
-        </div>
+        </div> */}
         </>
     );
 }
