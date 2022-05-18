@@ -1,9 +1,10 @@
 import React from 'react';
+import DashboardMenu from './DashboardMmenu'
 
-export const Class_file = () => {
+export default function Class_file() {
     return (
         <div>
-           תיק כיתה
-        </div>
-    )
+              <DashboardMenu />
+             </div>
+  )
 }
