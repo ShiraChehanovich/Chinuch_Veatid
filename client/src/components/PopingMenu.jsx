@@ -19,11 +19,29 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import SchoolIcon from '@mui/icons-material/School';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Table from './Table';
-import DashboardMenu from './DashboardMmenu';
+import { useAuth } from './context/AuthContext'
+import { Button } from "react-bootstrap"
+import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+
 
 const drawerWidth = 240;
 
 export default function PopingMenu() {
+  const navigate = useNavigate()
+  const [error, setError] = useState("")
+  const { currentUser, logout  } = useAuth()
+  async function handleLogout(){
+    setError('')
+    try{
+        await logout()
+        navigate("/login")
+    }
+    catch(err){
+        setError("Failed to log out: "+ err)
+        console.log(err)
+    }
+  };
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -33,17 +51,15 @@ export default function PopingMenu() {
       >
         <Toolbar>
           <Typography variant="h6" noWrap component="div">
-            <DashboardMenu />
           </Typography>
         </Toolbar>
       </AppBar>
+      <Table/>
       <Box
         component="main"
-        sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
-      >
+        sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}>
         <Toolbar />
         <Typography paragraph>
-            <Table/>
         </Typography>
         {/* <Typography paragraph>
           Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
@@ -79,15 +95,17 @@ export default function PopingMenu() {
         </List>
         <Divider />
         <List>
-          {['התנתקות'].map((text, index) => (
+
+          {[currentUser.email,'התנתקות'].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
-                  {index % 2 === 0 ? <LogoutIcon /> : <MailIcon />}
+                  {index % 2 === 0 ? <MailIcon /> : <LogoutIcon />}
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItemButton>
             </ListItem>
+            
           ))}
         </List>
       </Drawer>
