@@ -1,7 +1,7 @@
 import React from 'react'
-import Dashboard from './Dashboard'
 import DashboardMenu from './DashboardMmenu'
 import './Main.css'
+import NavigateButtons from './NavigateButtons'
 
 
 
@@ -26,9 +26,10 @@ export default function Main() {
             <hr />
         <br></br>
         <div className='flex-containerh'>
-        <div ><button className='button' > <span>תיק תלמיד</span></button></div>
+            <NavigateButtons/>
+        {/* <div ><button className='button' > <span>תיק תלמיד</span></button></div>
         <div ><button className='button' ><span>תיק כיתה</span></button></div>
-        <div ><button className='button' ><span>תיק מורה</span></button></div>
+        <div ><button className='button' ><span>תיק מורה</span></button></div> */}
         </div>
         </div>
       </div>

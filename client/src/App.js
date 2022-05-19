@@ -7,11 +7,11 @@ import Dashboard from './components/Dashboard';
 import { Container } from 'react-bootstrap';
 import { AuthProvider } from './components/context/AuthContext';
 
-import { BrowserRouter as Router,Switch, Route, Routes } from "react-router-dom"
-import Table from './components/Table';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import ForgotPassword from './components/ForgotPassword';
 
 import Main from './components/Main';
+import PopingMenu from './components/PopingMenu';
 
 function App() {
   return (
@@ -26,7 +26,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
                 <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/table" element={<Table />} />
+                <Route path="/table" element={<PopingMenu />} />
                 <Route path="/main" element={<Main />} />
                 </Routes>
               </AuthProvider>
