@@ -20,7 +20,7 @@ export default function ForgotPassword(){
             await resetPassword(emailRef.current.value)
             setMessage("בדוק את תיבת הדואר שלך להמשך התהליך")
         } catch(err){
-            setError("Failed to reset password: " + err)
+            setError(err.message)
         }
         setLoading(false)
      }

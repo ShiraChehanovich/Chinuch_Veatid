@@ -26,7 +26,7 @@ export default function Signup(){
             //history.push("/")
             navigate("/main ")
         } catch(err){            
-            setError(err)
+            setError(err.message)
         }
         setLoading(false)
      }
@@ -56,9 +56,9 @@ export default function Signup(){
             </Form>
             </Card.Body>
         </Card>
-        {/* <div className="w-100 text-center mt-2">
-            יש לך חשבון? <Link to = "/login">היכנס</Link>
-        </div> */}
+        <div className="w-100 text-center mt-2">
+           יש לך חשבון? <Link to = "/login">היכנס</Link>
+        </div>
         </>
     );
 }

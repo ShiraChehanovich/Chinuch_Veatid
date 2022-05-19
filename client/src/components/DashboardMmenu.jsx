@@ -97,29 +97,28 @@ export default function DashboardMenu() {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <MenuItem>
-          <Avatar /> Profile
+          <Avatar /> {currentUser.email}
         </MenuItem>
-        <MenuItem>
+        {/* <MenuItem>
           <Avatar /> My account
-        </MenuItem>
+        </MenuItem> */}
         <Divider />
-        <MenuItem>
+        {/* <MenuItem>
           <ListItemIcon>
             <PersonAdd fontSize="small" />
           </ListItemIcon>
           Add another account
-        </MenuItem>
-        <MenuItem>
+        </MenuItem> */}
+        {/* <MenuItem>
           <ListItemIcon>
             <Settings fontSize="small" />
           </ListItemIcon>
           Settings
-        </MenuItem>
+        </MenuItem> */}
         <MenuItem>
-          <ListItemIcon onClick={handleLogout}>
-            <Logout fontSize="small" />
-          </ListItemIcon>
-          Logout
+        <Button variant="link" onClick={handleLogout}>
+          יציאה
+        </Button>
         </MenuItem>
       </Menu>
     </React.Fragment>

@@ -23,14 +23,14 @@ export default function Login(){
             //history.push("/")
             navigate("/main ")
         } catch(err){
-            setError(err)
+            setError(err.message)
         }
         setLoading(false)
      }
 
     return (
         <>
-        <Card style={{ maxWidth: "400px" }}>
+        <Card>
             <Card.Body>
             <h2 className="text-center mb-4">כניסה לחשבון</h2>
             {error && <Alert variant="danger">{error}</Alert>}
@@ -48,7 +48,7 @@ export default function Login(){
                 </Button>
             </Form>
             <div className="w-100 text-center mt-3">
-                <Link to = "/forgot-password">שכחת סיסמא?</Link>
+                <Link to = "/forgot-password">?שכחת סיסמה</Link>
             </div>
             </Card.Body>  
         </Card>
@@ -58,3 +58,6 @@ export default function Login(){
         </>
     );
 }
+
+
+

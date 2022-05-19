@@ -17,13 +17,12 @@ export default function Dashboard() {
             navigate("/login")
         }
         catch(err){
-            setError("Failed to log out: "+ err)
+          setError(err.message)
         }
     }
   return (
     <>
     <div>
-      
       <Card >
         <Card.Body>
             <h2 className="text-center mb-4">Profile</h2>
