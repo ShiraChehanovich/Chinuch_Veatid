@@ -11,7 +11,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import ForgotPassword from './components/ForgotPassword';
 
 import Main from './components/Main';
-import PopingMenu from './components/PopingMenu';
+import StudentTable from './components/StudentTable';
+import StaffTable from './components/StaffTable';
 
 function App() {
   return (
@@ -26,7 +27,8 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
                 <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/table" element={<PopingMenu />} />
+                <Route path="/students" element={<StudentTable />} />
+                <Route path="/staff" element={<StaffTable />} />
                 <Route path="/main" element={<Main />} />
                 </Routes>
               </AuthProvider>

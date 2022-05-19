@@ -2,6 +2,7 @@ import React from 'react'
 import DashboardMenu from './DashboardMmenu'
 import './Main.css'
 import NavigateButtons from './NavigateButtons'
+import Divider from '@mui/material/Divider';
 
 
 
@@ -23,8 +24,7 @@ export default function Main() {
         </div>
         <div>
            <h1>תפריט</h1>
-            <hr />
-        <br></br>
+            <Divider/>
         <div className='flex-containerh'>
             <NavigateButtons/>
         {/* <div ><button className='button' > <span>תיק תלמיד</span></button></div>

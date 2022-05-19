@@ -54,7 +54,7 @@ export default function PopingMenu() {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Table/>
+      {/* <Table/> */}
       <Box
         component="main"
         sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}>
@@ -79,8 +79,8 @@ export default function PopingMenu() {
         anchor="right"
       >
         <img  src="https://chv.org.il/wp-content/uploads/2019/06/%D7%9C%D7%95%D7%92%D7%95-%D7%9E%D7%A9%D7%95%D7%9C%D7%91_2-1024x251.png" width="100%"></img>
-        <Toolbar />
-        <Divider />
+        {/* <Toolbar /> */}
+        {/* <Divider /> */}
         <List>
           {['תיק תלמיד', 'תיק צוות', 'תיק כיתה', 'יומן אישי'].map((text, index) => (
             <ListItem key={text} disablePadding>

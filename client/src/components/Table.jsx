@@ -51,7 +51,7 @@ export default function Table() {
       <DataGrid
         rows={rows}
         columns={columns}
-        pageSize={5}
+        pageSize={8}
         rowsPerPageOptions={[5]}
         checkboxSelection
         disableSelectionOnClick
