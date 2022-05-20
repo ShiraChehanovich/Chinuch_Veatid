@@ -4,6 +4,7 @@ import React from 'react';
 import  Signup  from './components/Signup'
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
+import StudentFile from './components/StudentFile';
 import { Container } from 'react-bootstrap';
 import { AuthProvider } from './components/context/AuthContext';
 
@@ -30,6 +31,7 @@ function App() {
                 <Route path="/students" element={<StudentTable />} />
                 <Route path="/staff" element={<StaffTable />} />
                 <Route path="/main" element={<Main />} />
+                <Route path="/studentFile" element={<StudentFile />} />
                 </Routes>
               </AuthProvider>
             </Router>

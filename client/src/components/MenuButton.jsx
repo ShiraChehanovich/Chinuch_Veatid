@@ -3,14 +3,20 @@ import ReactDOM from 'react-dom/client';
 import './Main.css'
 import StudentFile from './StudentFile'
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router';
+import { Navigate } from 'react-router';
 
 export default function MenuButton   () {
+  const navigate = useNavigate()
     const link = () => {
         return(
+          
+
+          navigate("/studentFile ")
           // <div className="w-100 text-center mt-3">
           //       <Link to = "/student-file">שכחת סיסמא?</Link>
           //   </div>
-             alert("click")
+             
         )
     }
   
