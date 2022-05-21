@@ -47,7 +47,7 @@ const rows = [
 
 export default function Table() {
   return (
-    <div style={{ height: 400, width: '100%' }}>
+    <div style={{ height: 400, width: '150%' }}>
       <DataGrid
         rows={rows}
         columns={columns}
