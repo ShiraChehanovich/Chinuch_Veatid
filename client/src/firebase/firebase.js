@@ -1,10 +1,7 @@
 // Import the functions you need from the SDKs you need
 //import "firebase/auth"
-<<<<<<< Updated upstream
 //import { initializeApp } from "firebase/app";
-=======
-import { initializeApp } from "firebase/app";
->>>>>>> Stashed changes
+//import { initializeApp } from "firebase/app";
 // import {
 //   getFirestore,
 //   doc,
@@ -19,17 +16,13 @@ import { initializeApp } from "firebase/app";
 //   orderBy,
 //   limit,
 // } from "firebase/firestore/lite";
-<<<<<<< Updated upstream
-=======
 // import firebase from 'firebase';
 import {getStorage} from 'firebase/storage';
->>>>>>> Stashed changes
 // import { getAnalytics } from "firebase/analytics";
 // import { addDoc, collection, getDoc, getDocs, getFirestore, query, setDoc, where } from 'firebase/firestore/lite';
 // import { ThemeConsumer } from "react-bootstrap/esm/ThemeProvider";
 // import { async } from "@firebase/util";
-<<<<<<< Updated upstream
-//import "@firebase/auth"
+import "@firebase/auth"
  //import firebase from "firebase/compat"
 //import firebase from firebase/compat/app;
 //import firebase from 'firebase/app';
@@ -44,8 +37,6 @@ import 'firebase/auth';
 //import { auth } from "firebase/app";
 //import firesbase from  'firebase/app';
 //import '@firebase/firestore';
-=======
->>>>>>> Stashed changes
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -65,14 +56,11 @@ const firebaseConfig = {
 
 
 // Initialize Firebase
-<<<<<<< Updated upstream
 const app = firebase.initializeApp(firebaseConfig);
 //const analytics =  firebase.getAnalytics(app);
 //const analytics =  getAnalytics(app);
-=======
-export const app = initializeApp(firebaseConfig);
+//export const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
->>>>>>> Stashed changes
 
 // const firestore = getFirestore();
 
@@ -142,7 +130,6 @@ export const app = initializeApp(firebaseConfig);
 //     });
 //   })
 // }
-<<<<<<< Updated upstream
 
 
 // console.log('hellow there, FireBase!');
@@ -153,14 +140,13 @@ export const app = initializeApp(firebaseConfig);
 // queryForDocuments();
 
 
-//const auth = firebase.auth();
-// const provider = new firebase.auth.GoogleAuthProvider();
-// export { auth, provider };
-=======
-// export const storage = getStorage();
+const auth = firebase.auth();
+ const provider = new firebase.auth.GoogleAuthProvider();
+ export { auth, provider };
+ export const storage = getStorage();
 
 
-console.log('hellow there, FireBase!');
+//console.log('hellow there, FireBase!');
 //writeDailySpecial();
 //addNewDocument();
 //readSingleDocument();
@@ -168,10 +154,9 @@ console.log('hellow there, FireBase!');
 //queryForDocuments();
 
 
->>>>>>> Stashed changes
 //maybe:
-export const auth = getAuth();
-export const storage = getStorage();
+ //export const auth = getAuth();
+ //export const storage = getStorage();
 export default app
 
 
