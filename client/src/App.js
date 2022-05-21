@@ -25,7 +25,7 @@ import { AuthProvider } from './components/context/AuthContext';
 <<<<<<< HEAD
 <<<<<<< HEAD
 import { ReactFirebaseFileUpload } from './components/ReactFirebaseFileUpload';
-=======
+
 // import { ReactFirebaseFileUpload } from './components/ReactFirebaseFileUpload';
 
 >>>>>>> main
