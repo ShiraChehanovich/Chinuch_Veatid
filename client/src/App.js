@@ -34,7 +34,7 @@ import StaffTable from './components/StaffTable';
 function App() {
   return (
 
-    <ReactFirebaseFileUpload />
+    // <ReactFirebaseFileUpload />
 
 
       <Container className="d-flex align-items-center justify-content-center"
