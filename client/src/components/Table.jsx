@@ -15,12 +15,14 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
+import AddIcon from '@mui/icons-material/Add';
 import Tooltip from '@mui/material/Tooltip';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
+import AddBoxIcon from '@mui/icons-material/AddBox';
 
 function createData(name, calories, fat, carbs, protein) {
   return {
@@ -78,36 +80,37 @@ function stableSort(array, comparator) {
   return stabilizedThis.map((el) => el[0]);
 }
 
+
 const headCells = [
   {
     id: 'name',
     numeric: false,
     disablePadding: true,
-    label: 'Dessert (100g serving)',
+    label: 'שם תלמיד',
   },
   {
     id: 'calories',
     numeric: true,
     disablePadding: false,
-    label: 'Calories',
+    label: 'תעודת זהות',
   },
   {
     id: 'fat',
     numeric: true,
     disablePadding: false,
-    label: 'Fat (g)',
+    label: 'טלפון',
   },
   {
     id: 'carbs',
     numeric: true,
     disablePadding: false,
-    label: 'Carbs (g)',
+    label: 'מייל',
   },
   {
     id: 'protein',
-    numeric: true,
-    disablePadding: false,
-    label: 'Protein (g)',
+    numeric: false,
+    disablePadding: true,
+    label: 'כתובת',
   },
 ];
 
@@ -188,7 +191,7 @@ const EnhancedTableToolbar = (props) => {
           variant="subtitle1"
           component="div"
         >
-          {numSelected} selected
+          {numSelected} מחק
         </Typography>
       ) : (
         <Typography
@@ -197,7 +200,13 @@ const EnhancedTableToolbar = (props) => {
           id="tableTitle"
           component="div"
         >
-          Nutrition
+          <div>
+          <IconButton>
+            <AddIcon />
+          </IconButton>
+          הוספת תלמיד
+          
+          </div>
         </Typography>
       )}
 
@@ -285,8 +294,8 @@ export default function EnhancedTable() {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   return (
-    <Box sx={{ width: '100%' }}>
-      <Paper sx={{ width: '100%', mb: 2 }}>
+    <Box sx={{ height: '130%', width: '130%' }}>
+      <Paper sx={{ width: '130%', mb: 2 }}>
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
           <Table
