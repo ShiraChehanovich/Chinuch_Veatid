@@ -3,6 +3,7 @@ import DashboardMenu from './DashboardMmenu'
 import MenuButton from './MenuButton'
 import './Main.css'
 import ReactDOM from 'react-dom/client';
+import NavigateButtons from './NavigateButtons';
 
 
 
@@ -28,7 +29,7 @@ export default function Main() {
         <br></br>
         
         </div>
-        <MenuButton />
+        <NavigateButtons />
       </div>
   )
 }
