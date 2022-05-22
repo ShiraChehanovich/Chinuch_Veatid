@@ -57,7 +57,7 @@ export default function PopingMenu() {
       {/* <Table/> */}
       <Box
         component="main"
-        sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}>
+        sx={{ flexGrow: 1, bgcolor: 'background.default', p: -1000 }}>
         <Toolbar />
         <Typography paragraph>
         </Typography>
