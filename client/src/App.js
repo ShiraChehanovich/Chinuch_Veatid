@@ -1,11 +1,6 @@
 //import logo from './logo.svg';
 //import './App.css';
 import React from 'react';
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> main
 
 import  Signup  from './components/Signup'
 import Login from './components/Login';
@@ -14,25 +9,20 @@ import StudentFile from './components/StudentFile';
 import { Container } from 'react-bootstrap';
 import { AuthProvider } from './components/context/AuthContext';
 
-<<<<<<< HEAD
->>>>>>> main
-=======
->>>>>>> main
+
 // import  Signup  from './components/Signup'
 // import { Container } from 'react-bootstrap';
 // import { AuthProvider } from './components/context/AuthContext';
 // import { Student_table } from './components/context/AuthContext';
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 import { ReactFirebaseFileUpload } from './components/ReactFirebaseFileUpload';
 
 // import { ReactFirebaseFileUpload } from './components/ReactFirebaseFileUpload';
 
->>>>>>> main
-=======
+
 // import { ReactFirebaseFileUpload } from './components/ReactFirebaseFileUpload';
 
->>>>>>> main
+
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import ForgotPassword from './components/ForgotPassword';
@@ -43,12 +33,9 @@ import StaffTable from './components/StaffTable';
 
 function App() {
   return (
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     <ReactFirebaseFileUpload />
-=======
-=======
->>>>>>> main
+
 
       <Container className="d-flex align-items-center justify-content-center"
       style={{ minHeight: "100vh" ,alignContent: 'center'}}>
