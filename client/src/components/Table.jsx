@@ -23,6 +23,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import AddBoxIcon from '@mui/icons-material/AddBox';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 
 function createData(name, calories, fat, carbs, protein) {
   return {
@@ -212,14 +213,16 @@ const EnhancedTableToolbar = (props) => {
 
       {numSelected > 0 ? (
         <Tooltip title="Delete">
+          
           <IconButton>
             <DeleteIcon />
           </IconButton>
+          
         </Tooltip>
       ) : (
         <Tooltip title="Filter list">
           <IconButton>
-            <FilterListIcon />
+            <SearchOutlinedIcon />
           </IconButton>
         </Tooltip>
       )}
@@ -294,8 +297,8 @@ export default function EnhancedTable() {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   return (
-    <Box sx={{ height: '130%', width: '130%' }}>
-      <Paper sx={{ width: '130%', mb: 2 }}>
+    <Box sx={{ height: '100%', width: '100%' }}>
+      <Paper sx={{ width: '100%', mb: 5 }}>
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
           <Table
@@ -376,10 +379,10 @@ export default function EnhancedTable() {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-      <FormControlLabel
+      {/* <FormControlLabel
         control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
-      />
+        label="שורות צפופות"
+      /> */}
     </Box>
   );
 }
