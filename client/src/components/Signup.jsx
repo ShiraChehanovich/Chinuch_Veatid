@@ -32,8 +32,8 @@ export default function Signup(){
      }
 
     return (
-        <>
-        <Card style={{ maxWidth: "400px" }}>
+        <div style={{maxWidth: 400, margin: "auto"}}>
+        <Card>
             <Card.Body>
             <h2 className="text-center mb-4">הירשם</h2>
             {error && <Alert variant="danger">{error}</Alert>}
@@ -59,6 +59,6 @@ export default function Signup(){
         <div className="w-100 text-center mt-2">
            יש לך חשבון? <Link to = "/login">היכנס</Link>
         </div>
-        </>
+        </div>
     );
 }

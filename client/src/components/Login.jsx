@@ -3,6 +3,8 @@ import { Form, Button, Card , Alert} from "react-bootstrap"
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from './context/AuthContext'
 import { Link } from 'react-router-dom'
+import { alignProperty } from '@mui/material/styles/cssUtils'
+import { textAlign } from '@mui/system'
 
 
 export default function Login(){
@@ -29,7 +31,7 @@ export default function Login(){
      }
 
     return (
-        <>
+        <div style={{maxWidth: 400, margin: "auto"}}>
         <Card>
             <Card.Body>
             <h2 className="text-center mb-4">כניסה לחשבון</h2>
@@ -55,7 +57,7 @@ export default function Login(){
         <div className="w-100 text-center mt-2">
               עוד אין לך חשבון? <Link to = "/signup">הירשם</Link>
         </div>
-        </>
+        </div>
     );
 }
 

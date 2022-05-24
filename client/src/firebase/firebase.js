@@ -2,20 +2,20 @@
 //import "firebase/auth"
 //import { initializeApp } from "firebase/app";
 //import { initializeApp } from "firebase/app";
-// import {
-//   getFirestore,
-//   doc,
-//   setDoc,
-//   collection,
-//   addDoc,
-//   getDoc,
-//   onSnapshot,
-//   query,
-//   where,
-//   getDocs,
-//   orderBy,
-//   limit,
-// } from "firebase/firestore/lite";
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  collection,
+  addDoc,
+  getDoc,
+  onSnapshot,
+  query,
+  where,
+  getDocs,
+  orderBy,
+  limit,
+} from "firebase/firestore/lite";
 // import firebase from 'firebase';
 import {getStorage} from 'firebase/storage';
 // import { getAnalytics } from "firebase/analytics";
@@ -62,7 +62,7 @@ const app = firebase.initializeApp(firebaseConfig);
 //export const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
 
-// const firestore = getFirestore();
+const firestore = getFirestore();
 
 // const speciaLOfTheDay = doc(firestore, 'dailySpecial/2022-08-5')
 // function writeDailySpecial() {
@@ -142,7 +142,7 @@ const app = firebase.initializeApp(firebaseConfig);
 
 const auth = firebase.auth();
  const provider = new firebase.auth.GoogleAuthProvider();
- export { auth, provider };
+ export { auth, provider, firestore };
  export const storage = getStorage();
 
 

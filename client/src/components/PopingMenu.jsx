@@ -43,7 +43,7 @@ export default function PopingMenu() {
     }
   };
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex' }} >
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -80,7 +80,7 @@ export default function PopingMenu() {
       >
         <img  src="https://chv.org.il/wp-content/uploads/2019/06/%D7%9C%D7%95%D7%92%D7%95-%D7%9E%D7%A9%D7%95%D7%9C%D7%91_2-1024x251.png" width="100%"></img>
         {/* <Toolbar /> */}
-        {/* <Divider /> */}
+        <Divider />
         <List>
           {['תיק תלמיד', 'תיק צוות', 'תיק כיתה', 'יומן אישי'].map((text, index) => (
             <ListItem key={text} disablePadding>
@@ -100,7 +100,7 @@ export default function PopingMenu() {
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
-                  {index % 2 === 0 ? <MailIcon /> : <LogoutIcon />}
+                  {index % 2 === 0 ? <MailIcon /> : <LogoutIcon onClick={handleLogout} />}
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItemButton>
