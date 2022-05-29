@@ -62,8 +62,13 @@ const app = firebase.initializeApp(firebaseConfig);
 //export const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
 
-const firestore = getFirestore();
-
+const db = getFirestore();
+const colRef = collection(db, 'student');
+// getDocs(colRef)
+//   .then((snapshot)=>{
+//       console.log(snapshot.docs)
+//   })
+    
 // const speciaLOfTheDay = doc(firestore, 'dailySpecial/2022-08-5')
 // function writeDailySpecial() {
 //   const docData = {
@@ -142,8 +147,16 @@ const firestore = getFirestore();
 
 const auth = firebase.auth();
  const provider = new firebase.auth.GoogleAuthProvider();
- export { auth, provider, firestore };
+ export { auth, provider, db };
  export const storage = getStorage();
+
+ //const colRef = collection(db, 'student');
+ //const q = query(colRef, where('ID', '==', auth.currentUser));
+//  getDocs(q).then((snap) => {
+//      const data = snap.docs.map((d) => ({ id: d.id, ...d.data() }))
+//      console.log(data);
+//      return data;
+//  });
 
 
 //console.log('hellow there, FireBase!');

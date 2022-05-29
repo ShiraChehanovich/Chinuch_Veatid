@@ -24,6 +24,7 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import { getDocuments } from '../firebase/firebase';
 
 function createData(name, calories, fat, carbs, protein) {
   return {
