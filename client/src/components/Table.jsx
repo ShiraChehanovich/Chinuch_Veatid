@@ -24,6 +24,7 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import Search from './Search';
 
 function createData(name, calories, fat, carbs, protein) {
   return {
@@ -34,6 +35,24 @@ function createData(name, calories, fat, carbs, protein) {
     protein,
   };
 }
+// const [estudiantes, setEstudiantes] = React.useState([]);
+// const estudiantesRef = db.collection("usuarios").doc(user.uid).collection("estudiantes")
+
+//   useEffect(() => {
+//     estudiantesRef
+//     .orderBy('name')
+//      .onSnapshot(snapshot => {
+       
+//         const rows = [];
+//         snapshot.forEach((doc) => {
+
+//           const data = doc.data();
+//           rows.push(data);
+
+//         });
+//         setEstudiantes(rows);
+//       })
+//   }, []);
 
 const rows = [
   createData('Cupcake', 305, 3.7, 67, 4.3),
@@ -213,7 +232,7 @@ const EnhancedTableToolbar = (props) => {
 
       {numSelected > 0 ? (
         <Tooltip title="Delete">
-          
+          <Search />
           <IconButton>
             <DeleteIcon />
           </IconButton>
@@ -297,7 +316,7 @@ export default function EnhancedTable() {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   return (
-    <Box sx={{ height: '100%', width: '100%' }}>
+    <Box sx={{ height: '100%', width: '78%' }}>
       <Paper sx={{ width: '100%', mb: 5 }}>
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>

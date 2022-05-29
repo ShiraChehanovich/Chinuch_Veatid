@@ -23,6 +23,7 @@ import { useAuth } from './context/AuthContext'
 import { Button } from "react-bootstrap"
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
+import { grey } from '@mui/material/colors';
 
 
 const drawerWidth = 240;
@@ -42,6 +43,15 @@ export default function PopingMenu() {
         console.log(err)
     }
   };
+
+  async function handleNavigate(index){
+    switch(index){
+      case 0: navigate("/students")
+      case 1: navigate("/staff")
+      case 2: navigate("/students")
+      case 3: navigate("/students")
+    }
+  }
   return (
     <Box sx={{ display: 'flex' }} >
       <CssBaseline />
@@ -51,6 +61,7 @@ export default function PopingMenu() {
       >
         <Toolbar>
           <Typography variant="h6" noWrap component="div">
+            סטודנטים
           </Typography>
         </Toolbar>
       </AppBar>
@@ -84,7 +95,7 @@ export default function PopingMenu() {
         <List>
           {['תיק תלמיד', 'תיק צוות', 'תיק כיתה', 'יומן אישי'].map((text, index) => (
             <ListItem key={text} disablePadding>
-              <ListItemButton>
+              <ListItemButton  onClick={() => handleNavigate(index)}>
                 <ListItemIcon>
                   {index === 0 ? <BoyIcon /> :index === 1 ?<PeopleIcon /> :index === 2 ? <SchoolIcon /> :<CalendarMonthIcon />}
                 </ListItemIcon>
@@ -98,9 +109,9 @@ export default function PopingMenu() {
 
           {[currentUser.email,'התנתקות'].map((text, index) => (
             <ListItem key={text} disablePadding>
-              <ListItemButton>
+              <ListItemButton onClick={handleLogout}>
                 <ListItemIcon>
-                  {index % 2 === 0 ? <MailIcon /> : <LogoutIcon onClick={handleLogout} />}
+                  {index % 2 === 0 ? <MailIcon /> : <LogoutIcon  />}
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItemButton>

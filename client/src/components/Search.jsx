@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import SearchIcon from '@mui/icons-material/Search';
 import Textbox from './Textbox'
 
-export default function SvgMaterialIcons() {
+export default function Search() {
   return (
     <Grid container sx={{ color: 'text.primary' }}>
       <Grid item xs={4}>

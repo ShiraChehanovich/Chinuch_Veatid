@@ -32,6 +32,7 @@ import ForgotPassword from './components/ForgotPassword';
 import Main from './components/Main';
 import StudentTable from './components/StudentTable';
 import StaffTable from './components/StaffTable';
+import HomePage from './components/HomePage';
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/students" element={<StudentTable />} />
                 <Route path="/staff" element={<StaffTable />} />
+                <Route path="/home-page" element={<HomePage />} />
                 <Route path="/main" element={<Main />} />
                 <Route path="/studentFile" element={<StudentFile />} />
                 </Routes>

@@ -1,7 +1,3 @@
-// Import the functions you need from the SDKs you need
-//import "firebase/auth"
-//import { initializeApp } from "firebase/app";
-//import { initializeApp } from "firebase/app";
 import {
   getFirestore,
   doc,
@@ -23,20 +19,10 @@ import {getStorage} from 'firebase/storage';
 // import { ThemeConsumer } from "react-bootstrap/esm/ThemeProvider";
 // import { async } from "@firebase/util";
 import "@firebase/auth"
- //import firebase from "firebase/compat"
-//import firebase from firebase/compat/app;
-//import firebase from 'firebase/app';
 import { initializeApp } from "@firebase/app";
-// import { getAnalytics } from 'firebase/app';
 import firebase from 'firebase/compat/app';
-
 import 'firebase/compat/auth';
-//import 'firebase/compat/firestore';
 import 'firebase/auth';
-//import 'firebase/analytics'
-//import { auth } from "firebase/app";
-//import firesbase from  'firebase/app';
-//import '@firebase/firestore';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
