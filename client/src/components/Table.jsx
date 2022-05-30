@@ -25,6 +25,11 @@ import { visuallyHidden } from '@mui/utils';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import Search from './Search';
+import { collection, getDocs, query } from 'firebase/firestore/lite';
+import { firestore } from '../firebase/firebase';
+import { Prev } from 'react-bootstrap/esm/PageItem';
+
+
 
 function createData(name, calories, fat, carbs, protein) {
   return {
@@ -53,6 +58,8 @@ function createData(name, calories, fat, carbs, protein) {
 //         setEstudiantes(rows);
 //       })
 //   }, []);
+
+//setDoc
 
 const rows = [
   createData('Cupcake', 305, 3.7, 67, 4.3),
@@ -259,7 +266,25 @@ export default function EnhancedTable() {
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
+  const [studentObjects, setStudentObjects] = React.useState([]);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const studentRef = collection(firestore, "student");
+
+
+const getData = async () => {
+  const q = query(studentRef)
+  const snapshot = await getDocs(q)
+  snapshot.forEach(doc =>
+     {
+       console.log(doc.data())
+       setStudentObjects(prev => [...prev, doc.data()])
+      }
+    
+  )
+}
+
+React.useEffect(()=>{getData()}, []);
+React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';

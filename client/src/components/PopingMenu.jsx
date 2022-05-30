@@ -11,7 +11,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import BoyIcon from '@mui/icons-material/Boy';
 import PeopleIcon from '@mui/icons-material/People';
@@ -23,7 +22,6 @@ import { useAuth } from './context/AuthContext'
 import { Button } from "react-bootstrap"
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import { grey } from '@mui/material/colors';
 
 
 const drawerWidth = 240;
@@ -46,10 +44,19 @@ export default function PopingMenu() {
 
   async function handleNavigate(index){
     switch(index){
-      case 0: navigate("/students")
-      case 1: navigate("/staff")
-      case 2: navigate("/students")
-      case 3: navigate("/students")
+      case 0: 
+      navigate("/students"); 
+      break;
+      case 1: 
+      navigate("/staff"); 
+      break;
+      case 2: 
+      navigate("/students");
+      break;
+      case 3: 
+      navigate("/students");
+      break;
+      default: navigate("/main")
     }
   }
   return (
