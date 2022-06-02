@@ -28,6 +28,7 @@ import Search from './Search';
 import { collection, getDocs, query } from 'firebase/firestore/lite';
 import { firestore } from '../firebase/firebase';
 import { Prev } from 'react-bootstrap/esm/PageItem';
+import ModalPage from './ModalPage';
 
 
 
@@ -228,10 +229,7 @@ const EnhancedTableToolbar = (props) => {
           component="div"
         >
           <div>
-          <IconButton>
-            <AddIcon />
-          </IconButton>
-          הוספת תלמיד
+          <ModalPage />
           
           </div>
         </Typography>
@@ -268,23 +266,23 @@ export default function EnhancedTable() {
   const [dense, setDense] = React.useState(false);
   const [studentObjects, setStudentObjects] = React.useState([]);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const studentRef = collection(firestore, "student");
+//   const studentRef = collection(firestore, "student");
 
 
-const getData = async () => {
-  const q = query(studentRef)
-  const snapshot = await getDocs(q)
-  snapshot.forEach(doc =>
-     {
-       console.log(doc.data())
-       setStudentObjects(prev => [...prev, doc.data()])
-      }
+// const getData = async () => {
+//   const q = query(studentRef)
+//   const snapshot = await getDocs(q)
+//   snapshot.forEach(doc =>
+//      {
+//        console.log(doc.data())
+//        setStudentObjects(prev => [...prev, doc.data()])
+//       }
     
-  )
-}
+//   )
+// }
 
-React.useEffect(()=>{getData()}, []);
-React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
+// React.useEffect(()=>{getData()}, []);
+// React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';

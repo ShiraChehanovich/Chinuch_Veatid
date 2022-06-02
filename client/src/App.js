@@ -33,6 +33,8 @@ import Main from './components/Main';
 import StudentTable from './components/StudentTable';
 import StaffTable from './components/StaffTable';
 import HomePage from './components/HomePage';
+import ClassTable from './components/ClassTable';
+import Schedule from './components/Schedule';
 
 function App() {
   return (
@@ -50,12 +52,12 @@ function App() {
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
-                <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/students" element={<StudentTable />} />
                 <Route path="/staff" element={<StaffTable />} />
                 <Route path="/home-page" element={<HomePage />} />
-                <Route path="/main" element={<Main />} />
                 <Route path="/studentFile" element={<StudentFile />} />
+                <Route path="/class" element={<ClassTable />} />
+                <Route path="/schedule" element={<Schedule />} />
                 </Routes>
               </AuthProvider>
             </Router>

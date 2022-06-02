@@ -30,7 +30,8 @@ export default function PopingMenu() {
   const navigate = useNavigate()
   const [error, setError] = useState("")
   const { currentUser, logout  } = useAuth()
-  async function handleLogout(){
+  async function handleLogout(index){
+    if(index === 1){
     setError('')
     try{
         await logout()
@@ -40,6 +41,7 @@ export default function PopingMenu() {
         setError("Failed to log out: "+ err)
         console.log(err)
     }
+  }
   };
 
   async function handleNavigate(index){
@@ -51,10 +53,10 @@ export default function PopingMenu() {
       navigate("/staff"); 
       break;
       case 2: 
-      navigate("/students");
+      navigate("/class");
       break;
       case 3: 
-      navigate("/students");
+      navigate("/schedule");
       break;
       default: navigate("/main")
     }
@@ -116,7 +118,7 @@ export default function PopingMenu() {
 
           {[currentUser.email,'התנתקות'].map((text, index) => (
             <ListItem key={text} disablePadding>
-              <ListItemButton onClick={handleLogout}>
+              <ListItemButton onClick={() =>handleLogout(index)}>
                 <ListItemIcon>
                   {index % 2 === 0 ? <MailIcon /> : <LogoutIcon  />}
                 </ListItemIcon>
