@@ -62,21 +62,21 @@ function createData(name, calories, fat, carbs, protein) {
 
 //setDoc
 
-const rows = [
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Donut', 452, 25.0, 51, 4.9),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Honeycomb', 408, 3.2, 87, 6.5),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Jelly Bean', 375, 0.0, 94, 0.0),
-  createData('KitKat', 518, 26.0, 65, 7.0),
-  createData('Lollipop', 392, 0.2, 98, 0.0),
-  createData('Marshmallow', 318, 0, 81, 2.0),
-  createData('Nougat', 360, 19.0, 9, 37.0),
-  createData('Oreo', 437, 18.0, 63, 4.0),
-];
+// const rows = [
+//   createData('Cupcake', 305, 3.7, 67, 4.3),
+//   createData('Donut', 452, 25.0, 51, 4.9),
+//   createData('Eclair', 262, 16.0, 24, 6.0),
+//   createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
+//   createData('Gingerbread', 356, 16.0, 49, 3.9),
+//   createData('Honeycomb', 408, 3.2, 87, 6.5),
+//   createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
+//   createData('Jelly Bean', 375, 0.0, 94, 0.0),
+//   createData('KitKat', 518, 26.0, 65, 7.0),
+//   createData('Lollipop', 392, 0.2, 98, 0.0),
+//   createData('Marshmallow', 318, 0, 81, 2.0),
+//   createData('Nougat', 360, 19.0, 9, 37.0),
+//   createData('Oreo', 437, 18.0, 63, 4.0),
+// ];
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -108,8 +108,30 @@ function stableSort(array, comparator) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-
+function  getHeaders()
+{
 const headCells = [
+  {
+    id: 'name',
+    numeric: false,
+    disablePadding: true,
+    label: 'שם מורה',
+  },
+  {
+    id: 'calories',
+    numeric: true,
+    disablePadding: false,
+    label: 'תעודת זהות',
+  },
+  {
+    id: 'fat',
+    numeric: true,
+    disablePadding: false,
+    label: 'טלפון',
+  },
+];
+
+const headCells2 = [
   {
     id: 'name',
     numeric: false,
@@ -142,6 +164,11 @@ const headCells = [
   },
 ];
 
+if (tableType.tableType == 'Staff')
+  return headCells;
+  return headCells2;
+};
+
 function EnhancedTableHead(props) {
   const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } =
     props;
@@ -163,7 +190,7 @@ function EnhancedTableHead(props) {
             }}
           />
         </TableCell>
-        {headCells.map((headCell) => (
+        {/*headCells*/getHeaders().map((headCell) => (
           <TableCell
             key={headCell.id}
             align={headCell.numeric ? 'right' : 'left'}
@@ -258,7 +285,10 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-export default function EnhancedTable() {
+var tableType;
+
+export default function EnhancedTable(t) {
+  tableType = t;
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
   const [selected, setSelected] = React.useState([]);
@@ -266,23 +296,28 @@ export default function EnhancedTable() {
   const [dense, setDense] = React.useState(false);
   const [studentObjects, setStudentObjects] = React.useState([]);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-//   const studentRef = collection(firestore, "student");
+  const studentRef = collection(firestore, "student");
+  const staffRef = collection(firestore, "staff");
 
-
-// const getData = async () => {
-//   const q = query(studentRef)
-//   const snapshot = await getDocs(q)
-//   snapshot.forEach(doc =>
-//      {
-//        console.log(doc.data())
-//        setStudentObjects(prev => [...prev, doc.data()])
-//       }
+const getData = async () => {
+  var q ;
+  if (tableType.tableType == 'Staff')
+    q = query(staffRef);
+  else
+    q = query(studentRef);
+  
+  const snapshot = await getDocs(q)
+  snapshot.forEach(doc =>
+     {
+       //console.log(doc.data())
+       setStudentObjects(prev => [...prev, doc.data()])
+      }
     
-//   )
-// }
+  )
+}
 
-// React.useEffect(()=>{getData()}, []);
-// React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
+React.useEffect(()=>{getData()}, []);
+React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -292,7 +327,7 @@ export default function EnhancedTable() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.name);
+      const newSelecteds = studentObjects.map((n) => n.name);
       setSelected(newSelecteds);
       return;
     }
@@ -336,7 +371,7 @@ export default function EnhancedTable() {
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - studentObjects.length) : 0;
 
   return (
     <Box sx={{ height: '100%', width: '78%' }}>
@@ -354,12 +389,12 @@ export default function EnhancedTable() {
               orderBy={orderBy}
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              rowCount={rows.length}
+              rowCount={studentObjects.length}
             />
             <TableBody>
               {/* if you don't need to support IE11, you can replace the `stableSort` call with:
                  rows.slice().sort(getComparator(order, orderBy)) */}
-              {stableSort(rows, getComparator(order, orderBy))
+              {stableSort(studentObjects, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const isItemSelected = isSelected(row.name);
@@ -414,7 +449,7 @@ export default function EnhancedTable() {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={rows.length}
+          count={studentObjects.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}

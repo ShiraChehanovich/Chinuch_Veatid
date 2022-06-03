@@ -24,6 +24,9 @@ export default function ModalPage() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const fnameRef = React.useRef ()
+    const lName = React.useRef()
+    const IDRef = React.useRef()
 
   async function handleSubmit(e){
 
@@ -48,9 +51,9 @@ export default function ModalPage() {
             <h2 className="text-center mb-4">הוספת תלמיד</h2>
             <Form onSubmit={handleSubmit}>
                 <Form.Group id="first-name">
-                    <RegularTextField />
+                    <RegularTextField/>
                 {/* <Form.Label>שם פרטי</Form.Label> */}
-                {/* <Form.Control type="email"  required /> */}
+                {/* <Form.Control type="email"  ref={fnameRef}  required /> */}
                 </Form.Group>
                 <Form.Group id="last-name">
                 <RegularTextField />
