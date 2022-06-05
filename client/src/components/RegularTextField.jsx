@@ -2,7 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
-export default function RegularTextField() {
+export default function RegularTextField(t) {
   return (
     <Box
       component="form"
@@ -13,7 +13,7 @@ export default function RegularTextField() {
       autoComplete="off"
     >
       {/* <TextField id="outlined-basic" label="Outlined" variant="outlined" /> */}
-      <TextField id="filled-basic" label="פרטים" variant="filled" />
+      <TextField id="filled-basic" label= {t.t} variant="filled"   align= "right"/>
       {/* <TextField id="standard-basic" label="Standard" variant="standard" /> */}
     </Box>
   );

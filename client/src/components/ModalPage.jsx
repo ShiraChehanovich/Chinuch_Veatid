@@ -51,27 +51,27 @@ export default function ModalPage() {
             <h2 className="text-center mb-4">הוספת תלמיד</h2>
             <Form onSubmit={handleSubmit}>
                 <Form.Group id="first-name">
-                    <RegularTextField/>
+                    <RegularTextField  t = "שם פרטי"></RegularTextField>
                 {/* <Form.Label>שם פרטי</Form.Label> */}
                 {/* <Form.Control type="email"  ref={fnameRef}  required /> */}
                 </Form.Group>
                 <Form.Group id="last-name">
-                <RegularTextField />
+                <RegularTextField  t = "שם משפחה"></RegularTextField>
                 {/* <Form.Label>שם משפחה</Form.Label> */}
                 {/* <Form.Control type="password"  required /> */}
                 </Form.Group>
-                <Form.Group id="first-name">
+                <Form.Group id="email">
                 {/* <Form.Label>כתובת</Form.Label> */}
-                <RegularTextField />
+                <RegularTextField t = "מייל"></RegularTextField>
                 {/* <Form.Control type="email"  required /> */}
                 </Form.Group>
-                <Form.Group id="first-name">
-                <RegularTextField />
+                <Form.Group id="ID">
+                <RegularTextField t = "תעודת זהות"></RegularTextField>
                 {/* <Form.Label>תאריך לידה</Form.Label> */}
                 {/* <Form.Control type="email"  required /> */}
                 </Form.Group>
-                <Form.Group id="first-name">
-                <RegularTextField />
+                <Form.Group id="address">
+                <RegularTextField t = "כתובת"></RegularTextField>
                 {/* <Form.Label>כתובת מייל</Form.Label> */}
                 {/* <Form.Control type="email"  required /> */}
                 </Form.Group>

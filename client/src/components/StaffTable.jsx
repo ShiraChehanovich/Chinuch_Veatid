@@ -7,7 +7,7 @@ import SecondTable from './SecondTable'
 export default function StaffTable() {
   return (
     <div>
-      <Search/>
+      {/* <Search/> */}
       <PopingMenu/>
       <Table tableType="Staff"></Table>
     </div>
