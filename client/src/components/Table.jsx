@@ -25,32 +25,61 @@ import { visuallyHidden } from '@mui/utils';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { getDocuments } from '../firebase/firebase';
+import Search from './Search';
+import { collection, getDocs, query } from 'firebase/firestore/lite';
+import { firestore } from '../firebase/firebase';
+import { Prev } from 'react-bootstrap/esm/PageItem';
+import ModalPage from './ModalPage';
 
-function createData(name, calories, fat, carbs, protein) {
+
+
+function createData(name,lastName, id, phone, email, address, age) {
   return {
     name,
-    calories,
-    fat,
-    carbs,
-    protein,
+    lastName,
+    id,
+    phone,
+    email,
+    address,
+    age,
   };
 }
+// const [estudiantes, setEstudiantes] = React.useState([]);
+// const estudiantesRef = db.collection("usuarios").doc(user.uid).collection("estudiantes")
 
-const rows = [
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Donut', 452, 25.0, 51, 4.9),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Honeycomb', 408, 3.2, 87, 6.5),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Jelly Bean', 375, 0.0, 94, 0.0),
-  createData('KitKat', 518, 26.0, 65, 7.0),
-  createData('Lollipop', 392, 0.2, 98, 0.0),
-  createData('Marshmallow', 318, 0, 81, 2.0),
-  createData('Nougat', 360, 19.0, 9, 37.0),
-  createData('Oreo', 437, 18.0, 63, 4.0),
-];
+//   useEffect(() => {
+//     estudiantesRef
+//     .orderBy('name')
+//      .onSnapshot(snapshot => {
+       
+//         const rows = [];
+//         snapshot.forEach((doc) => {
+
+//           const data = doc.data();
+//           rows.push(data);
+
+//         });
+//         setEstudiantes(rows);
+//       })
+//   }, []);
+
+//setDoc
+
+// const rows = [
+//   createData('Cupcake', 305, 3.7, 67, 4.3),
+//   createData('Donut', 452, 25.0, 51, 4.9),
+//   createData('Eclair', 262, 16.0, 24, 6.0),
+//   createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
+//   createData('Gingerbread', 356, 16.0, 49, 3.9),
+//   createData('Honeycomb', 408, 3.2, 87, 6.5),
+//   createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
+//   createData('Jelly Bean', 375, 0.0, 94, 0.0),
+//   createData('KitKat', 518, 26.0, 65, 7.0),
+//   createData('Lollipop', 392, 0.2, 98, 0.0),
+//   createData('Marshmallow', 318, 0, 81, 2.0),
+//   createData('Nougat', 360, 19.0, 9, 37.0),
+//   createData('Oreo', 437, 18.0, 63, 4.0),
+// ];
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -82,8 +111,54 @@ function stableSort(array, comparator) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-
+function  getHeaders()
+{
 const headCells = [
+  {
+    id: 'name',
+    numeric: false,
+    disablePadding: true,
+    label: 'שם מורה',
+  },
+  {
+    id: 'lastName',
+    numeric: true,
+    disablePadding: false,
+    label: 'שם משפחה',
+  },
+  {
+    id: 'id',
+    numeric: true,
+    disablePadding: false,
+    label: 'תעודת זהות',
+  },
+  {
+    id: 'phone',
+    numeric: true,
+    disablePadding: false,
+    label: 'טלפון',
+  },
+  {
+    id: 'email',
+    numeric: true,
+    disablePadding: false,
+    label: 'מייל',
+  },
+  {
+    id: 'address',
+    numeric: true,
+    disablePadding: false,
+    label: 'כתובת',
+  },
+  {
+    id: 'age',
+    numeric: true,
+    disablePadding: false,
+    label: 'גיל',
+  },
+];
+
+const headCells2 = [
   {
     id: 'name',
     numeric: false,
@@ -91,30 +166,47 @@ const headCells = [
     label: 'שם תלמיד',
   },
   {
-    id: 'calories',
+    id: 'lastName',
+    numeric: true,
+    disablePadding: false,
+    label: 'שם משפחה',
+  },
+  {
+    id: 'id',
     numeric: true,
     disablePadding: false,
     label: 'תעודת זהות',
   },
   {
-    id: 'fat',
+    id: 'phone',
     numeric: true,
     disablePadding: false,
     label: 'טלפון',
   },
   {
-    id: 'carbs',
+    id: 'email',
     numeric: true,
     disablePadding: false,
     label: 'מייל',
   },
   {
-    id: 'protein',
-    numeric: false,
-    disablePadding: true,
+    id: 'address',
+    numeric: true,
+    disablePadding: false,
     label: 'כתובת',
   },
+  {
+    id: 'address',
+    numeric: true,
+    disablePadding: false,
+    label: 'גיל',
+  },
 ];
+
+if (tableType.tableType == 'Staff')
+  return headCells;
+  return headCells2;
+};
 
 function EnhancedTableHead(props) {
   const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } =
@@ -137,7 +229,7 @@ function EnhancedTableHead(props) {
             }}
           />
         </TableCell>
-        {headCells.map((headCell) => (
+        {/*headCells*/getHeaders().map((headCell) => (
           <TableCell
             key={headCell.id}
             align={headCell.numeric ? 'right' : 'left'}
@@ -203,10 +295,7 @@ const EnhancedTableToolbar = (props) => {
           component="div"
         >
           <div>
-          <IconButton>
-            <AddIcon />
-          </IconButton>
-          הוספת תלמיד
+          <ModalPage />
           
           </div>
         </Typography>
@@ -214,7 +303,7 @@ const EnhancedTableToolbar = (props) => {
 
       {numSelected > 0 ? (
         <Tooltip title="Delete">
-          
+          <Search />
           <IconButton>
             <DeleteIcon />
           </IconButton>
@@ -235,13 +324,43 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-export default function EnhancedTable() {
+var tableType;
+
+export default function EnhancedTable(t) {
+  tableType = t;
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
+  const [studentObjects, setStudentObjects] = React.useState([]);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const studentRef = collection(firestore, "student");
+  const staffRef = collection(firestore, "staff");
+
+const getData = async () => {
+  var q ;
+  if (tableType.tableType == 'Staff')
+    q = query(staffRef);
+  else
+    q = query(studentRef);
+  
+  const snapshot = await getDocs(q)
+  snapshot.forEach(doc =>
+     {
+       //console.log(doc.data())  
+       setStudentObjects(prev => [...prev, doc.data()])
+      }
+    
+  )
+  
+  
+}
+
+
+
+React.useEffect(()=>{getData()}, []);
+React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -251,7 +370,7 @@ export default function EnhancedTable() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.name);
+      const newSelecteds = studentObjects.map((n) => n.name);
       setSelected(newSelecteds);
       return;
     }
@@ -295,10 +414,10 @@ export default function EnhancedTable() {
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - studentObjects.length) : 0;
 
   return (
-    <Box sx={{ height: '100%', width: '100%' }}>
+    <Box sx={{ height: '100%', width: '81%' }}>
       <Paper sx={{ width: '100%', mb: 5 }}>
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
@@ -313,12 +432,12 @@ export default function EnhancedTable() {
               orderBy={orderBy}
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              rowCount={rows.length}
+              rowCount={studentObjects.length}
             />
-            <TableBody>
+            <TableBody >
               {/* if you don't need to support IE11, you can replace the `stableSort` call with:
                  rows.slice().sort(getComparator(order, orderBy)) */}
-              {stableSort(rows, getComparator(order, orderBy))
+              {stableSort(studentObjects, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const isItemSelected = isSelected(row.name);
@@ -351,10 +470,12 @@ export default function EnhancedTable() {
                       >
                         {row.name}
                       </TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right">{row.protein}</TableCell>
+                      <TableCell align="right">{row.lastName}</TableCell>
+                      <TableCell align="right">{row.id}</TableCell>
+                      <TableCell align="right">{row.phone}</TableCell>
+                      <TableCell align="right">{row.email}</TableCell>
+                      <TableCell align="right">{row.address}</TableCell>
+                      <TableCell align="right">{row.age}</TableCell>
                     </TableRow>
                   );
                 })}
@@ -373,7 +494,7 @@ export default function EnhancedTable() {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={rows.length}
+          count={studentObjects.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}

@@ -11,7 +11,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import BoyIcon from '@mui/icons-material/Boy';
 import PeopleIcon from '@mui/icons-material/People';
@@ -31,7 +30,8 @@ export default function PopingMenu() {
   const navigate = useNavigate()
   const [error, setError] = useState("")
   const { currentUser, logout  } = useAuth()
-  async function handleLogout(){
+  async function handleLogout(index){
+    if(index === 1){
     setError('')
     try{
         await logout()
@@ -41,7 +41,26 @@ export default function PopingMenu() {
         setError("Failed to log out: "+ err)
         console.log(err)
     }
+  }
   };
+
+  async function handleNavigate(index){
+    switch(index){
+      case 0: 
+      navigate("/students"); 
+      break;
+      case 1: 
+      navigate("/staff"); 
+      break;
+      case 2: 
+      navigate("/class");
+      break;
+      case 3: 
+      navigate("/schedule");
+      break;
+      default: navigate("/main")
+    }
+  }
   return (
     <Box sx={{ display: 'flex' }} >
       <CssBaseline />
@@ -51,6 +70,7 @@ export default function PopingMenu() {
       >
         <Toolbar>
           <Typography variant="h6" noWrap component="div">
+            סטודנטים
           </Typography>
         </Toolbar>
       </AppBar>
@@ -84,7 +104,7 @@ export default function PopingMenu() {
         <List>
           {['תיק תלמיד', 'תיק צוות', 'תיק כיתה', 'יומן אישי'].map((text, index) => (
             <ListItem key={text} disablePadding>
-              <ListItemButton>
+              <ListItemButton  onClick={() => handleNavigate(index)}>
                 <ListItemIcon>
                   {index === 0 ? <BoyIcon /> :index === 1 ?<PeopleIcon /> :index === 2 ? <SchoolIcon /> :<CalendarMonthIcon />}
                 </ListItemIcon>
@@ -98,9 +118,9 @@ export default function PopingMenu() {
 
           {[currentUser.email,'התנתקות'].map((text, index) => (
             <ListItem key={text} disablePadding>
-              <ListItemButton>
+              <ListItemButton onClick={() =>handleLogout(index)}>
                 <ListItemIcon>
-                  {index % 2 === 0 ? <MailIcon /> : <LogoutIcon onClick={handleLogout} />}
+                  {index % 2 === 0 ? <MailIcon /> : <LogoutIcon  />}
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItemButton>

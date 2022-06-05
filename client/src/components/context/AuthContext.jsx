@@ -1,6 +1,7 @@
 import React , {useContext, useState, useEffect} from 'react'
 import { auth } from '../../firebase/firebase'
 import ReactDOM from 'react-dom/client'
+import firebase from 'firebase/compat/app';
 
 const AuthContext = React.createContext()
 
@@ -11,13 +12,16 @@ export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState()
     const [loading, setLoading] = useState(true)
 
-    function signup(email, password) {
-        return auth.createUserWithEmailAndPassword(email, password)
+    async function signup(email, password) {
+        await firebase.auth().createUserWithEmailAndPassword(email, password)
     }
+     async function login(email, password) {
+      await firebase.auth().signInWithEmailAndPassword(email, password);
+     }
 
-    function login(email, password) {
-        return auth.signInWithEmailAndPassword(email, password)
-      }
+    // function login(email, password) {
+    //     return auth.signInWithEmailAndPassword(email, password)
+    //   }
 
       function logout() {
         return auth.signOut()

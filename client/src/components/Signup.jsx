@@ -24,7 +24,7 @@ export default function Signup(){
             setLoading(true)
             await signup(emailRef.current.value, passwordRef.current.value)
             //history.push("/")
-            navigate("/main ")
+            navigate("/home-page ")
         } catch(err){            
             setError(err.message)
         }
