@@ -8,9 +8,10 @@ import RegularTextField from './RegularTextField';
 import { Form, Card , Alert} from "react-bootstrap"
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
-import { doc, setDoc } from "firebase/firestore";
+import { addDoc, doc, setDoc } from "firebase/firestore";
 import { collection, query } from 'firebase/firestore/lite';
 import { firestore } from '../firebase/firebase';
+
 
 const style = {
   position: 'absolute',
@@ -23,21 +24,21 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-async function add(fname, lname, id, email, phone, age, address) {
-  const studentRef = collection(firestore, "student");
-  const staffRef = collection(firestore, "staff");
-  await setDoc(doc(firestore, {
-    name: fname,
-    lastName: lname,
-    id: id,
-    email: email,
-    phone: phone,
-    age: age,
-    address: address,
-  }));
+// async function add(fname, lname, id, email, phone, age, address) {
+//   const studentRef = collection(firestore, "student");
+//   const staffRef = collection(firestore, "staff");
+//   await setDoc(doc(firestore, {
+//     name: fname,
+//     lastName: lname,
+//     id: id,
+//     email: email,
+//     phone: phone,
+//     age: age,
+//     address: address,
+//   }));
 
   
- }
+//  }
 
 
 
@@ -49,18 +50,83 @@ export default function ModalPage() {
   const lNameRef = React.useRef()
   const IDRef = React.useRef()
   const emailRef = React.useRef()
-  const phonelRef = React.useRef()
+  const phoneRef = React.useRef()
   const ageRef = React.useRef()
   const addressRef = React.useRef()
   const navigate = useNavigate()
 
 
-  async function handleSubmit(e){
-    e.preventDefault()
-            //console.log(fnameRef.current.value)
-           // await add(fnameRef.current.value, lNameRef.current.value,IDRef.current.value, emailRef.current.value, phonelRef.current.value, ageRef.current.value, addressRef.current.value)
-            navigate("/students ")
-          }
+  // async function handleSubmit(e){
+  //   e.preventDefault()
+  //           //console.log(fnameRef.current.value)
+  //           //await add(fnameRef.current.value, lNameRef.current.value,IDRef.current.value, emailRef.current.value, phoneRef.current.value, ageRef.current.value, addressRef.current.value)
+  //           //firestore.collection("student").add({fnameRef, lNameRef,IDRef, emailRef, phoneRef, ageRef, addressRef})
+  //           // const DocRef = await setDoc(collection(firestore, "student"), {
+  //           //   name: fnameRef.current.value,
+  //           //   lastName: lNameRef.current.value,
+  //           //   id: IDRef.current.value,
+  //           //   email: emailRef.current.value,
+  //           //   phone: phoneRef.current.value,
+  //           //   age: ageRef.current.value,
+  //           //   address: addressRef.current.value,
+  //           // });
+  //           // console.log("Document written with ID: ", DocRef.id);
+
+  //         //   useEffect (() => {
+  //         //     if(collection) { 
+  //         //       var q;
+  //         //       //const newcoll = col(projectFirestore, collection);
+  //               const studentRef = collection(firestore, "student");
+  //         //       // const q = query(studentRef, orderBy('createdAt', 'desc'));
+  //         //       // const unsub = onSnapshot(q, (snapshot) => {
+  //         //         q = query(studentRef);
+  //         //         const snapshot = await setDoc(q)
+  //         //         let documents = [];
+  //         //         snapshot.forEach(doc => {
+  //         //            documents.push({...doc.data(), id: doc.id})
+  //         //         // })
+  //         //         //setDocs(documents);
+  //         //       });
+           
+  //         //       return unsub;
+  //         //    }
+  //         //  },[collection]);
+  //         //const docRef = firestore.collection(firestore, "student").doc();
+  //         //const newId = docRef.id;
+  //         const newId = firestore.newId;
+  //         firestore.studentRef.doc(newId).set({
+  //           name: fnameRef.current.value,
+  //             lastName: lNameRef.current.value,
+  //             id: IDRef.current.value,
+  //             email: emailRef.current.value,
+  //             phone: phoneRef.current.value,
+  //             age: ageRef.current.value,
+  //             address: addressRef.current.value,
+  //         })
+
+  //           navigate("/students")
+  //         }
+    const studentRef = collection(firestore,"student");
+    const [newName,setNewName] = React.useState("")
+    const [newLName,setNewLName] = React.useState("")
+    const [newId,setNewId] = React.useState(0)
+    const [newEmail,setNewEmail] = React.useState("")
+    const [newPhone,setNewPhone] = React.useState(0)
+    const [newAge,setNewAge] = React.useState(0)
+    const [newAddress,setNewAddress] = React.useState("")
+    const handleSubmit = async (e) =>{
+        e.preventDefault()
+      await setDoc(doc(studentRef),{
+        name: newName,
+        lastName: newLName,
+        id: newId,
+        email: newEmail, 
+        phone: newPhone,
+        age: newAge,
+        address: newAddress,
+      });
+      navigate("/students ");
+    }
   return (
     <div>
       <Button onClick={handleOpen}>
@@ -83,39 +149,39 @@ export default function ModalPage() {
                     הוספה
                 </Button>
                 <Form.Group id="first-name">
-                    {/* <RegularTextField  t = "שם פרטי" ref={fnameRef} required></RegularTextField> */}
-                <Form.Label size = "small">שם פרטי</Form.Label>
-                <Form.Control ref={fnameRef}  required />
+                    <RegularTextField  t = "שם פרטי"  value = {newName} onChange={(event) => setNewName(event.target.value)}></RegularTextField>
+                {/* <Form.Label>שם פרטי</Form.Label>
+                <Form.Control ref={fnameRef}  required /> */}
                 </Form.Group>
                 <Form.Group id="last-name">
-                {/* <RegularTextField  t = "שם משפחה" ref={lName} required></RegularTextField> */}
-                <Form.Label>שם משפחה</Form.Label>
-                <Form.Control ref={lNameRef} required />
+                <RegularTextField  t = "שם משפחה"  value = {newLName} onChange={(event) => setNewLName(event.target.value)}></RegularTextField>
+                {/* <Form.Label>שם משפחה</Form.Label> */}
+                {/* <Form.Control ref={lNameRef} required /> */}
                 </Form.Group>
                 <Form.Group id="email">
-                {/* <RegularTextField t = "מייל"></RegularTextField> */}
-                <Form.Label>מייל</Form.Label>
-                <Form.Control type="email" ref={emailRef} required />
+                <RegularTextField t = "מייל"  value = {newEmail} onChange={(event) => setNewEmail(event.target.value)}></RegularTextField>
+                {/* <Form.Label>מייל</Form.Label> */}
+                {/* <Form.Control type="email" ref={emailRef} required /> */}
                 </Form.Group>
                 <Form.Group id="ID">
-                {/* <RegularTextField t = "תעודת זהות" ref={IDRef} required></RegularTextField> */}
-                <Form.Label>תעודת זהות</Form.Label>
-                <Form.Control ref={IDRef} required />
+                <RegularTextField t = "תעודת זהות"  value = {newId} onChange={(event) => setNewId(event.target.value)}></RegularTextField>
+                {/* <Form.Label>תעודת זהות</Form.Label> */}
+                {/* <Form.Control ref={IDRef} required /> */}
                 </Form.Group>
                 <Form.Group id="phone">
-                {/* <RegularTextField t = "כתובת"></RegularTextField> */}
-                <Form.Label>מספר טלפון</Form.Label>
-                <Form.Control ref={phonelRef} required />
+                <RegularTextField t = "טלפון"  value = {newPhone} onChange={(event) => setNewPhone(event.target.value)}></RegularTextField>
+                {/* <Form.Label>מספר טלפון</Form.Label> */}
+                {/* <Form.Control ref={phoneRef} required /> */}
                 </Form.Group>
                 <Form.Group id="age">
-                {/* <RegularTextField t = "גיל"></RegularTextField> */}
-                <Form.Label>גיל</Form.Label>
-                <Form.Control ref={ageRef} required />
+                <RegularTextField t = "גיל"  value = {newAge} onChange={(event) => setNewAge(event.target.value)}></RegularTextField>
+                {/* <Form.Label>גיל</Form.Label> */}
+                {/* <Form.Control ref={ageRef} required /> */}
                 </Form.Group>
                 <Form.Group id="address">
-                {/* <RegularTextField t = "כתובת"></RegularTextField> */}
-                <Form.Label>כתובת</Form.Label>
-                <Form.Control ref={addressRef} required />
+                <RegularTextField t = "כתובת"  value = {newAddress} onChange={(event) => setNewAddress(event.target.value)}></RegularTextField>
+                {/* <Form.Label>כתובת</Form.Label> */}
+                {/* <Form.Control ref={addressRef} required /> */}
                 </Form.Group>
             </Form>
             {/* </Card.Body>  
