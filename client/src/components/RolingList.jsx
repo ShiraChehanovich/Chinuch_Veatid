@@ -1,35 +1,86 @@
 import * as React from 'react';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListSubheader from '@mui/material/ListSubheader';
+import { styled } from '@mui/material/styles';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
 
-export default function PinnedSubheaderList() {
+const BpIcon = styled('span')(({ theme }) => ({
+  borderRadius: '50%',
+  width: 16,
+  height: 16,
+  boxShadow:
+    theme.palette.mode === 'dark'
+      ? '0 0 0 1px rgb(16 22 26 / 40%)'
+      : 'inset 0 0 0 1px rgba(16,22,26,.2), inset 0 -1px 0 rgba(16,22,26,.1)',
+  backgroundColor: theme.palette.mode === 'dark' ? '#394b59' : '#f5f8fa',
+  backgroundImage:
+    theme.palette.mode === 'dark'
+      ? 'linear-gradient(180deg,hsla(0,0%,100%,.05),hsla(0,0%,100%,0))'
+      : 'linear-gradient(180deg,hsla(0,0%,100%,.8),hsla(0,0%,100%,0))',
+  '.Mui-focusVisible &': {
+    outline: '2px auto rgba(19,124,189,.6)',
+    outlineOffset: 2,
+  },
+  'input:hover ~ &': {
+    backgroundColor: theme.palette.mode === 'dark' ? '#30404d' : '#ebf1f5',
+  },
+  'input:disabled ~ &': {
+    boxShadow: 'none',
+    background:
+      theme.palette.mode === 'dark' ? 'rgba(57,75,89,.5)' : 'rgba(206,217,224,.5)',
+  },
+}));
+
+const BpCheckedIcon = styled(BpIcon)({
+  backgroundColor: '#137cbd',
+  backgroundImage: 'linear-gradient(180deg,hsla(0,0%,100%,.1),hsla(0,0%,100%,0))',
+  '&:before': {
+    display: 'block',
+    width: 16,
+    height: 16,
+    backgroundImage: 'radial-gradient(#fff,#fff 28%,transparent 32%)',
+    content: '""',
+  },
+  'input:hover ~ &': {
+    backgroundColor: '#106ba3',
+  },
+});
+
+// Inspired by blueprintjs
+function BpRadio(props) {
   return (
-    <List
+    <Radio
       sx={{
-        width: '100%',
-        maxWidth: 360,
-        bgcolor: 'background.paper',
-        position: 'relative',
-        overflow: 'auto',
-        maxHeight: 300,
-        '& ul': { padding: 0 },
+        '&:hover': {
+          bgcolor: 'transparent',
+        },
       }}
-      subheader={<li />}
-    >
-      {[0, 1, 2, 3, 4].map((sectionId) => (
-        <li key={`section-${sectionId}`}>
-          <ul>
-            <ListSubheader>{`I'm sticky ${sectionId}`}</ListSubheader>
-            {[0, 1, 2].map((item) => (
-              <ListItem key={`item-${sectionId}-${item}`}>
-                <ListItemText primary={`Item ${item}`} />
-              </ListItem>
-            ))}
-          </ul>
-        </li>
-      ))}
-    </List>
+      disableRipple
+      color="default"
+      checkedIcon={<BpCheckedIcon />}
+      icon={<BpIcon />}
+      {...props}
+    />
+  );
+}
+
+export default function CustomizedRadios() {
+  return (
+    <FormControl>
+       <RadioGroup
+        defaultValue="female"
+        aria-labelledby="demo-customized-radios"
+        name="customized-radios"
+      >
+        <FormControlLabel value="ישיבת צוות" control={<BpRadio />} label="ישיבת צוות" />
+        <FormControlLabel value="שיעור" control={<BpRadio />} label="שיעור" />
+        <FormControlLabel value="טיול" control={<BpRadio />} label="טיול" />
+        <FormControlLabel value="אחר" control={<BpRadio />} label="אחר" />
+
+      
+      </RadioGroup>
+    </FormControl>
   );
 }

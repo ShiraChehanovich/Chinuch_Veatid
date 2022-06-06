@@ -13,7 +13,15 @@ import { collection, query } from 'firebase/firestore/lite';
 import { firestore } from '../firebase/firebase';
 import PopingMenu from './PopingMenu';
 import SelectAdateInTheCalendar from './SelectAdateInTheCalendar';
+import ListOfTeachers from './ListOfTeachers';
+import SearchIcon from '@mui/icons-material/Search';
+import ListOfTasksForTeacher from './ListOfTasksForTeacher';
+import FmdGoodIcon from '@mui/icons-material/FmdGood';
+import EventNoteIcon from '@mui/icons-material/EventNote';
+import QueryBuilderIcon from '@mui/icons-material/QueryBuilder';
 
+import ModeIcon from '@mui/icons-material/Mode';
+import ListOfTasks from './ListOfTasks';
 const style = {
   position: 'absolute',
   top: '50%',
@@ -80,39 +88,47 @@ export default function TaskModalPage() {
           <Typography id="modal-modal-title" variant="h6" component="h2">
           {/* <Card>
             <Card.Body> */}
-            <h2 className="text-center mb-4">הוספת תלמיד</h2>
+            <h2 className="text-center mb-4">הוספת משימה</h2>
             <Form onSubmit={handleSubmit}>
                 <Button className="w-100" type="submit">
                     הוספה
                 </Button>
                 <Form.Group id="first-name">
                     {/* <RegularTextField  t = "תאריך" ref={fnameRef} required></RegularTextField> */}
+                    <EventNoteIcon/>
                 <Form.Label size = "small">תאריך</Form.Label>
                 <SelectAdateInTheCalendar/>
                 </Form.Group>
                 <Form.Group id="last-name">
                 {/* <RegularTextField  t = "שעה" ref={lName} required></RegularTextField> */}
+                <QueryBuilderIcon/>
                 <Form.Label>שעה</Form.Label>
                 <Form.Control ref={lNameRef} required />
                 </Form.Group>
                 <Form.Group id="email">
                 {/* <RegularTextField t = "סוג משימה"></RegularTextField> */}
-                <Form.Label>סוג משימה</Form.Label>
-                <Form.Control type="email" ref={emailRef} required />
+                <ListOfTasks/>
+                {/* <RolingList/> */}
                 </Form.Group>
                 <Form.Group id="ID">
                 {/* <RegularTextField t = "משתתפים" ref={IDRef} required></RegularTextField> */}
-                <Form.Label>משתתפים</Form.Label>
-                <Form.Control ref={IDRef} required />
+                {/* <Form.Label>משתתפים</Form.Label>
+                <SearchIcon /> */}
+                <ListOfTasksForTeacher/>
+                {/* <Form.Control ref={IDRef} required /> */}
+                
                 </Form.Group>
                 <Form.Group id="phone">
                 {/* <RegularTextField t = "מיקום"></RegularTextField> */}
+                <FmdGoodIcon/>
                 <Form.Label>מיקום</Form.Label>
                 <Form.Control ref={phonelRef} required />
                 </Form.Group>
                 <Form.Group id="age">
                 {/* <RegularTextField t = "תאור משימה"></RegularTextField> */}
-                <Form.Label>תאור משימה</Form.Label>
+                <ModeIcon/>
+                <Form.Label>תאור המשימה</Form.Label>
+               
                 <Form.Control ref={ageRef} required />
                 </Form.Group>
                 <Form.Group id="address">
