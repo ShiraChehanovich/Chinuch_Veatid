@@ -48,7 +48,7 @@ const app = firebase.initializeApp(firebaseConfig);
 //export const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
 
-const firestore = getFirestore(app);
+const firestore = getFirestore();
 
 // const speciaLOfTheDay = doc(firestore, 'dailySpecial/2022-08-5')
 // function writeDailySpecial() {
