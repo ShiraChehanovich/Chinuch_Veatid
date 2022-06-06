@@ -6,7 +6,6 @@ import Search from './Search'
 export default function StudentTable() {
   return (
     <div>
-      <Search/>
       <PopingMenu/>
       <Table/>
     </div>
