@@ -22,6 +22,7 @@ export default function StaticDatePickerLandscape() {
         renderInput={(params) => <TextField {...params} />}
       />
       <TaskModalPage/>
+      
     </LocalizationProvider>
   );
 }

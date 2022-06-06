@@ -12,6 +12,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { collection, query } from 'firebase/firestore/lite';
 import { firestore } from '../firebase/firebase';
 import PopingMenu from './PopingMenu';
+import SelectAdateInTheCalendar from './SelectAdateInTheCalendar';
 
 const style = {
   position: 'absolute',
@@ -85,39 +86,39 @@ export default function TaskModalPage() {
                     הוספה
                 </Button>
                 <Form.Group id="first-name">
-                    {/* <RegularTextField  t = "שם פרטי" ref={fnameRef} required></RegularTextField> */}
+                    {/* <RegularTextField  t = "תאריך" ref={fnameRef} required></RegularTextField> */}
                 <Form.Label size = "small">תאריך</Form.Label>
-                <Form.Control ref={fnameRef}  required />
+                <SelectAdateInTheCalendar/>
                 </Form.Group>
                 <Form.Group id="last-name">
-                {/* <RegularTextField  t = "שם משפחה" ref={lName} required></RegularTextField> */}
-                <Form.Label>שם משפחה</Form.Label>
+                {/* <RegularTextField  t = "שעה" ref={lName} required></RegularTextField> */}
+                <Form.Label>שעה</Form.Label>
                 <Form.Control ref={lNameRef} required />
                 </Form.Group>
                 <Form.Group id="email">
-                {/* <RegularTextField t = "מייל"></RegularTextField> */}
-                <Form.Label>מייל</Form.Label>
+                {/* <RegularTextField t = "סוג משימה"></RegularTextField> */}
+                <Form.Label>סוג משימה</Form.Label>
                 <Form.Control type="email" ref={emailRef} required />
                 </Form.Group>
                 <Form.Group id="ID">
-                {/* <RegularTextField t = "תעודת זהות" ref={IDRef} required></RegularTextField> */}
-                <Form.Label>תעודת זהות</Form.Label>
+                {/* <RegularTextField t = "משתתפים" ref={IDRef} required></RegularTextField> */}
+                <Form.Label>משתתפים</Form.Label>
                 <Form.Control ref={IDRef} required />
                 </Form.Group>
                 <Form.Group id="phone">
-                {/* <RegularTextField t = "כתובת"></RegularTextField> */}
-                <Form.Label>מספר טלפון</Form.Label>
+                {/* <RegularTextField t = "מיקום"></RegularTextField> */}
+                <Form.Label>מיקום</Form.Label>
                 <Form.Control ref={phonelRef} required />
                 </Form.Group>
                 <Form.Group id="age">
-                {/* <RegularTextField t = "גיל"></RegularTextField> */}
-                <Form.Label>גיל</Form.Label>
+                {/* <RegularTextField t = "תאור משימה"></RegularTextField> */}
+                <Form.Label>תאור משימה</Form.Label>
                 <Form.Control ref={ageRef} required />
                 </Form.Group>
                 <Form.Group id="address">
-                {/* <RegularTextField t = "כתובת"></RegularTextField> */}
+                {/* <RegularTextField t = "כתובת"></RegularTextField>
                 <Form.Label>כתובת</Form.Label>
-                <Form.Control ref={addressRef} required />
+                <Form.Control ref={addressRef} required /> */}
                 </Form.Group>
             </Form>
             {/* </Card.Body>  
