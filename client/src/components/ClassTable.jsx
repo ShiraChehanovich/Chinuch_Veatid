@@ -6,9 +6,7 @@ import Search from './Search'
 export default function ClassTable() {
   return (
     <div>
-      <Search/>
       <PopingMenu/>
-      <Table/>
     </div>
   )
 }
