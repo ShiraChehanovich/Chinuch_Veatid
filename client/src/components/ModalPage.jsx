@@ -149,7 +149,7 @@ export default function ModalPage() {
                     הוספה
                 </Button>
                 <Form.Group id="first-name">
-                    <input  t = "שם פרטי"  value = {newName} onChange={(event) => setNewName(event.target.value)}></input>
+                    <RegularTextField  t = "שם פרטי"  value = {newName} onChange={(event) => setNewName(event.target.value)}></RegularTextField>
                 {/* <Form.Label>שם פרטי</Form.Label>
                 <Form.Control ref={fnameRef}  required /> */}
                 </Form.Group>
