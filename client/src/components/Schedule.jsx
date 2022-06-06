@@ -6,6 +6,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 import TaskModalPage from './TaskModalPge';
 
+
 export default function StaticDatePickerLandscape() {
   const [value, setValue] = React.useState(new Date());
 
@@ -21,8 +22,10 @@ export default function StaticDatePickerLandscape() {
         }}
         renderInput={(params) => <TextField {...params} />}
       />
+      
       <TaskModalPage/>
       
     </LocalizationProvider>
+    
   );
 }

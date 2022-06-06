@@ -19,7 +19,8 @@ import ListOfTasksForTeacher from './ListOfTasksForTeacher';
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import QueryBuilderIcon from '@mui/icons-material/QueryBuilder';
-
+import ListItemButton from '@mui/material/ListItemButton'; 
+import ListAltIcon from '@mui/icons-material/ListAlt';
 import ModeIcon from '@mui/icons-material/Mode';
 import ListOfTasks from './ListOfTasks';
 const style = {
@@ -107,6 +108,10 @@ export default function TaskModalPage() {
                 </Form.Group>
                 <Form.Group id="email">
                 {/* <RegularTextField t = "סוג משימה"></RegularTextField> */}
+                <ListAltIcon/>
+                <Form.Label>סוג משימה</Form.Label>
+                
+{/* <ListItemButton></ListItemButton> */}
                 <ListOfTasks/>
                 {/* <RolingList/> */}
                 </Form.Group>
