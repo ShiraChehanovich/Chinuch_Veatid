@@ -31,7 +31,7 @@ import { firestore } from '../firebase/firebase';
 import { Prev } from 'react-bootstrap/esm/PageItem';
 import ModalPage from './ModalPage';
 
-
+import SearchTeachersAndStudent from './SearchTeachersAndStudent';
 
 function createData(name,lastName, id, phone, email, address, age) {
   return {
@@ -311,9 +311,18 @@ const EnhancedTableToolbar = (props) => {
         </Tooltip>
       ) : (
         <Tooltip title="Filter list">
-          <IconButton>
+          <div class="row">
+            <div class="col">
+              <div class="card card-body">
+                <input id="search-input" class="from-control" type="text"></input>
+
+              </div>
+            </div>
+          </div>
+          {/* <IconButton>
             <SearchOutlinedIcon />
-          </IconButton>
+          </IconButton> */}
+          {/* <SearchTeachersAndStudent/> */}
         </Tooltip>
       )}
     </Toolbar>
