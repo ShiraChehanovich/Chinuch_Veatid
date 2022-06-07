@@ -26,7 +26,7 @@ import AddBoxIcon from '@mui/icons-material/AddBox';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { getDocuments } from '../firebase/firebase';
 import Search from './Search';
-import { collection, getDocs, query } from 'firebase/firestore/lite';
+import { collection, getDocs, query } from 'firebase/firestore';
 import { firestore } from '../firebase/firebase';
 import { Prev } from 'react-bootstrap/esm/PageItem';
 import ModalPage from './ModalPage';

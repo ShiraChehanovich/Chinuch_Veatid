@@ -11,7 +11,7 @@ import {
   getDocs,
   orderBy,
   limit,
-} from "firebase/firestore/lite";
+} from "firebase/firestore";
 // import firebase from 'firebase';
 import {getStorage} from 'firebase/storage';
 // import { getAnalytics } from "firebase/analytics";
@@ -48,7 +48,7 @@ const app = firebase.initializeApp(firebaseConfig);
 //export const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
 
-const firestore = getFirestore(app);
+const firestore = getFirestore();
 
 // const speciaLOfTheDay = doc(firestore, 'dailySpecial/2022-08-5')
 // function writeDailySpecial() {

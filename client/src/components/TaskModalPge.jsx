@@ -9,7 +9,6 @@ import { Form, Card , Alert} from "react-bootstrap"
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { doc, setDoc } from "firebase/firestore";
-import { collection, query } from 'firebase/firestore/lite';
 import { firestore } from '../firebase/firebase';
 import PopingMenu from './PopingMenu';
 import SelectAdateInTheCalendar from './SelectAdateInTheCalendar';
@@ -91,7 +90,7 @@ export default function TaskModalPage() {
           <Typography id="modal-modal-title" variant="h6" component="h2">
           {/* <Card>
             <Card.Body> */}
-            <h2 className="text-center mb-4">הוספת משימה</h2>
+            <div className="text-center mb-4">הוספת משימה</div>
             <Form onSubmit={handleSubmit}>
                 <Button className="w-100" type="submit">
                     הוספה

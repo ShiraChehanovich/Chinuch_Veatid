@@ -2,7 +2,7 @@
 //import './App.css';
 import React from 'react';
 
-import  Signup  from './components/Signup'
+import Signup from './components/Signup'
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import StudentFile from './components/StudentFile';
@@ -42,27 +42,27 @@ function App() {
     // <ReactFirebaseFileUpload />
 
 
-      <Container className="d-flex align-items-center justify-content-center"
-      style={{ minHeight: "100vh" ,alignContent: 'center'}}>
-          <div className="w-100">
-            <Router>
-              <AuthProvider>
-                <Routes>
-                <Route exact path="/" element={<Login />}/>
-                <Route path="/signup" element={<Signup />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/forgot-password" element={<ForgotPassword />} />
-                <Route path="/students" element={<StudentTable />} />
-                <Route path="/staff" element={<StaffTable />} />
-                <Route path="/home-page" element={<HomePage />} />
-                <Route path="/studentFile" element={<StudentFile />} />
-                <Route path="/class" element={<ClassTable />} />
-                <Route path="/schedule" element={<Schedule />} />
-                </Routes>
-              </AuthProvider>
-            </Router>
-          </div>
-      </Container>
+    <Container className="d-flex align-items-center justify-content-center"
+      style={{ minHeight: "100vh", alignContent: 'center' }}>
+      <div className="w-100">
+        <Router>
+          <AuthProvider>
+            <Routes>
+              <Route exact path="/" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/students" element={<StudentTable />} />
+              <Route path="/staff" element={<StaffTable />} />
+              <Route path="/home-page" element={<HomePage />} />
+              <Route path="/studentFile" element={<StudentFile />} />
+              <Route path="/class" element={<ClassTable />} />
+              <Route path="/schedule" element={<Schedule />} />
+            </Routes>
+          </AuthProvider>
+        </Router>
+      </div>
+    </Container>
   );
 }
 // function App() {
@@ -78,29 +78,29 @@ function App() {
 //   );
 // }
 
-    /////<ReactFirebaseFileUpload />
+/////<ReactFirebaseFileUpload />
 
-    // <AuthProvider>
-    // <Container className="d-flex align-items-center justify-content-center"
-    // style={{ minHeight: "100vh" }}>
-    //     <div className="w-100" style={{ maxWidth: "400px" }}>
-    //         <Signup /> 
-    //     </div>
-    // </Container>
-    // </AuthProvider>
-  //);
+// <AuthProvider>
+// <Container className="d-flex align-items-center justify-content-center"
+// style={{ minHeight: "100vh" }}>
+//     <div className="w-100" style={{ maxWidth: "400px" }}>
+//         <Signup /> 
+//     </div>
+// </Container>
+// </AuthProvider>
+//);
 //}
 //function App() {
-  //return (
-    //<Student_table>
-    //</Student_table>/<Container className="d-flex align-items-center justify-content-center"
-    //style={{ minHeight: "100vh" }}>
-        //<div className="w-100" style={{ maxWidth: "400px" }}>
-        //    <Signup /> 
-      //  </div>
-    //</Container>
-   // </Student_table>
- // );
+//return (
+//<Student_table>
+//</Student_table>/<Container className="d-flex align-items-center justify-content-center"
+//style={{ minHeight: "100vh" }}>
+//<div className="w-100" style={{ maxWidth: "400px" }}>
+//    <Signup /> 
+//  </div>
+//</Container>
+// </Student_table>
+// );
 //}
 
 
