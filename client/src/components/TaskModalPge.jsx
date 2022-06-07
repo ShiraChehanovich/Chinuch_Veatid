@@ -23,6 +23,8 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import ModeIcon from '@mui/icons-material/Mode';
 import ListOfTasks from './ListOfTasks';
+import TimeDateClock from './TimeDateClock';
+
 const style = {
   position: 'absolute',
   top: '50%',
@@ -102,9 +104,9 @@ export default function TaskModalPage() {
                 </Form.Group>
                 <Form.Group id="last-name">
                 {/* <RegularTextField  t = "שעה" ref={lName} required></RegularTextField> */}
-                <QueryBuilderIcon/>
+              
                 <Form.Label>שעה</Form.Label>
-                <Form.Control ref={lNameRef} required />
+              <TimeDateClock/>
                 </Form.Group>
                 <Form.Group id="email">
                 {/* <RegularTextField t = "סוג משימה"></RegularTextField> */}
