@@ -35,6 +35,10 @@ import StaffTable from './components/StaffTable';
 import HomePage from './components/HomePage';
 import ClassTable from './components/ClassTable';
 import Schedule from './components/Schedule';
+import FullCalendar from './components/FullCalendarComponent';
+import FullCalendarComponent from './components/FullCalendarComponent';
+
+
 
 function App() {
   return (
@@ -58,6 +62,7 @@ function App() {
               <Route path="/studentFile" element={<StudentFile />} />
               <Route path="/class" element={<ClassTable />} />
               <Route path="/schedule" element={<Schedule />} />
+              {/* <Route path="/FullCalendar" element={<FullCalendarComponent />} /> */}
             </Routes>
           </AuthProvider>
         </Router>
