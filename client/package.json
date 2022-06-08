@@ -13,7 +13,7 @@
     "@fullcalendar/interaction": "^5.11.0",
     "@fullcalendar/react": "^5.11.1",
     "@mui/icons-material": "^5.8.0",
-    "@mui/material": "^5.8.0",
+    "@mui/material": "^5.8.2",
     "@mui/styled-engine-sc": "^5.7.0",
     "@mui/x-data-grid": "^5.11.1",
     "@mui/x-date-pickers": "^5.0.0-alpha.5",

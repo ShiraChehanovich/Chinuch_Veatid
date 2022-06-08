@@ -30,6 +30,9 @@ import { collection, getDocs, query } from 'firebase/firestore';
 import { firestore } from '../firebase/firebase';
 import { Prev } from 'react-bootstrap/esm/PageItem';
 import ModalPage from './ModalPage';
+import StudentCell from './TableCells/StudentCell';
+import StaffCell from './TableCells/StaffCell';
+import { ro } from 'date-fns/locale';
 
 import SearchTeachersAndStudent from './SearchTeachersAndStudent';
 
@@ -115,34 +118,10 @@ function  getHeaders()
 {
 const headCells = [
   {
-    id: 'name',
-    numeric: false,
-    disablePadding: true,
-    label: 'שם מורה',
-  },
-  {
-    id: 'lastName',
+    id: 'address',
     numeric: true,
     disablePadding: false,
-    label: 'שם משפחה',
-  },
-  {
-    id: 'id',
-    numeric: true,
-    disablePadding: false,
-    label: 'תעודת זהות',
-  },
-  {
-    id: 'phone',
-    numeric: true,
-    disablePadding: false,
-    label: 'טלפון',
-  },
-  {
-    id: 'email',
-    numeric: true,
-    disablePadding: false,
-    label: 'מייל',
+    label: 'תפקיד',
   },
   {
     id: 'address',
@@ -151,43 +130,43 @@ const headCells = [
     label: 'כתובת',
   },
   {
-    id: 'age',
+    id: 'email',
     numeric: true,
     disablePadding: false,
-    label: 'גיל',
+    label: 'מייל',
   },
-];
-
-const headCells2 = [
+  {
+    id: 'phone',
+    numeric: true,
+    disablePadding: false,
+    label: 'טלפון',
+  },
+  {
+    id: 'id',
+    numeric: true,
+    disablePadding: false,
+    label: 'תעודת זהות',
+  },
+  {
+    id: 'lastName',
+    numeric: true,
+    disablePadding: false,
+    label: 'שם משפחה',
+  },
   {
     id: 'name',
     numeric: false,
     disablePadding: true,
     label: 'שם תלמיד',
   },
+];
+
+const headCells2 = [
   {
-    id: 'lastName',
+    id: 'address',
     numeric: true,
     disablePadding: false,
-    label: 'שם משפחה',
-  },
-  {
-    id: 'id',
-    numeric: true,
-    disablePadding: false,
-    label: 'תעודת זהות',
-  },
-  {
-    id: 'phone',
-    numeric: true,
-    disablePadding: false,
-    label: 'טלפון',
-  },
-  {
-    id: 'email',
-    numeric: true,
-    disablePadding: false,
-    label: 'מייל',
+    label: 'גיל',
   },
   {
     id: 'address',
@@ -196,10 +175,34 @@ const headCells2 = [
     label: 'כתובת',
   },
   {
-    id: 'address',
+    id: 'email',
     numeric: true,
     disablePadding: false,
-    label: 'גיל',
+    label: 'מייל',
+  },
+  {
+    id: 'phone',
+    numeric: true,
+    disablePadding: false,
+    label: 'טלפון',
+  },
+  {
+    id: 'id',
+    numeric: true,
+    disablePadding: false,
+    label: 'תעודת זהות',
+  },
+  {
+    id: 'lastName',
+    numeric: true,
+    disablePadding: false,
+    label: 'שם משפחה',
+  },
+  {
+    id: 'name',
+    numeric: false,
+    disablePadding: true,
+    label: 'שם תלמיד',
   },
 ];
 
@@ -218,21 +221,11 @@ function EnhancedTableHead(props) {
   return (
     <TableHead>
       <TableRow>
-        <TableCell padding="checkbox">
-          <Checkbox
-            color="primary"
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
-            onChange={onSelectAllClick}
-            inputProps={{
-              'aria-label': 'select all desserts',
-            }}
-          />
-        </TableCell>
-        {/*headCells*/getHeaders().map((headCell) => (
+        {/*headCells*/getHeaders().map((headCell, index) => (
           <TableCell
-            key={headCell.id}
-            align={headCell.numeric ? 'right' : 'left'}
+            //key={headCell.id}
+            key={index}
+            align={'right'}
             padding={headCell.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === headCell.id ? order : false}
           >
@@ -250,6 +243,17 @@ function EnhancedTableHead(props) {
             </TableSortLabel>
           </TableCell>
         ))}
+        <TableCell padding="checkbox">
+          <Checkbox
+            color="primary"
+            indeterminate={numSelected > 0 && numSelected < rowCount}
+            checked={rowCount > 0 && numSelected === rowCount}
+            onChange={onSelectAllClick}
+            inputProps={{
+              'aria-label': 'select all desserts',
+            }}
+          />
+        </TableCell>
       </TableRow>
     </TableHead>
   );
@@ -346,13 +350,16 @@ export default function EnhancedTable(t) {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const studentRef = collection(firestore, "student");
   const staffRef = collection(firestore, "staff");
+  const classRef = collection(firestore, "classes");
 
 const getData = async () => {
   var q ;
   if (tableType.tableType == 'Staff')
     q = query(staffRef);
-  else
+  else if(tableType.tableType == 'Student')
     q = query(studentRef);
+    else
+    q = query(classRef);
   
   const snapshot = await getDocs(q)
   snapshot.forEach(doc =>
@@ -426,7 +433,7 @@ React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - studentObjects.length) : 0;
 
   return (
-    <Box sx={{ height: '100%', width: '81%' }}>
+    <Box sx={{ height: '100%', width: '81%', minHeight: '50%' }}>
       <Paper sx={{ width: '100%', mb: 5 }}>
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
@@ -462,6 +469,23 @@ React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
                       key={row.name}
                       selected={isItemSelected}
                     >
+                      {/* {tableType === 'students' ? <StudentCell r = {row}></StudentCell> : <StaffCell r = {row}></StaffCell>} */}
+                      { tableType.tableType == 'Staff' ? (<TableCell align="right">{row.role}</TableCell>) : ( <TableCell align="right">{row.age}</TableCell>) }
+                      {console.log(row.age)}
+                      <TableCell align="right">{row.address}</TableCell>
+                      <TableCell align="right">{row.email}</TableCell>
+                      <TableCell align="right">{row.id}</TableCell>
+                      <TableCell align="right">{row.phone}</TableCell>
+                       <TableCell align="right">{row.lastName}</TableCell>
+                      <TableCell
+                        component="th"
+                        id={labelId}
+                        scope="row"
+                        padding="none"
+                        align="right"
+                      >
+                        {row.name}
+                      </TableCell>
                       <TableCell padding="checkbox">
                         <Checkbox
                           color="primary"
@@ -471,20 +495,6 @@ React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
                           }}
                         />
                       </TableCell>
-                      <TableCell
-                        component="th"
-                        id={labelId}
-                        scope="row"
-                        padding="none"
-                      >
-                        {row.name}
-                      </TableCell>
-                      <TableCell align="right">{row.lastName}</TableCell>
-                      <TableCell align="right">{row.id}</TableCell>
-                      <TableCell align="right">{row.phone}</TableCell>
-                      <TableCell align="right">{row.email}</TableCell>
-                      <TableCell align="right">{row.address}</TableCell>
-                      <TableCell align="right">{row.age}</TableCell>
                     </TableRow>
                   );
                 })}

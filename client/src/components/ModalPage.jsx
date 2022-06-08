@@ -17,7 +17,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: 700,
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
@@ -155,10 +155,12 @@ export default function ModalPage() {
             <Card.Body> */}
 
             <h2 className="text-center mb-4">הוספת תלמיד</h2>
-            <Form >
                 <Button className="w-100" type="submit" onClick={handleSubmit}>
                     הוספה
                 </Button>
+            <Form >
+                <div style={{display: 'flex' , flexWrap : 'nowrap'}}>
+                <div>
                 <Form.Group id="first-name">
                     {/* <RegularTextField  t = "שם פרטי"  value = {newName} onChange={(event) => {console.log(event.target.value); setNewName(event.target.value)}}></RegularTextField> */}
                  <Form.Label>שם פרטי</Form.Label>
@@ -179,6 +181,8 @@ export default function ModalPage() {
                 <Form.Label>תעודת זהות</Form.Label>
                 <Form.Control type="number" ref={IDRef} required />
                 </Form.Group>
+                </div>
+                <div>
                 <Form.Group id="phone">
                 {/* <RegularTextField t = "טלפון"  value = {newPhone} onChange={(event) => setNewPhone(event.target.value)}></RegularTextField> */}
                 <Form.Label>מספר טלפון</Form.Label>
@@ -194,6 +198,8 @@ export default function ModalPage() {
                 <Form.Label>כתובת</Form.Label>
                 <Form.Control type="text" ref={addressRef} required />
                 </Form.Group>
+                </div>
+                </div>
             </Form>
             {/* </Card.Body>  
         </Card> */}
