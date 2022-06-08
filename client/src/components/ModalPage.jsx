@@ -40,8 +40,9 @@ const style = {
 //  }
 
 
-
-export default function ModalPage() {
+var tableType;
+export default function ModalPage(t) {
+  tableType = t;
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -51,6 +52,7 @@ export default function ModalPage() {
   const emailRef = React.useRef()
   const phoneRef = React.useRef()
   const ageRef = React.useRef()
+  const roleRef = React.useRef ()
   const addressRef = React.useRef()
   const navigate = useNavigate()
 
@@ -116,7 +118,7 @@ export default function ModalPage() {
 
 
 
-    const handleSubmit = async () =>{
+    const handleSubmitStudent = async () =>{
         // e.preventDefault()
       await setDoc(doc(collection(firestore, "student")),{
         // name: newName,
@@ -134,8 +136,28 @@ export default function ModalPage() {
         age: ageRef.current.value,
        address: addressRef.current.value,
       });
-      // navigate("/students ");
+      window.location.reload(false);
     }
+    const handleSubmitStaff = async () =>{
+      // e.preventDefault()
+    await setDoc(doc(collection(firestore, "staff")),{
+      // name: newName,
+      // lastName: newLName,
+      // id: newId,
+      // email: newEmail, 
+      // phone: newPhone,
+      // age: newAge,
+      // address: newAddress,
+      name: fnameRef.current.value,
+      lastName: lNameRef.current.value,
+      id: IDRef.current.value,
+      email: emailRef.current.value,
+      phone: phoneRef.current.value,  
+      role: roleRef.current.value,
+     address: addressRef.current.value,
+    });
+    window.location.reload(false);
+  }
 
   return (
     <div>
@@ -154,10 +176,8 @@ export default function ModalPage() {
           {/* <Card>
             <Card.Body> */}
 
-            <h2 className="text-center mb-4">הוספת תלמיד</h2>
-                <Button className="w-100" type="submit" onClick={handleSubmit}>
-                    הוספה
-                </Button>
+            {tableType.tableType == 'Staff' ? (<div><h2 className="text-center mb-4">הוספת איש צוות</h2></div>) : (<div><h2 className="text-center mb-4">הוספת תלמיד</h2></div>)}
+                {tableType.tableType == 'Staff' ? (<Button className="w-100" type="submit" onClick={handleSubmitStaff}>הוספה</Button>) : (<Button className="w-100" type="submit" onClick={handleSubmitStudent}>הוספה</Button>)}
             <Form >
                 <div style={{display: 'flex' , flexWrap : 'nowrap'}}>
                 <div>
@@ -188,10 +208,10 @@ export default function ModalPage() {
                 <Form.Label>מספר טלפון</Form.Label>
                 <Form.Control type="number" ref={phoneRef} required />
                 </Form.Group>
-                <Form.Group id="age">
+                <Form.Group id="ageAndRole">
                 {/* <RegularTextField t = "גיל"  value = {newAge} onChange={(event) => setNewAge(event.target.value)}></RegularTextField> */}
-                <Form.Label>גיל</Form.Label>
-                <Form.Control type="number" ref={ageRef} required />
+                {tableType.tableType == 'Staff' ? (<Form.Label>תפקיד</Form.Label>) : (<Form.Label>גיל</Form.Label>)}
+                {tableType.tableType == 'Staff' ? (<Form.Control type="text" ref={roleRef} required />) : (<Form.Control type="number" ref={ageRef} required />)}
                 </Form.Group>
                 <Form.Group id="address">
                 {/* <RegularTextField t = "כתובת"  value = {newAddress} onChange={(event) => setNewAddress(event.target.value)}></RegularTextField> */}

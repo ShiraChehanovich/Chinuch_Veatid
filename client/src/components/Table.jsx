@@ -118,7 +118,7 @@ function  getHeaders()
 {
 const headCells = [
   {
-    id: 'address',
+    id: 'role',
     numeric: true,
     disablePadding: false,
     label: 'תפקיד',
@@ -157,13 +157,13 @@ const headCells = [
     id: 'name',
     numeric: false,
     disablePadding: true,
-    label: 'שם תלמיד',
+    label: 'שם',
   },
 ];
 
 const headCells2 = [
   {
-    id: 'address',
+    id: 'age',
     numeric: true,
     disablePadding: false,
     label: 'גיל',
@@ -202,7 +202,7 @@ const headCells2 = [
     id: 'name',
     numeric: false,
     disablePadding: true,
-    label: 'שם תלמיד',
+    label: 'שם',
   },
 ];
 
@@ -299,7 +299,7 @@ const EnhancedTableToolbar = (props) => {
           component="div"
         >
           <div>
-          <ModalPage />
+          <ModalPage tableType={tableType.tableType}></ModalPage>
           
           </div>
         </Typography>
@@ -457,16 +457,14 @@ React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.name}
+                      key={row.id}
                       selected={isItemSelected}
                     >
-                      {/* {tableType === 'students' ? <StudentCell r = {row}></StudentCell> : <StaffCell r = {row}></StaffCell>} */}
                       { tableType.tableType == 'Staff' ? (<TableCell align="right">{row.role}</TableCell>) : ( <TableCell align="right">{row.age}</TableCell>) }
-                      {console.log(row.age)}
                       <TableCell align="right">{row.address}</TableCell>
                       <TableCell align="right">{row.email}</TableCell>
-                      <TableCell align="right">{row.id}</TableCell>
                       <TableCell align="right">{row.phone}</TableCell>
+                      <TableCell align="right">{row.id}</TableCell>
                        <TableCell align="right">{row.lastName}</TableCell>
                       <TableCell
                         component="th"
