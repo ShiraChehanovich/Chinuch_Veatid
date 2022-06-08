@@ -315,18 +315,18 @@ const EnhancedTableToolbar = (props) => {
         </Tooltip>
       ) : (
         <Tooltip title="Filter list">
-          <div class="row">
-            <div class="col">
-              <div class="card card-body">
-                <input id="search-input" class="from-control" type="text"></input>
+          {/* <div className="row">
+            <div className="col">
+              <div className="card card-body">
+                <input id="search-input" className="from-control" type="text"></input>
 
               </div>
             </div>
-          </div>
-          {/* <IconButton>
+          </div> */}
+          <IconButton>
             <SearchOutlinedIcon />
-          </IconButton> */}
-          {/* <SearchTeachersAndStudent/> */}
+          </IconButton> 
+           {/* <SearchTeachersAndStudent/> */}
         </Tooltip>
       )}
     </Toolbar>
