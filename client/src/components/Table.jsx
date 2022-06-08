@@ -32,6 +32,7 @@ import { Prev } from 'react-bootstrap/esm/PageItem';
 import ModalPage from './ModalPage';
 import StudentCell from './TableCells/StudentCell';
 import StaffCell from './TableCells/StaffCell';
+import { ro } from 'date-fns/locale';
 
 
 
@@ -220,9 +221,10 @@ function EnhancedTableHead(props) {
   return (
     <TableHead>
       <TableRow>
-        {/*headCells*/getHeaders().map((headCell) => (
+        {/*headCells*/getHeaders().map((headCell, index) => (
           <TableCell
-            key={headCell.id}
+            //key={headCell.id}
+            key={index}
             align={'right'}
             padding={headCell.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === headCell.id ? order : false}
@@ -459,7 +461,8 @@ React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
                       selected={isItemSelected}
                     >
                       {/* {tableType === 'students' ? <StudentCell r = {row}></StudentCell> : <StaffCell r = {row}></StaffCell>} */}
-                      {tableType === "Student" ? <TableCell align="right">{row.age}</TableCell> : <TableCell align="right">{row.role}</TableCell> }
+                      { tableType.tableType == 'Staff' ? (<TableCell align="right">{row.role}</TableCell>) : ( <TableCell align="right">{row.age}</TableCell>) }
+                      {console.log(row.age)}
                       <TableCell align="right">{row.address}</TableCell>
                       <TableCell align="right">{row.email}</TableCell>
                       <TableCell align="right">{row.id}</TableCell>
