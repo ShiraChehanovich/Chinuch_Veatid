@@ -8,6 +8,7 @@ import TaskModalPage from './TaskModalPge';
 import FullCalendarComponent from './FullCalendarComponent';
 import Stack from '@mui/material/Stack';
 import PopingMenu from './PopingMenu';
+import TaskModalPge from './TaskModalPge';
 
 
 export default function StaticDatePickerLandscape() {
@@ -31,7 +32,7 @@ export default function StaticDatePickerLandscape() {
     //   />
       <div>
         <PopingMenu/>
-        <TaskModalPage/>
+        <TaskModalPge/>
       
       <FullCalendarComponent/>
       </div>

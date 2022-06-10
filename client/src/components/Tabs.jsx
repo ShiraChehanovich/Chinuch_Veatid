@@ -5,6 +5,7 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import Table from './Table'
+import MedicineList from './MedicineList';
 
 export default function Tabs() {
   const [value, setValue] = React.useState('1');
@@ -24,8 +25,11 @@ export default function Tabs() {
             <Tab label="תלמידים" value="4" />
           </TabList>
         </Box>
-        <TabPanel value="1">Item One</TabPanel>
-        <TabPanel value="2">Item Two</TabPanel>
+        <TabPanel value="1">
+        <MedicineList/>
+        </TabPanel>
+        <TabPanel value="2">
+        </TabPanel>
         <TabPanel value="3">
             <Table tableType = "Staff" p = "none" ></Table>
         </TabPanel>
