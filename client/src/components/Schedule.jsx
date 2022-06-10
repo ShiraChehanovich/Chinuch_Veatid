@@ -7,6 +7,7 @@ import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 import TaskModalPage from './TaskModalPge';
 import FullCalendarComponent from './FullCalendarComponent';
 import Stack from '@mui/material/Stack';
+import PopingMenu from './PopingMenu';
 
 
 export default function StaticDatePickerLandscape() {
@@ -28,9 +29,12 @@ export default function StaticDatePickerLandscape() {
     //     }}
     //     renderInput={(params) => <TextField {...params} />}
     //   />
-      <div><TaskModalPage/>
+      <div>
+        <PopingMenu/>
+        <TaskModalPage/>
       
-      <FullCalendarComponent/></div>
+      <FullCalendarComponent/>
+      </div>
       
     // </LocalizationProvider>
     // </Stack>
