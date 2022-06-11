@@ -187,6 +187,12 @@ const headCells2 = [
     label: 'טלפון',
   },
   {
+    id: 'grade',
+    numeric: true,
+    disablePadding: false,
+    label: 'כיתה',
+  },
+  {
     id: 'id',
     numeric: true,
     disablePadding: false,
@@ -368,12 +374,9 @@ const getData = async () => {
        setStudentObjects(prev => [...prev, doc.data()])
       }
     
-  )
-  
+  ) 
   
 }
-
-
 
 React.useEffect(()=>{getData()}, []);
 React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
@@ -473,6 +476,7 @@ React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
                       <TableCell align="right">{row.address}</TableCell>
                       <TableCell align="right">{row.email}</TableCell>
                       <TableCell align="right">{row.phone}</TableCell>
+                      { tableType.tableType == 'Staff' ? (<></>) : ( <TableCell align="right">{row.grade}</TableCell>) }
                       <TableCell align="right">{row.id}</TableCell>
                        <TableCell align="right">{row.lastName}</TableCell>
                       <TableCell

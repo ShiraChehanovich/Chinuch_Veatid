@@ -4,6 +4,7 @@ import React from 'react';
 
 import Signup from './components/Signup'
 import Login from './components/Login';
+import Table2 from './components/Table2';
 import Dashboard from './components/Dashboard';
 import StudentFile from './components/StudentFile';
 import { Container } from 'react-bootstrap';
