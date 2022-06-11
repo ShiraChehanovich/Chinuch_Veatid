@@ -5,9 +5,9 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 import TaskModalPage from './TaskModalPge';
-import FullCalendarComponent from './FullCalendarComponent';
+import ReactBigCalendar from './ReactBigCalendar';
 import Stack from '@mui/material/Stack';
-
+// import "./NewStyels.css";
 
 export default function StaticDatePickerLandscape() {
   const [value, setValue] = React.useState(new Date());
@@ -29,8 +29,9 @@ export default function StaticDatePickerLandscape() {
     //     renderInput={(params) => <TextField {...params} />}
     //   />
       <div><TaskModalPage/>
+      <a><ReactBigCalendar/></a>
       
-      <FullCalendarComponent/></div>
+      </div>
       
     // </LocalizationProvider>
     // </Stack>
