@@ -7,7 +7,7 @@ export default function StudentTable() {
   return (
     <div>
       <PopingMenu/>
-      <Table tableType = "Student"></Table>
+      <Table tableType = "Student" p = 'none'></Table>
     </div>
   )
 }

@@ -53,7 +53,7 @@ const style = {
 
 
 
-export default function TaskModalPage() {
+export default function TaskModalPge() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -74,8 +74,8 @@ export default function TaskModalPage() {
             navigate("/students ")
           }
   return (
-    <div>
-        <PopingMenu/>
+    <div style={{maxWidth: 700}}>
+        {/* <PopingMenu/> */}
       <Button onClick={handleOpen}>
           <AddIcon/>
           משימה חדשה
@@ -85,6 +85,7 @@ export default function TaskModalPage() {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        style={{width: 700}}
       >
         <Box sx={style} >
           <Typography id="modal-modal-title" variant="h6" component="h2">

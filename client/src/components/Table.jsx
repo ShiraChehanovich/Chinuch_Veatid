@@ -26,7 +26,7 @@ import AddBoxIcon from '@mui/icons-material/AddBox';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { getDocuments } from '../firebase/firebase';
 import Search from './Search';
-import { collection, getDocs, query } from 'firebase/firestore';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import { firestore } from '../firebase/firebase';
 import { Prev } from 'react-bootstrap/esm/PageItem';
 import ModalPage from './ModalPage';
@@ -338,9 +338,11 @@ EnhancedTableToolbar.propTypes = {
 };
 
 var tableType;
+var  condition ;
 
-export default function EnhancedTable(t) {
+export default function EnhancedTable(t, p) {
   tableType = t;
+  condition = p.p;
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
   const [selected, setSelected] = React.useState([]);
@@ -356,8 +358,12 @@ const getData = async () => {
   var q ;
   if (tableType.tableType == 'Staff')
     q = query(staffRef);
-  else if(tableType.tableType == 'Student')
-    q = query(studentRef);
+  else if(tableType.tableType == 'Student'){
+    if(condition != 'none')
+      q = query(studentRef, where("grade", "==", "1"));
+      else
+      q = query(studentRef);
+  }
     else
     q = query(classRef);
   
