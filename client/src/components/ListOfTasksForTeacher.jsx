@@ -12,7 +12,7 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import StarBorder from '@mui/icons-material/StarBorder';
 import ListOfTeachers from './ListOfTeachers';
-import SearchIcon from '@mui/icons-material/Search';
+
 
 export default function NestedList() {
   const [open, setOpen] = React.useState(false);
@@ -31,7 +31,7 @@ export default function NestedList() {
       <ListItemButton>
       </ListItemButton>
       <ListItemButton onClick={handleClick}>
-      <SearchIcon/>
+
         <ListItemText primary=" משתתפים"  />
         
         {open ? <ExpandLess /> : <ExpandMore />}
