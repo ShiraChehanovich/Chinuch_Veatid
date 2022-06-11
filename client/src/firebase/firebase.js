@@ -1,23 +1,7 @@
 import {
-  getFirestore,
-  doc,
-  setDoc,
-  collection,
-  addDoc,
-  getDoc,
-  onSnapshot,
-  query,
-  where,
-  getDocs,
-  orderBy,
-  limit,
+  getFirestore
 } from "firebase/firestore";
-// import firebase from 'firebase';
 import {getStorage} from 'firebase/storage';
-// import { getAnalytics } from "firebase/analytics";
-// import { addDoc, collection, getDoc, getDocs, getFirestore, query, setDoc, where } from 'firebase/firestore/lite';
-// import { ThemeConsumer } from "react-bootstrap/esm/ThemeProvider";
-// import { async } from "@firebase/util";
 import "@firebase/auth"
 import { initializeApp } from "@firebase/app";
 import firebase from 'firebase/compat/app';
