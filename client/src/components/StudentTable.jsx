@@ -4,10 +4,14 @@ import Table from './Table'
 import Search from './Search'
 
 export default function StudentTable() {
+  let props1 = {
+    t:"Student",
+    p:"none"
+    }
   return (
     <div>
       <PopingMenu/>
-      <Table tableType = "Student" p = 'none'></Table>
+      <Table {...props1}></Table>
     </div>
   )
 }
