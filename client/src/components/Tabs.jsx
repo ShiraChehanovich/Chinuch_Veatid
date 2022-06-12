@@ -15,7 +15,7 @@ export default function Tabs() {
   const [value, setValue] = React.useState('1');
   const staffRef = collection(firestore, "staff");
     const [classObject, setClassObject] = React.useState([]);
-    const { currentUser, logout  } = useAuth();
+    const { currentUser  } = useAuth();
     const mail = currentUser.email
 
     // const getData = async () => {
@@ -56,7 +56,7 @@ export default function Tabs() {
           </TabList>
         </Box>
         <TabPanel value="1">
-        <MedicineList/>
+        <MedicineList prop = {"1"}/>
         </TabPanel>
         <TabPanel value="2">
             {/* {console.log(props3.id)} */}
