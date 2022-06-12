@@ -1,7 +1,7 @@
 a {
   width: 50%;
   /* height: 400px; */
-  border: 0.3px solid black;
+  /* border: 0.3px solid black; */
   display: flex;
    zoom:70%; 
   flex-wrap: wrap;
@@ -18,7 +18,7 @@ div.hellowU{
 }
 h6.words {
   width: 25%;
-  border: 0.3px solid black;
+  /* border: 0.3px solid black; */
   display: flex;
    zoom:70%; 
   flex-wrap: wrap;
