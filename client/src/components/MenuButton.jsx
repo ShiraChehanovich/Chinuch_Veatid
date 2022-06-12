@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './Main.css'
-import StudentFile from './StudentFile'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router';
 import { Navigate } from 'react-router';

@@ -54,6 +54,7 @@ export default function ModalPage(t) {
   const ageRef = React.useRef()
   const roleRef = React.useRef ()
   const addressRef = React.useRef()
+  const gradeRef = React.useRef()
   const navigate = useNavigate()
 
 
@@ -108,13 +109,13 @@ export default function ModalPage(t) {
   //           navigate("/students")
   //         }
     // const studentRef = collection(firestore,"student");
-    const [newName,setNewName] = React.useState("")
-    const [newLName,setNewLName] = React.useState("")
-    const [newId,setNewId] = React.useState(0)
-    const [newEmail,setNewEmail] = React.useState("")
-    const [newPhone,setNewPhone] = React.useState(0)
-    const [newAge,setNewAge] = React.useState(0)
-    const [newAddress,setNewAddress] = React.useState("")
+    // const [newName,setNewName] = React.useState("")
+    // const [newLName,setNewLName] = React.useState("")
+    // const [newId,setNewId] = React.useState(0)
+    // const [newEmail,setNewEmail] = React.useState("")
+    // const [newPhone,setNewPhone] = React.useState(0)
+    // const [newAge,setNewAge] = React.useState(0)
+    // const [newAddress,setNewAddress] = React.useState("")
 
 
 
@@ -131,6 +132,7 @@ export default function ModalPage(t) {
         name: fnameRef.current.value,
         lastName: lNameRef.current.value,
         id: IDRef.current.value,
+        grade: gradeRef.current.value,
         email: emailRef.current.value,
         phone: phoneRef.current.value,  
         age: ageRef.current.value,
@@ -203,6 +205,11 @@ export default function ModalPage(t) {
                 </Form.Group>
                 </div>
                 <div>
+                <Form.Group id="grade">
+                {/* <RegularTextField t = "כיתה"  value = {newGrade onChange={(event) => setNewAge(event.target.value)}></RegularTextField> */}
+                {tableType.tableType == 'Staff' ? null : (<Form.Label>כיתה</Form.Label>)}
+                {tableType.tableType == 'Staff' ? null : (<Form.Control type="text" ref={gradeRef} required />)}
+                </Form.Group>
                 <Form.Group id="phone">
                 {/* <RegularTextField t = "טלפון"  value = {newPhone} onChange={(event) => setNewPhone(event.target.value)}></RegularTextField> */}
                 <Form.Label>מספר טלפון</Form.Label>

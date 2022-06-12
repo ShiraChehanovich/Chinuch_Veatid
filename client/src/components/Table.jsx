@@ -20,6 +20,7 @@ import Tooltip from '@mui/material/Tooltip';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import AddBoxIcon from '@mui/icons-material/AddBox';
@@ -35,6 +36,7 @@ import StaffCell from './TableCells/StaffCell';
 import { ro } from 'date-fns/locale';
 
 import SearchTeachersAndStudent from './SearchTeachersAndStudent';
+import { Navigate } from 'react-router-dom';
 
 function createData(name,lastName, id, phone, email, address, age) {
   return {
@@ -47,6 +49,7 @@ function createData(name,lastName, id, phone, email, address, age) {
     age,
   };
 }
+
 // const [estudiantes, setEstudiantes] = React.useState([]);
 // const estudiantesRef = db.collection("usuarios").doc(user.uid).collection("estudiantes")
 
@@ -187,6 +190,12 @@ const headCells2 = [
     label: 'טלפון',
   },
   {
+    id: 'grade',
+    numeric: true,
+    disablePadding: false,
+    label: 'כיתה',
+  },
+  {
     id: 'id',
     numeric: true,
     disablePadding: false,
@@ -206,7 +215,7 @@ const headCells2 = [
   },
 ];
 
-if (tableType.tableType == 'Staff')
+if (tableType.tableType === 'Staff')
   return headCells;
   return headCells2;
 };
@@ -217,7 +226,8 @@ function EnhancedTableHead(props) {
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
-
+  
+  // const [searchedVal, setSearchedVal] = useState("");
   return (
     <TableHead>
       <TableRow>
@@ -282,53 +292,97 @@ const EnhancedTableToolbar = (props) => {
         }),
       }}
     >
-      {numSelected > 0 ? (
+      {numSelected > 1 ? (
         <Typography
           sx={{ flex: '1 1 100%' }}
           color="inherit"
           variant="subtitle1"
           component="div"
         >
-          {numSelected} מחק
+         {numSelected} מחק
         </Typography>
-      ) : (
-        <Typography
-          sx={{ flex: '1 1 100%' }}
-          variant="h6"
-          id="tableTitle"
-          component="div"
-        >
-          <div>
-          <ModalPage tableType={tableType.tableType}></ModalPage>
-          
-          </div>
-        </Typography>
+      ) : ( <></>
+        
       )}
 
-      {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <Search />
+    {numSelected == 1 ? (
+        <Typography
+          sx={{ flex: '1 1 100%' }}
+          color="inherit"
+          variant="subtitle1"
+          component="div"
+        >
+        </Typography>
+      ) : (<></>   
+       )}
+
+      {numSelected > 1 ? (
+  
+      <div>  <Tooltip title="Delete">
           <IconButton>
             <DeleteIcon />
           </IconButton>
-          
-        </Tooltip>
-      ) : (
-        <Tooltip title="Filter list">
-          {/* <div className="row">
-            <div className="col">
-              <div className="card card-body">
-                <input id="search-input" className="from-control" type="text"></input>
 
-              </div>
-            </div>
-          </div> */}
-          <IconButton>
-            <SearchOutlinedIcon />
-          </IconButton> 
-           {/* <SearchTeachersAndStudent/> */}
-        </Tooltip>
+        </Tooltip></div>
+
+      ) : (
+        <></>
       )}
+
+
+
+    {numSelected == 1 ? (
+      <div style={{display: 'flex' , flexWrap : 'nowrap'}}>
+
+      <div>  <Tooltip title="Delete">
+          <IconButton>
+            <DeleteIcon />
+          </IconButton>
+
+        </Tooltip></div>
+
+
+      <div><Tooltip title="Edit">
+        <IconButton>
+          <EditIcon />
+        </IconButton>
+
+        </Tooltip></div>
+        </div>
+      ) : (
+        // <Tooltip title="Filter list">
+        //   <IconButton>
+        //     <SearchOutlinedIcon />
+        //   </IconButton> 
+
+        // </Tooltip>
+        <></>
+      )}
+      {numSelected == 0 ?(
+
+        
+         <Typography
+         sx={{ flex: '1 1 100%' }}
+         variant="h6"
+         id="tableTitle"
+         component="div"
+       >
+         <div style={{display: 'flex' , flexWrap : 'nowrap'}}>
+         <div><ModalPage tableType={tableType.tableType}></ModalPage></div>
+
+         <div><Tooltip title="Filter list">
+           <IconButton>
+             <SearchOutlinedIcon />
+           </IconButton> 
+
+         </Tooltip></div>
+         
+         </div>
+       </Typography> 
+
+      ):(<></>)}
+
+
     </Toolbar>
   );
 };
@@ -340,9 +394,9 @@ EnhancedTableToolbar.propTypes = {
 var tableType;
 var  condition ;
 
-export default function EnhancedTable(t, p) {
-  tableType = t;
-  condition = p.p;
+export default function EnhancedTable(props) {
+  tableType = props.t;
+  condition = props.p;
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
   const [selected, setSelected] = React.useState([]);
@@ -356,11 +410,13 @@ export default function EnhancedTable(t, p) {
 
 const getData = async () => {
   var q ;
-  if (tableType.tableType == 'Staff')
+  if (tableType === 'Staff')
     q = query(staffRef);
-  else if(tableType.tableType == 'Student'){
-    if(condition != 'none')
-      q = query(studentRef, where("grade", "==", "1"));
+  else if(tableType === 'Student'){
+    if(condition != "none"){
+      // console.log(condition);
+      q = query(studentRef, where("grade", "==", condition));
+    }
       else
       q = query(studentRef);
   }
@@ -374,12 +430,9 @@ const getData = async () => {
        setStudentObjects(prev => [...prev, doc.data()])
       }
     
-  )
-  
+  ) 
   
 }
-
-
 
 React.useEffect(()=>{getData()}, []);
 React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
@@ -422,6 +475,9 @@ React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
+  const handleClick2 = () => {
+    Navigate("/student-page");
+  }
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
@@ -459,7 +515,8 @@ React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
             <TableBody >
               {/* if you don't need to support IE11, you can replace the `stableSort` call with:
                  rows.slice().sort(getComparator(order, orderBy)) */}
-              {stableSort(studentObjects, getComparator(order, orderBy))
+              {
+              stableSort(studentObjects, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const isItemSelected = isSelected(row.name);
@@ -475,10 +532,11 @@ React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
                       key={row.id}
                       selected={isItemSelected}
                     >
-                      { tableType.tableType == 'Staff' ? (<TableCell align="right">{row.role}</TableCell>) : ( <TableCell align="right">{row.age}</TableCell>) }
+                      { tableType.tableType === 'Staff' ? (<TableCell align="right">{row.role}</TableCell>) : ( <TableCell align="right">{row.age}</TableCell>) }
                       <TableCell align="right">{row.address}</TableCell>
                       <TableCell align="right">{row.email}</TableCell>
                       <TableCell align="right">{row.phone}</TableCell>
+                      { tableType.tableType == 'Staff' ? (<></>) : ( <TableCell align="right">{row.grade}</TableCell>) }
                       <TableCell align="right">{row.id}</TableCell>
                        <TableCell align="right">{row.lastName}</TableCell>
                       <TableCell
