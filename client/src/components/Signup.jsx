@@ -42,7 +42,7 @@ export default function Signup(){
         <Toolbar>
             {/* <img  src="https://chv.org.il/wp-content/uploads/2019/06/%D7%9C%D7%95%D7%92%D7%95-%D7%9E%D7%A9%D7%95%D7%9C%D7%91_2-1024x251.png" width="10%"></img> */}
           <Typography variant="h6" noWrap component="div">
-            כניסה
+            הרשמה
           </Typography>
         </Toolbar>
 

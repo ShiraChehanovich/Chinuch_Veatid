@@ -4,6 +4,7 @@ import { firestore } from '../firebase/firebase';
 import PlusButton from './PlusButton'
 import PopingMenu from './PopingMenu'
 import RegularTextField from './RegularTextField'
+import './ClassStyle.css'
 
 var idS;
 export default function StudentPage(props) {
@@ -25,6 +26,7 @@ export default function StudentPage(props) {
   return (
     <div>
       <PopingMenu/>
+      <div className="flex" style={{width:"100%"}}>
       <h2>עריכת סטודנט</h2>
       <div>
       <RegularTextField t = "שם התלמיד"></RegularTextField>
@@ -36,7 +38,10 @@ export default function StudentPage(props) {
       <RegularTextField t = "גיל"></RegularTextField>
       <PlusButton />
       </div>
+      </div>
+      <div style={{width:"40%"}}>
       <h4>מסמכים</h4>
+      </div>
     </div>
   )
 }

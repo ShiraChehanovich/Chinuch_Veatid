@@ -56,7 +56,7 @@ export default function PopingMenu() {
       navigate("/class");
       break;
       case 3: 
-      navigate("/schedule");
+      navigate("/students");
       break;
       default: navigate("/main")
     }
@@ -91,7 +91,7 @@ export default function PopingMenu() {
           width: drawerWidth,
           flexShrink: 0,
           '& .MuiDrawer-paper': {
-            width: drawerWidth,
+            width: "20%",
             boxSizing: 'border-box',
           },
         }}
