@@ -17,9 +17,15 @@ export default function StudentPage(props) {
         // console.log(idS);
         var q = query(studentRef, where("id", "==",  idS));
         const snapshot = await getDocs(q);
-        const  result = snapshot.docs.map((doc) => ({...doc.data(), id: doc.id}));
-        console.log(result[0]);
-        return result[0]; 
+        // const  result = snapshot.docs.map((doc) => ({...doc.data(), id: doc.id}));
+        snapshot.forEach(doc =>
+            {
+              //console.log(doc.data())  
+              setClassObject(prev => [...prev, doc.data()])
+             }
+        )
+        // console.log(result[0]);
+        // return result[0]; 
          }      
       React.useEffect(()=>{getData()});
 
