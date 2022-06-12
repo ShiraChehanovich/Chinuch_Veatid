@@ -32,11 +32,23 @@ export default function StaticDatePickerLandscape() {
     //     }}
     //     renderInput={(params) => <TextField {...params} />}
     //   />
+    
+    
       <div>
+        <div>
         <PopingMenu/>
+          <h3>
+          יומן אישי</h3>
+        </div>
+        
         <TaskModalPage/>
 
-      <a><ReactBigCalendar/></a>
+<div1> 
+<a><ReactBigCalendar/></a>
+<e></e>
+  <w>hjhjh</w>
+  </div1>
+     
       
       </div>
       
