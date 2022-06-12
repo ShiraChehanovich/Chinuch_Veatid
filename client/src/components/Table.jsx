@@ -282,6 +282,11 @@ EnhancedTableHead.propTypes = {
 const EnhancedTableToolbar = (props) => {
   const { numSelected } = props;
 
+  const handleClick2= (event)=> {
+    Navigate("/student-page");
+  }
+  
+
   return (
     <Toolbar
       sx={{
@@ -347,9 +352,9 @@ const EnhancedTableToolbar = (props) => {
         </Tooltip></div>
 
 
-      <div><Tooltip title="Edit">
+      <div ><Tooltip title="Edit" onClick={(event) => handleClick2(event)}>
         <IconButton>
-          <EditIcon />
+          <EditIcon/>
         </IconButton>
 
         </Tooltip></div>
@@ -480,9 +485,6 @@ React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-  const handleClick2 = () => {
-    Navigate("/student-page");
-  }
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));

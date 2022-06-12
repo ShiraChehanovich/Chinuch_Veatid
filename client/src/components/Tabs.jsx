@@ -10,12 +10,13 @@ import { collection, getDocs, query, where } from 'firebase/firestore';
 import { useAuth } from './context/AuthContext';
 import { firestore } from '../firebase/firebase';
 import StudentPage from './StudentPage';
+import Schedule_class_file from './Schedule_class_file'
 
 export default function Tabs() {
   const [value, setValue] = React.useState('1');
   const staffRef = collection(firestore, "staff");
     const [classObject, setClassObject] = React.useState([]);
-    const { currentUser, logout  } = useAuth();
+    const { currentUser  } = useAuth();
     const mail = currentUser.email
 
     // const getData = async () => {
@@ -56,11 +57,11 @@ export default function Tabs() {
           </TabList>
         </Box>
         <TabPanel value="1">
-        <MedicineList/>
+        <MedicineList prop = {"1"}/>
         </TabPanel>
         <TabPanel value="2">
-            {/* {console.log(props3.id)} */}
-            <StudentPage {...props3}></StudentPage>
+        <Schedule_class_file/>
+          {/* // */}
         </TabPanel>
         <TabPanel value="3">
             <Table prop = {props1.t} prop2 = {props1.p}></Table>

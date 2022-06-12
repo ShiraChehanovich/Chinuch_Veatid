@@ -6,9 +6,31 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Checkbox from '@mui/material/Checkbox';
 import Avatar from '@mui/material/Avatar';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { firestore } from '../firebase/firebase';
 
-export default function MedicineList() {
+var classGrade;
+
+export default function MedicineList(prop) {
+    classGrade = prop.prop;
   const [checked, setChecked] = React.useState([1]);
+  const studentRef = collection(firestore, "student");
+  const [studentObjects, setStudentObjects] = React.useState([]);
+
+const getData = async () => {
+  var q  = query(studentRef, where("grade", "==", classGrade));
+  
+  const snapshot = await getDocs(q)
+  snapshot.forEach(doc =>
+     {
+       //console.log(doc.data())  
+       setStudentObjects(prev => [...prev, doc.data()])
+      }
+    
+  ) 
+  
+}
+React.useEffect(()=>{getData()}, []);
 
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
@@ -47,7 +69,12 @@ export default function MedicineList() {
                   src={`/static/images/avatar/${value + 1}.jpg`}
                 />
               </ListItemAvatar>
-              <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
+      {
+          studentObjects.map((s) =>{
+              return(
+              <ListItemText id={labelId} primary={`${s.name}`} />
+              )
+          })}
             </ListItemButton>
           </ListItem>
         );
