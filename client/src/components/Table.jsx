@@ -49,7 +49,6 @@ function createData(name,lastName, id, phone, email, address, age) {
     age,
   };
 }
-<<<<<<< HEAD
 
 // const [estudiantes, setEstudiantes] = React.useState([]);
 // const estudiantesRef = db.collection("usuarios").doc(user.uid).collection("estudiantes")
@@ -69,8 +68,6 @@ function createData(name,lastName, id, phone, email, address, age) {
 //         setEstudiantes(rows);
 //       })
 //   }, []);
-=======
->>>>>>> main
 
 //setDoc
 
@@ -230,7 +227,7 @@ function EnhancedTableHead(props) {
     onRequestSort(event, property);
   };
   
-  const [searchedVal, setSearchedVal] = useState("");
+  // const [searchedVal, setSearchedVal] = useState("");
   return (
     <TableHead>
       <TableRow>
@@ -375,7 +372,7 @@ const EnhancedTableToolbar = (props) => {
 
          <div><Tooltip title="Filter list">
            <IconButton>
-             <SearchOutlinedIcon onClick={handleSearch}/>
+             <SearchOutlinedIcon />
            </IconButton> 
 
          </Tooltip></div>
