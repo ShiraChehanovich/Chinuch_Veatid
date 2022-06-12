@@ -267,6 +267,8 @@ export default function EnhancedTable(prop) {
   const staffRef = collection(firestore, "staff");
   const classRef = collection(firestore, "classes");
 
+  // const [searchedVal, setSearchedVal] = React.useState("");
+
   // const [search, setSearch] = React.useState('');
   // const handleSearch = async (e) =>{
   //   setSearch(e.target.value)
@@ -281,7 +283,7 @@ export default function EnhancedTable(prop) {
   //   return rows.filter(row => row.name.toLowerCase().indexOf(searchedVal) > -1)
   // };
   // const handleSearch =  () => {
-  //   <input type = " text" value={searchedVal} onChange={(e) => setSearchedVal(e.target.value)}/>
+  //   
   // }
 
 const getData = async () => {
@@ -371,7 +373,7 @@ React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
   return (
     <Box sx={{ height: '100%', width: '81%', minHeight: '50%' }}>
       <Paper sx={{ width: '100%', mb: 5 }}>
-        <EnhancedTableToolbar numSelected={selected.length} tt = {tableType}/>
+        <EnhancedTableToolbar numSelected={selected.length} tt = {tableType} sel = {selected}/>
         <TableContainer>
           <Table 
             // studentObjects={data}
@@ -396,13 +398,13 @@ React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
               stableSort(studentObjects, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.name);
+                  const isItemSelected = isSelected(row.id);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.name)}
+                      onClick={(event) => handleClick(event, row.id)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}

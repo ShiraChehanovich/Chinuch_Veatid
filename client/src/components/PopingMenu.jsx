@@ -56,7 +56,7 @@ export default function PopingMenu() {
       navigate("/class");
       break;
       case 3: 
-      navigate("/students");
+      navigate("/schedule");
       break;
       default: navigate("/main")
     }

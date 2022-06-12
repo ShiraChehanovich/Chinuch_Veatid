@@ -38,6 +38,7 @@ import Schedule from './components/Schedule';
 import FullCalendar from './components/FullCalendarComponent';
 import FullCalendarComponent from './components/FullCalendarComponent';
 import StudentPage from './components/StudentPage';
+import File from './components/File';
 
 
 
@@ -63,6 +64,7 @@ function App() {
               <Route path="/class" element={<ClassTable />} />
               <Route path="/schedule" element={<Schedule />} />
               <Route path="/student-page" element={<StudentPage />} />
+              <Route path="/upload" element={<File />} />
               {/* <Route path="/FullCalendar" element={<FullCalendarComponent />} /> */}
             </Routes>
           </AuthProvider>
