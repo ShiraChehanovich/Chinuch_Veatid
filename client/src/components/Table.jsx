@@ -265,6 +265,23 @@ export default function EnhancedTable(prop) {
   const staffRef = collection(firestore, "staff");
   const classRef = collection(firestore, "classes");
 
+  // const [search, setSearch] = React.useState('');
+  // const handleSearch = async (e) =>{
+  //   setSearch(e.target.value)
+  // };
+  // const data = {
+  //     studentObjects: studentObjects.filter((item) =>
+  //     item.name.toLowerCase().includes(search.toLowerCase())
+  //   ),
+  // };
+  // const [searchedVal, setSearchedVal] = React.useState("");
+  // function search(rows){
+  //   return rows.filter(row => row.name.toLowerCase().indexOf(searchedVal) > -1)
+  // };
+  // const handleSearch =  () => {
+  //   <input type = " text" value={searchedVal} onChange={(e) => setSearchedVal(e.target.value)}/>
+  // }
+
 const getData = async () => {
   var q ;
   if (tableType === 'Staff')
@@ -288,10 +305,11 @@ const getData = async () => {
       }
     
   ) 
-  
+
 }
 
 React.useEffect(()=>{getData()}, []);
+// React.useEffect(()=>{console.log(searchedVal)}, [searchedVal])
 React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
 
   const handleRequestSort = (event, property) => {
@@ -356,7 +374,8 @@ React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
       <Paper sx={{ width: '100%', mb: 5 }}>
         <EnhancedTableToolbar numSelected={selected.length} tt = {tableType}/>
         <TableContainer>
-          <Table
+          <Table 
+            // studentObjects={data}
             sx={{ minWidth: 750 }}
             aria-labelledby="tableTitle"
             size={dense ? 'small' : 'medium'}
@@ -374,8 +393,16 @@ React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
               {/* if you don't need to support IE11, you can replace the `stableSort` call with:
                  rows.slice().sort(getComparator(order, orderBy)) */}
               {
+                
               stableSort(studentObjects, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  // .filter((row) =>
+                  //   // note that I've incorporated the searchedVal length check here
+                  //   !EnhancedTableToolbar.searchedVal || row.customer
+                  //     .toString()
+                  //     .toLowerCase()
+                  //     .includes(EnhancedTableToolbar.searchedVal.toString().toLowerCase()) 
+                  // )
                 .map((row, index) => {
                   const isItemSelected = isSelected(row.name);
                   const labelId = `enhanced-table-checkbox-${index}`;
