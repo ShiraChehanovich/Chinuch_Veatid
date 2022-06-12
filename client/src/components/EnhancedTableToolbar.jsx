@@ -41,13 +41,19 @@ var tableType;
 export default function EnhancedTableToolbar(props) {
   tableType = props.tt;
   const navigate = useNavigate()
+  // const [searchedVal, setSearchedVal] = React.useState("");
+  //  function search1(rows){
+  //     return rows.filter(row => row.name.toLowerCase().indexOf(searchedVal) > -1)
+  //   };
 
         const { numSelected } = props;
       
         const handleClick2= (event)=> {
           navigate("/student-page");
         }
-        
+        const handleSearch= (event)=> {
+          
+        }
       
         return (
           <Toolbar
@@ -73,7 +79,7 @@ export default function EnhancedTableToolbar(props) {
               
             )}
       
-          {numSelected == 1 ? (
+          {/* {numSelected == 1 ? (
               <Typography
                 sx={{ flex: '1 1 100%' }}
                 color="inherit"
@@ -86,7 +92,7 @@ export default function EnhancedTableToolbar(props) {
                 </div>
               </Typography>
             ) : (<></>   
-             )}
+             )} */}
       
             {numSelected > 1 ? (
         
@@ -143,11 +149,12 @@ export default function EnhancedTableToolbar(props) {
                <div><ModalPage tableType={tableType}></ModalPage></div>
       
                <div><Tooltip title="Filter list">
-                 <IconButton>
+                 <IconButton onClick={handleSearch}>
                    <SearchOutlinedIcon />
                  </IconButton> 
       
                </Tooltip></div>
+               {/* <input type = " text" value={searchedVal} onChange={(e) => setSearchedVal(e.target.value)}/> */}
                
                </div>
              </Typography> 

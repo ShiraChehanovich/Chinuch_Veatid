@@ -34,10 +34,12 @@ import { Prev } from 'react-bootstrap/esm/PageItem';
 import ModalPage from './ModalPage';
 import StudentCell from './TableCells/StudentCell';
 import StaffCell from './TableCells/StaffCell';
-import { ro } from 'date-fns/locale';
+// import { ro } from 'date-fns/locale';
 import EnhancedTableHead from './EnhancedTableHead';
+// import EnhancedTableToolbar from './EnhancedTableToolbar';
+// import {search1} from ''
 
-import SearchTeachersAndStudent from './SearchTeachersAndStudent';
+// import SearchTeachersAndStudent from './SearchTeachersAndStudent';
 import { useNavigate } from 'react-router-dom';
 
 function createData(name,lastName, id, phone, email, address, age) {
@@ -255,7 +257,7 @@ export default function EnhancedTable(prop) {
   tableType = prop.prop;
   condition = prop.prop2;
   const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('calories');
+  const [orderBy, setOrderBy] = React.useState('desc');
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
@@ -314,10 +316,7 @@ React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
-    // console.log(isAsc);
     setOrder(isAsc ? 'desc' : 'asc');
-    console.log(order);
-    console.log(property);
     setOrderBy(property);
   };
 
@@ -396,13 +395,6 @@ React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
                 
               stableSort(studentObjects, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  // .filter((row) =>
-                  //   // note that I've incorporated the searchedVal length check here
-                  //   !EnhancedTableToolbar.searchedVal || row.customer
-                  //     .toString()
-                  //     .toLowerCase()
-                  //     .includes(EnhancedTableToolbar.searchedVal.toString().toLowerCase()) 
-                  // )
                 .map((row, index) => {
                   const isItemSelected = isSelected(row.name);
                   const labelId = `enhanced-table-checkbox-${index}`;
