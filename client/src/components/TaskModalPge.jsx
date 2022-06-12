@@ -23,6 +23,8 @@ import ListAltIcon from '@mui/icons-material/ListAlt';
 import ModeIcon from '@mui/icons-material/Mode';
 import ListOfTasks from './ListOfTasks';
 import TimeDateClock from './TimeDateClock';
+import { addDoc, collection } from "firebase/firestore";
+
 
 const style = {
   position: 'absolute',
@@ -35,21 +37,7 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-// async function add(fname, lname, id, email, phone, age, address) {
-//   const studentRef = collection(firestore, "student");
-//   const staffRef = collection(firestore, "staff");
-//   await setDoc(doc(firestore, {
-//     name: fname,
-//     lastName: lname,
-//     id: id,
-//     email: email,
-//     phone: phone,
-//     age: age,
-//     address: address,
-//   }));
 
-  
-//  }
 
 
 
@@ -57,21 +45,40 @@ export default function TaskModalPge() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const fnameRef = React.useRef ()
-  const lNameRef = React.useRef()
-  const IDRef = React.useRef()
-  const emailRef = React.useRef()
-  const phonelRef = React.useRef()
-  const ageRef = React.useRef()
-  const addressRef = React.useRef()
-  const navigate = useNavigate()
+  const dateTimeYear = React.useRef ()
+  const timeClock = React.useRef()
+  const taskType = React.useRef()
+  const participantsNames = React.useRef()
+  const locationTime = React.useRef()
+  const TaskDescriptionOfTesk = React.useRef()
+ 
+
 
 
   async function handleSubmit(e){
     e.preventDefault()
+      const handleSubmitStudent = async () =>{
+    // e.preventDefault()
+  await setDoc(doc(collection(firestore, "tasks")),{
+    // name: newName,
+    // lastName: newLName,
+    // id: newId,
+    // email: newEmail, 
+    // phone: newPhone,
+    // age: newAge,
+    // address: newAddress,
+    date: dateTimeYear.current.value,
+    time: timeClock.current.value,
+    task: taskType.current.value,
+    Participants: participantsNames.current.value,
+    location: locationTime.current.value,
+    TaskDescription: TaskDescriptionOfTesk.current.value,  
+  });
+  window.location.reload(false);
+}
             //console.log(fnameRef.current.value)
            // await add(fnameRef.current.value, lNameRef.current.value,IDRef.current.value, emailRef.current.value, phonelRef.current.value, ageRef.current.value, addressRef.current.value)
-            navigate("/students ")
+            // navigate("/students ")
           }
   return (
     <div style={{maxWidth: 700}}>
@@ -96,47 +103,47 @@ export default function TaskModalPge() {
                 <Button className="w-100" type="submit">
                     הוספה
                 </Button>
-                <Form.Group id="first-name">
+                <Form.Group id="date">
                     {/* <RegularTextField  t = "תאריך" ref={fnameRef} required></RegularTextField> */}
                     <EventNoteIcon/>
+                    
                 <Form.Label size = "small">תאריך</Form.Label>
-                <SelectAdateInTheCalendar/>
+                <SelectAdateInTheCalendar type="text" ref={dateTimeYear}  required /> 
                 </Form.Group>
-                <Form.Group id="last-name">
+                <Form.Group id="hour">
                 {/* <RegularTextField  t = "שעה" ref={lName} required></RegularTextField> */}
-              
                 <Form.Label>שעה</Form.Label>
-              <TimeDateClock/>
+                <TimeDateClock type="text" ref={timeClock} required />
                 </Form.Group>
-                <Form.Group id="email">
+                <Form.Group id="oneTesk">
                 {/* <RegularTextField t = "סוג משימה"></RegularTextField> */}
                 <ListAltIcon/>
                 <Form.Label>סוג משימה</Form.Label>
+                {/* <ListItemButton></ListItemButton> */}
+                <ListOfTasks type="text" ref={taskType}  required />
                 
-{/* <ListItemButton></ListItemButton> */}
-                <ListOfTasks/>
                 {/* <RolingList/> */}
                 </Form.Group>
-                <Form.Group id="ID">
+                <Form.Group id="participat">
                 {/* <RegularTextField t = "משתתפים" ref={IDRef} required></RegularTextField> */}
                 {/* <Form.Label>משתתפים</Form.Label>
                 <SearchIcon /> */}
-                <ListOfTasksForTeacher/>
+                <ListOfTasksForTeacher type="text" ref={participantsNames} required/>
                 {/* <Form.Control ref={IDRef} required /> */}
                 
                 </Form.Group>
-                <Form.Group id="phone">
+                <Form.Group id="location">
                 {/* <RegularTextField t = "מיקום"></RegularTextField> */}
                 <FmdGoodIcon/>
                 <Form.Label>מיקום</Form.Label>
-                <Form.Control ref={phonelRef} required />
+                <Form.Control ref={locationTime} required />
                 </Form.Group>
-                <Form.Group id="age">
+                <Form.Group id="discription">
                 {/* <RegularTextField t = "תאור משימה"></RegularTextField> */}
                 <ModeIcon/>
                 <Form.Label>תאור המשימה</Form.Label>
                
-                <Form.Control ref={ageRef} required />
+                <Form.Control ref={TaskDescriptionOfTesk} required />
                 </Form.Group>
                 <Form.Group id="address">
                 {/* <RegularTextField t = "כתובת"></RegularTextField>

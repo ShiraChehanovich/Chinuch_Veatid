@@ -36,9 +36,19 @@ export default function StaticDatePickerLandscape() {
 
     <div>
       <div>
-        <PopingMenu />
-        <h3>
-          יומן אישי</h3>
+        <div>
+        <PopingMenu/>
+          <h1>
+          יומן אישי</h1>
+        </div>
+        
+
+        <TaskModalPage/>
+<div className="hellowU"> 
+<a><ReactBigCalendar/></a>
+<h3 className="space"></h3>
+  <h6 className="words">hjhjh</h6>
+  </div>
       </div>
       <TaskModalPage />
       <div1>
