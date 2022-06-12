@@ -34,19 +34,24 @@ import ModalPage from './ModalPage';
 import StudentCell from './TableCells/StudentCell';
 import StaffCell from './TableCells/StaffCell';
 import { ro } from 'date-fns/locale';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 var tableType;
 
 export default function EnhancedTableToolbar(props) {
   tableType = props.tt;
   const navigate = useNavigate()
+  let p ={
+  id:"1234345",
+  type:"general",
+  }
+    
 
         const { numSelected } = props;
       
-        const handleClick2= (event)=> {
-          navigate("/student-page");
-        }
+        // const handleClick2= (event)=> {
+        //   navigate("/student-page");
+        // }
         
       
         return (
@@ -114,10 +119,13 @@ export default function EnhancedTableToolbar(props) {
               </Tooltip></div>
       
       
-            <div ><Tooltip title="Edit" onClick={(event) => handleClick2(event)}>
+            {/* <div ><Tooltip title="Edit" onClick={(event) => handleClick2(event)}> */}
+            <div ><Tooltip title="Edit" >
+              <Link to= "/student-page" property='1234345' >
               <IconButton>
                 <EditIcon/>
               </IconButton>
+              </Link>
       
               </Tooltip></div>
               </div>
