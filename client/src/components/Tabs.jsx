@@ -10,6 +10,7 @@ import { collection, getDocs, query, where } from 'firebase/firestore';
 import { useAuth } from './context/AuthContext';
 import { firestore } from '../firebase/firebase';
 import StudentPage from './StudentPage';
+import Schedule_class_file from './Schedule_class_file'
 
 export default function Tabs() {
   const [value, setValue] = React.useState('1');
@@ -59,8 +60,8 @@ export default function Tabs() {
         <MedicineList/>
         </TabPanel>
         <TabPanel value="2">
-            {/* {console.log(props3.id)} */}
-            <StudentPage {...props3}></StudentPage>
+        <Schedule_class_file/>
+          {/* // */}
         </TabPanel>
         <TabPanel value="3">
             <Table prop = {props1.t} prop2 = {props1.p}></Table>
