@@ -27,6 +27,7 @@ import AddBoxIcon from '@mui/icons-material/AddBox';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { getDocuments } from '../firebase/firebase';
 import Search from './Search';
+import EnhancedTableToolbar from './EnhancedTableToolbar';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { firestore } from '../firebase/firebase';
 import { Prev } from 'react-bootstrap/esm/PageItem';
@@ -34,9 +35,10 @@ import ModalPage from './ModalPage';
 import StudentCell from './TableCells/StudentCell';
 import StaffCell from './TableCells/StaffCell';
 import { ro } from 'date-fns/locale';
+import EnhancedTableHead from './EnhancedTableHead';
 
 import SearchTeachersAndStudent from './SearchTeachersAndStudent';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function createData(name,lastName, id, phone, email, address, age) {
   return {
@@ -49,43 +51,6 @@ function createData(name,lastName, id, phone, email, address, age) {
     age,
   };
 }
-
-// const [estudiantes, setEstudiantes] = React.useState([]);
-// const estudiantesRef = db.collection("usuarios").doc(user.uid).collection("estudiantes")
-
-//   useEffect(() => {
-//     estudiantesRef
-//     .orderBy('name')
-//      .onSnapshot(snapshot => {
-       
-//         const rows = [];
-//         snapshot.forEach((doc) => {
-
-//           const data = doc.data();
-//           rows.push(data);
-
-//         });
-//         setEstudiantes(rows);
-//       })
-//   }, []);
-
-//setDoc
-
-// const rows = [
-//   createData('Cupcake', 305, 3.7, 67, 4.3),
-//   createData('Donut', 452, 25.0, 51, 4.9),
-//   createData('Eclair', 262, 16.0, 24, 6.0),
-//   createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-//   createData('Gingerbread', 356, 16.0, 49, 3.9),
-//   createData('Honeycomb', 408, 3.2, 87, 6.5),
-//   createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-//   createData('Jelly Bean', 375, 0.0, 94, 0.0),
-//   createData('KitKat', 518, 26.0, 65, 7.0),
-//   createData('Lollipop', 392, 0.2, 98, 0.0),
-//   createData('Marshmallow', 318, 0, 81, 2.0),
-//   createData('Nougat', 360, 19.0, 9, 37.0),
-//   createData('Oreo', 437, 18.0, 63, 4.0),
-// ];
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -117,158 +82,158 @@ function stableSort(array, comparator) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-function  getHeaders()
-{
-const headCells = [
-  {
-    id: 'role',
-    numeric: true,
-    disablePadding: false,
-    label: 'תפקיד',
-  },
-  {
-    id: 'address',
-    numeric: true,
-    disablePadding: false,
-    label: 'כתובת',
-  },
-  {
-    id: 'email',
-    numeric: true,
-    disablePadding: false,
-    label: 'מייל',
-  },
-  {
-    id: 'phone',
-    numeric: true,
-    disablePadding: false,
-    label: 'טלפון',
-  },
-  {
-    id: 'id',
-    numeric: true,
-    disablePadding: false,
-    label: 'תעודת זהות',
-  },
-  {
-    id: 'lastName',
-    numeric: true,
-    disablePadding: false,
-    label: 'שם משפחה',
-  },
-  {
-    id: 'name',
-    numeric: false,
-    disablePadding: true,
-    label: 'שם',
-  },
-];
+// function  getHeaders()
+// {
+// const headCells = [
+//   {
+//     id: 'role',
+//     numeric: true,
+//     disablePadding: false,
+//     label: 'תפקיד',
+//   },
+//   {
+//     id: 'address',
+//     numeric: true,
+//     disablePadding: false,
+//     label: 'כתובת',
+//   },
+//   {
+//     id: 'email',
+//     numeric: true,
+//     disablePadding: false,
+//     label: 'מייל',
+//   },
+//   {
+//     id: 'phone',
+//     numeric: true,
+//     disablePadding: false,
+//     label: 'טלפון',
+//   },
+//   {
+//     id: 'id',
+//     numeric: true,
+//     disablePadding: false,
+//     label: 'תעודת זהות',
+//   },
+//   {
+//     id: 'lastName',
+//     numeric: true,
+//     disablePadding: false,
+//     label: 'שם משפחה',
+//   },
+//   {
+//     id: 'name',
+//     numeric: false,
+//     disablePadding: true,
+//     label: 'שם',
+//   },
+// ];
 
-const headCells2 = [
-  {
-    id: 'age',
-    numeric: true,
-    disablePadding: false,
-    label: 'גיל',
-  },
-  {
-    id: 'address',
-    numeric: true,
-    disablePadding: false,
-    label: 'כתובת',
-  },
-  {
-    id: 'email',
-    numeric: true,
-    disablePadding: false,
-    label: 'מייל',
-  },
-  {
-    id: 'phone',
-    numeric: true,
-    disablePadding: false,
-    label: 'טלפון',
-  },
-  {
-    id: 'grade',
-    numeric: true,
-    disablePadding: false,
-    label: 'כיתה',
-  },
-  {
-    id: 'id',
-    numeric: true,
-    disablePadding: false,
-    label: 'תעודת זהות',
-  },
-  {
-    id: 'lastName',
-    numeric: true,
-    disablePadding: false,
-    label: 'שם משפחה',
-  },
-  {
-    id: 'name',
-    numeric: false,
-    disablePadding: true,
-    label: 'שם',
-  },
-];
+// const headCells2 = [
+//   {
+//     id: 'age',
+//     numeric: true,
+//     disablePadding: false,
+//     label: 'גיל',
+//   },
+//   {
+//     id: 'address',
+//     numeric: true,
+//     disablePadding: false,
+//     label: 'כתובת',
+//   },
+//   {
+//     id: 'email',
+//     numeric: true,
+//     disablePadding: false,
+//     label: 'מייל',
+//   },
+//   {
+//     id: 'phone',
+//     numeric: true,
+//     disablePadding: false,
+//     label: 'טלפון',
+//   },
+//   {
+//     id: 'grade',
+//     numeric: true,
+//     disablePadding: false,
+//     label: 'כיתה',
+//   },
+//   {
+//     id: 'id',
+//     numeric: true,
+//     disablePadding: false,
+//     label: 'תעודת זהות',
+//   },
+//   {
+//     id: 'lastName',
+//     numeric: true,
+//     disablePadding: false,
+//     label: 'שם משפחה',
+//   },
+//   {
+//     id: 'name',
+//     numeric: false,
+//     disablePadding: true,
+//     label: 'שם',
+//   },
+// ];
 
-if (tableType === "Staff")
-  return headCells;
-  return headCells2;
-};
+// if (tableType === "Staff")
+//   return headCells;
+//   return headCells2;
+// };
 
-function EnhancedTableHead(props) {
-  const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } =
-    props;
-  const createSortHandler = (property) => (event) => {
-    onRequestSort(event, property);
-  };
+// function EnhancedTableHead(props) {
+//   const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } =
+//     props;
+//   const createSortHandler = (property) => (event) => {
+//     onRequestSort(event, property);
+//   };
   
-  // const [searchedVal, setSearchedVal] = useState("");
-  return (
-    <TableHead>
-      <TableRow>
-        {/*headCells*/getHeaders().map((headCell, index) => (
-          <TableCell
-            //key={headCell.id}
-            key={index}
-            fontSize = "small"
-            align={'right'}
-            padding={headCell.disablePadding ? 'none' : 'normal'}
-            sortDirection={orderBy === headCell.id ? order : false}
-          >
-            <TableSortLabel
-              active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : 'asc'}
-              onClick={createSortHandler(headCell.id)}
-            >
-              {headCell.label}
-              {orderBy === headCell.id ? (
-                <Box component="span" sx={visuallyHidden}>
-                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                </Box>
-              ) : null}
-            </TableSortLabel>
-          </TableCell>
-        ))}
-        <TableCell padding="checkbox">
-          <Checkbox
-            color="primary"
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
-            onChange={onSelectAllClick}
-            inputProps={{
-              'aria-label': 'select all desserts',
-            }}
-          />
-        </TableCell>
-      </TableRow>
-    </TableHead>
-  );
-}
+//   // const [searchedVal, setSearchedVal] = useState("");
+//   return (
+//     <TableHead>
+//       <TableRow>
+//         {/*headCells*/getHeaders().map((headCell, index) => (
+//           <TableCell
+//             //key={headCell.id}
+//             key={index}
+//             fontSize = "small"
+//             align={'right'}
+//             padding={headCell.disablePadding ? 'none' : 'normal'}
+//             sortDirection={orderBy === headCell.id ? order : false}
+//           >
+//             <TableSortLabel
+//               active={orderBy === headCell.id}
+//               direction={orderBy === headCell.id ? order : 'asc'}
+//               onClick={createSortHandler(headCell.id)}
+//             >
+//               {headCell.label}
+//               {orderBy === headCell.id ? (
+//                 <Box component="span" sx={visuallyHidden}>
+//                   {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+//                 </Box>
+//               ) : null}
+//             </TableSortLabel>
+//           </TableCell>
+//         ))}
+//         <TableCell padding="checkbox">
+//           <Checkbox
+//             color="primary"
+//             indeterminate={numSelected > 0 && numSelected < rowCount}
+//             checked={rowCount > 0 && numSelected === rowCount}
+//             onChange={onSelectAllClick}
+//             inputProps={{
+//               'aria-label': 'select all desserts',
+//             }}
+//           />
+//         </TableCell>
+//       </TableRow>
+//     </TableHead>
+//   );
+// }
 
 EnhancedTableHead.propTypes = {
   numSelected: PropTypes.number.isRequired,
@@ -277,124 +242,6 @@ EnhancedTableHead.propTypes = {
   order: PropTypes.oneOf(['asc', 'desc']).isRequired,
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,
-};
-
-const EnhancedTableToolbar = (props) => {
-  const { numSelected } = props;
-
-  const handleClick2= (event)=> {
-    Navigate("/student-page");
-  }
-  
-
-  return (
-    <Toolbar
-      sx={{
-        pl: { sm: 2 },
-        pr: { xs: 1, sm: 1 },
-        ...(numSelected > 0 && {
-          bgcolor: (theme) =>
-            alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
-        }),
-      }}
-    >
-      {numSelected > 1 ? (
-        <Typography
-          sx={{ flex: '1 1 100%' }}
-          color="inherit"
-          variant="subtitle1"
-          component="div"
-        >
-         {numSelected} מחק
-        </Typography>
-      ) : ( <></>
-        
-      )}
-
-    {numSelected == 1 ? (
-        <Typography
-          sx={{ flex: '1 1 100%' }}
-          color="inherit"
-          variant="subtitle1"
-          component="div"
-        >
-          <div>
-          <ModalPage tableType={tableType}></ModalPage>
-          
-          </div>
-        </Typography>
-      ) : (<></>   
-       )}
-
-      {numSelected > 1 ? (
-  
-      <div>  <Tooltip title="Delete">
-          <IconButton>
-            <DeleteIcon />
-          </IconButton>
-
-        </Tooltip></div>
-
-      ) : (
-        <></>
-      )}
-
-
-
-    {numSelected == 1 ? (
-      <div style={{display: 'flex' , flexWrap : 'nowrap'}}>
-
-      <div>  <Tooltip title="Delete">
-          <IconButton>
-            <DeleteIcon />
-          </IconButton>
-
-        </Tooltip></div>
-
-
-      <div ><Tooltip title="Edit" onClick={(event) => handleClick2(event)}>
-        <IconButton>
-          <EditIcon/>
-        </IconButton>
-
-        </Tooltip></div>
-        </div>
-      ) : (
-        // <Tooltip title="Filter list">
-        //   <IconButton>
-        //     <SearchOutlinedIcon />
-        //   </IconButton> 
-
-        // </Tooltip>
-        <></>
-      )}
-      {numSelected == 0 ?(
-
-        
-         <Typography
-         sx={{ flex: '1 1 100%' }}
-         variant="h6"
-         id="tableTitle"
-         component="div"
-       >
-         <div style={{display: 'flex' , flexWrap : 'nowrap'}}>
-         <div><ModalPage tableType={tableType}></ModalPage></div>
-
-         <div><Tooltip title="Filter list">
-           <IconButton>
-             <SearchOutlinedIcon />
-           </IconButton> 
-
-         </Tooltip></div>
-         
-         </div>
-       </Typography> 
-
-      ):(<></>)}
-
-
-    </Toolbar>
-  );
 };
 
 EnhancedTableToolbar.propTypes = {
@@ -449,7 +296,10 @@ React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
+    // console.log(isAsc);
     setOrder(isAsc ? 'desc' : 'asc');
+    console.log(order);
+    console.log(property);
     setOrderBy(property);
   };
 
@@ -504,7 +354,7 @@ React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
   return (
     <Box sx={{ height: '100%', width: '81%', minHeight: '50%' }}>
       <Paper sx={{ width: '100%', mb: 5 }}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+        <EnhancedTableToolbar numSelected={selected.length} tt = {tableType}/>
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
@@ -513,6 +363,7 @@ React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
           >
             <EnhancedTableHead
               numSelected={selected.length}
+              tt = {tableType}
               order={order}
               orderBy={orderBy}
               onSelectAllClick={handleSelectAllClick}

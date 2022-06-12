@@ -1,5 +1,5 @@
-flex-container {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: right;
+.flex {
+  display: flex;
+  -ms-flex: 1;  /* IE 10 */  
+  flex: 1;
   }
