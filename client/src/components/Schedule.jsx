@@ -50,12 +50,12 @@ export default function StaticDatePickerLandscape() {
   <h6 className="words">hjhjh</h6>
   </div>
       </div>
-      <TaskModalPage />
+      {/* <TaskModalPage />
       <div1>
         <a><ReactBigCalendar /></a>
         <e></e>
         <w>hjhjh</w>
-      </div1>
+      </div1> */}
 
 
     </div>

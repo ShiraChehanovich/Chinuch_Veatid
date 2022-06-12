@@ -67,6 +67,7 @@ export default function TaskModalPge() {
     // phone: newPhone,
     // age: newAge,
     // address: newAddress,
+    //  timestamp: {date: , time: },
     date: dateTimeYear.current.value,
     time: timeClock.current.value,
     task: taskType.current.value,
@@ -108,36 +109,38 @@ export default function TaskModalPge() {
                     <EventNoteIcon/>
                     
                 <Form.Label size = "small">תאריך</Form.Label>
-                <SelectAdateInTheCalendar type="text" ref={dateTimeYear}  required /> 
+                <SelectAdateInTheCalendar type="text" handleChange={(date) => dateTimeYear.current = date}  required /> 
                 </Form.Group>
                 <Form.Group id="hour">
                 {/* <RegularTextField  t = "שעה" ref={lName} required></RegularTextField> */}
                 <Form.Label>שעה</Form.Label>
-                <TimeDateClock type="text" ref={timeClock} required />
+                <Form.Control ref={TimeDateClock} required />
+                {}
+                {/* <TimeDateClock type="text" ref={timeClock} required /> */}
                 </Form.Group>
-                <Form.Group id="oneTesk">
+                {/* <Form.Group id="oneTesk"> */}
                 {/* <RegularTextField t = "סוג משימה"></RegularTextField> */}
-                <ListAltIcon/>
-                <Form.Label>סוג משימה</Form.Label>
+                {/* <ListAltIcon/> */}
+                {/* <Form.Label>סוג משימה</Form.Label> */}
                 {/* <ListItemButton></ListItemButton> */}
-                <ListOfTasks type="text" ref={taskType}  required />
+                {/* <ListOfTasks type="text" ref={taskType}  required /> */}
                 
                 {/* <RolingList/> */}
-                </Form.Group>
-                <Form.Group id="participat">
+                {/* </Form.Group> */}
+                {/* <Form.Group id="participat"> */}
                 {/* <RegularTextField t = "משתתפים" ref={IDRef} required></RegularTextField> */}
                 {/* <Form.Label>משתתפים</Form.Label>
                 <SearchIcon /> */}
-                <ListOfTasksForTeacher type="text" ref={participantsNames} required/>
+                {/* <ListOfTasksForTeacher type="text" ref={participantsNames} required/> */}
                 {/* <Form.Control ref={IDRef} required /> */}
                 
-                </Form.Group>
-                <Form.Group id="location">
+                {/* </Form.Group> */}
+                {/* <Form.Group id="location"> */}
                 {/* <RegularTextField t = "מיקום"></RegularTextField> */}
-                <FmdGoodIcon/>
-                <Form.Label>מיקום</Form.Label>
-                <Form.Control ref={locationTime} required />
-                </Form.Group>
+                {/* <FmdGoodIcon/> */}
+                {/* <Form.Label>מיקום</Form.Label> */}
+                {/* <Form.Control ref={locationTime} required /> */}
+                {/* </Form.Group> */}
                 <Form.Group id="discription">
                 {/* <RegularTextField t = "תאור משימה"></RegularTextField> */}
                 <ModeIcon/>
