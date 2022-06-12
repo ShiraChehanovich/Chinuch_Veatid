@@ -35,6 +35,7 @@ import StaffCell from './TableCells/StaffCell';
 import { ro } from 'date-fns/locale';
 
 import SearchTeachersAndStudent from './SearchTeachersAndStudent';
+import { Navigate } from 'react-router-dom';
 
 function createData(name,lastName, id, phone, email, address, age) {
   return {
@@ -47,24 +48,6 @@ function createData(name,lastName, id, phone, email, address, age) {
     age,
   };
 }
-// const [estudiantes, setEstudiantes] = React.useState([]);
-// const estudiantesRef = db.collection("usuarios").doc(user.uid).collection("estudiantes")
-
-//   useEffect(() => {
-//     estudiantesRef
-//     .orderBy('name')
-//      .onSnapshot(snapshot => {
-       
-//         const rows = [];
-//         snapshot.forEach((doc) => {
-
-//           const data = doc.data();
-//           rows.push(data);
-
-//         });
-//         setEstudiantes(rows);
-//       })
-//   }, []);
 
 //setDoc
 
@@ -212,7 +195,7 @@ const headCells2 = [
   },
 ];
 
-if (tableType.tableType == 'Staff')
+if (tableType.tableType === 'Staff')
   return headCells;
   return headCells2;
 };
@@ -346,9 +329,9 @@ EnhancedTableToolbar.propTypes = {
 var tableType;
 var  condition ;
 
-export default function EnhancedTable(t, p) {
-  tableType = t;
-  condition = p.p;
+export default function EnhancedTable(props) {
+  tableType = props.t;
+  condition = props.p;
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
   const [selected, setSelected] = React.useState([]);
@@ -362,11 +345,13 @@ export default function EnhancedTable(t, p) {
 
 const getData = async () => {
   var q ;
-  if (tableType.tableType == 'Staff')
+  if (tableType === 'Staff')
     q = query(staffRef);
-  else if(tableType.tableType == 'Student'){
-    if(condition != 'none')
-      q = query(studentRef, where("grade", "==", "1"));
+  else if(tableType === 'Student'){
+    if(condition != "none"){
+      // console.log(condition);
+      q = query(studentRef, where("grade", "==", condition));
+    }
       else
       q = query(studentRef);
   }
@@ -425,6 +410,9 @@ React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
+  const handleClick2 = () => {
+    Navigate("/student-page");
+  }
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
@@ -478,7 +466,7 @@ React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
                       key={row.id}
                       selected={isItemSelected}
                     >
-                      { tableType.tableType == 'Staff' ? (<TableCell align="right">{row.role}</TableCell>) : ( <TableCell align="right">{row.age}</TableCell>) }
+                      { tableType.tableType === 'Staff' ? (<TableCell align="right">{row.role}</TableCell>) : ( <TableCell align="right">{row.age}</TableCell>) }
                       <TableCell align="right">{row.address}</TableCell>
                       <TableCell align="right">{row.email}</TableCell>
                       <TableCell align="right">{row.phone}</TableCell>
