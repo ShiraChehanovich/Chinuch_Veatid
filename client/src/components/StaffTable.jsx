@@ -5,11 +5,15 @@ import Search from './Search'
 import SecondTable from './SecondTable'
 
 export default function StaffTable() {
+  let props1 = {
+    t:"Staff",
+    p:"none"
+    }
   return (
     <div>
       {/* <Search/> */}
       <PopingMenu/>
-      <Table tableType="Staff"></Table>
+      <Table prop = {props1.t} prop2 = {props1.p}></Table>
     </div>
   )
 }

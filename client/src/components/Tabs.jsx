@@ -63,10 +63,10 @@ export default function Tabs() {
             <StudentPage {...props3}></StudentPage>
         </TabPanel>
         <TabPanel value="3">
-            <Table {...props1}></Table>
+            <Table prop = {props1.t} prop2 = {props1.p}></Table>
         </TabPanel>
         <TabPanel value="4">
-            <Table {...props2}></Table>
+            <Table prop = {props2.t} prop2 = {props2.p}></Table>
         </TabPanel>
       </TabContext>
     </Box>

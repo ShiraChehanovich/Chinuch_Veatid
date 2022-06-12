@@ -11,7 +11,7 @@ export default function StudentTable() {
   return (
     <div>
       <PopingMenu/>
-      <Table {...props1}></Table>
+      <Table prop = {props1.t} prop2 = {props1.p}></Table>
     </div>
   )
 }

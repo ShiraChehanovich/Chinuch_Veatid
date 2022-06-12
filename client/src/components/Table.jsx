@@ -215,7 +215,7 @@ const headCells2 = [
   },
 ];
 
-if (tableType.tableType === 'Staff')
+if (tableType === "Staff")
   return headCells;
   return headCells2;
 };
@@ -235,6 +235,7 @@ function EnhancedTableHead(props) {
           <TableCell
             //key={headCell.id}
             key={index}
+            fontSize = "small"
             align={'right'}
             padding={headCell.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === headCell.id ? order : false}
@@ -312,6 +313,10 @@ const EnhancedTableToolbar = (props) => {
           variant="subtitle1"
           component="div"
         >
+          <div>
+          <ModalPage tableType={tableType}></ModalPage>
+          
+          </div>
         </Typography>
       ) : (<></>   
        )}
@@ -368,7 +373,7 @@ const EnhancedTableToolbar = (props) => {
          component="div"
        >
          <div style={{display: 'flex' , flexWrap : 'nowrap'}}>
-         <div><ModalPage tableType={tableType.tableType}></ModalPage></div>
+         <div><ModalPage tableType={tableType}></ModalPage></div>
 
          <div><Tooltip title="Filter list">
            <IconButton>
@@ -394,9 +399,9 @@ EnhancedTableToolbar.propTypes = {
 var tableType;
 var  condition ;
 
-export default function EnhancedTable(props) {
-  tableType = props.t;
-  condition = props.p;
+export default function EnhancedTable(prop) {
+  tableType = prop.prop;
+  condition = prop.prop2;
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
   const [selected, setSelected] = React.useState([]);
@@ -532,11 +537,11 @@ React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
                       key={row.id}
                       selected={isItemSelected}
                     >
-                      { tableType.tableType === 'Staff' ? (<TableCell align="right">{row.role}</TableCell>) : ( <TableCell align="right">{row.age}</TableCell>) }
+                      { tableType === 'Staff' ? (<TableCell align="right">{row.role}</TableCell>) : ( <TableCell align="right">{row.age}</TableCell>) }
                       <TableCell align="right">{row.address}</TableCell>
                       <TableCell align="right">{row.email}</TableCell>
                       <TableCell align="right">{row.phone}</TableCell>
-                      { tableType.tableType == 'Staff' ? (<></>) : ( <TableCell align="right">{row.grade}</TableCell>) }
+                      { tableType == 'Staff' ? (<></>) : ( <TableCell align="right">{row.grade}</TableCell>) }
                       <TableCell align="right">{row.id}</TableCell>
                        <TableCell align="right">{row.lastName}</TableCell>
                       <TableCell
