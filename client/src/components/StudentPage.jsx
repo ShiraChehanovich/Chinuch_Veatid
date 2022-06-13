@@ -12,7 +12,7 @@ var idS;
 var s;
 export default function StudentPage() {
     const {studentId} = useParams();
-    console.log(studentId)
+    // console.log(studentId)
     // idS = props.id;
     const studentRef = collection(firestore, "student");
     const [studentObjects, setStudentObjects] = useState([]);
@@ -29,7 +29,7 @@ export default function StudentPage() {
     //paramps
     // id = props.id;
     const getData = async () => {
-        var q  = query(studentRef, where("id", "==", "1234345"));
+        var q  = query(studentRef, where("idUser", "==", studentId));
         
         const snapshot = await getDocs(q)
         // const  result = snapshot.docs.map((doc) => ({...doc.data(), id: doc.id}));
@@ -42,9 +42,9 @@ export default function StudentPage() {
         )
         
       }
-      React.useEffect(()=>{getData()}, []);    
+    //   React.useEffect(()=>{getData()}, []);    
     //   React.useEffect(()=>{getData()});
-      React.useEffect(()=>{console.log(studentObjects)})
+    // React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
 
       const setData = async () =>{
         studentObjects.map((s)=>{
@@ -56,7 +56,7 @@ export default function StudentPage() {
         addressRef.current.value = s.address;
         })
     }
-    React.useEffect(()=>{getData()}, []);    
+    React.useEffect(()=>{getData()},[]);    
     React.useEffect(()=>{setData()});    
 
   return (

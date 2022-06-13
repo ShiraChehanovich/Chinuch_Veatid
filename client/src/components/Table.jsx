@@ -288,7 +288,7 @@ export default function EnhancedTable(prop) {
 
 const getData = async () => {
   var q ;
-  if (tableType === 'Staff')
+    if (tableType === 'Staff')
     q = query(staffRef);
   else if(tableType === 'Student'){
     if(condition != "none"){

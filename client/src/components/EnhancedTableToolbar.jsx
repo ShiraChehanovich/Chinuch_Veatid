@@ -84,11 +84,11 @@ export default function EnhancedTableToolbar(props) {
   }  
   
   const handleAttach = async () =>{
-    console.log(selectedId)
-    Navigation.navigate("/student-page ", {
-      selectedId,
-    });
+    // selectedId
 
+    console.log(selectedId)
+    navigate(`/student-page/${selectedId}`);
+    // };
   }
 
 
