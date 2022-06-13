@@ -39,7 +39,7 @@ const headCells = [
     label: 'טלפון',
   },
   {
-    id: 'id',
+    id: 'idUser',
     numeric: true,
     disablePadding: false,
     label: 'תעודת זהות',
@@ -90,7 +90,7 @@ const headCells2 = [
     label: 'כיתה',
   },
   {
-    id: 'id',
+    id: 'idUser',
     numeric: true,
     disablePadding: false,
     label: 'תעודת זהות',

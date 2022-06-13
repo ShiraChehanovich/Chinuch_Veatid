@@ -42,17 +42,17 @@ import EnhancedTableHead from './EnhancedTableHead';
 // import SearchTeachersAndStudent from './SearchTeachersAndStudent';
 import { useNavigate } from 'react-router-dom';
 
-function createData(name,lastName, id, phone, email, address, age) {
-  return {
-    name,
-    lastName,
-    id,
-    phone,
-    email,
-    address,
-    age,
-  };
-}
+// function createData(name,lastName, id, phone, email, address, age) {
+//   return {
+//     name,
+//     lastName,
+//     id,
+//     phone,
+//     email,
+//     address,
+//     age,
+//   };
+// }
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -398,17 +398,17 @@ React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
               stableSort(studentObjects, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.id);
+                  const isItemSelected = isSelected(row.idUser);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.id)}
+                      onClick={(event) => handleClick(event, row.idUser)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.id}
+                      key={row.idUser}
                       selected={isItemSelected}
                     >
                       { tableType === 'Staff' ? (<TableCell align="right">{row.role}</TableCell>) : ( <TableCell align="right">{row.age}</TableCell>) }
@@ -416,7 +416,7 @@ React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
                       <TableCell align="right">{row.email}</TableCell>
                       <TableCell align="right">{row.phone}</TableCell>
                       { tableType == 'Staff' ? (<></>) : ( <TableCell align="right">{row.grade}</TableCell>) }
-                      <TableCell align="right">{row.id}</TableCell>
+                      <TableCell align="right">{row.idUser}</TableCell>
                        <TableCell align="right">{row.lastName}</TableCell>
                       <TableCell
                         component="th"

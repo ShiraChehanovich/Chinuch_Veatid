@@ -53,29 +53,33 @@ export default function EnhancedTableToolbar(props) {
         
   const { numSelected } = props; 
   const handleDelete = async () =>{
-    // const snapshot = await firestore
-    // .collection("student")
-    // .where("id", "==", selectedId)
-    // .get();
-     
-    // const doc =snapshot.docs[0];
-    // doc.ref.delete();
+    // const docRef = doc(firestore, "student", "1h0GqsjdkUvTwnp6AqXV");
+    // await deleteDoc(docRef);
 
 
+    const studentRef = collection(firestore, "student");
+    const staffRef = collection(firestore, "staff");
+    var q;
+    var docRef;
+    selectedId.forEach(async item=>{
+    if (tableType === 'Staff')
+      {q = query(staffRef, where("idUser", "==", item));}
+    else
+      {q = query(studentRef, where("idUser", "==", item));}
 
-  //  await collection(firestore, "student").deleteDoc(selectedId);
-    // await deleteDoc(doc(collection(firestore, "student")),"students",selectedId);
+     const snapshot = await getDocs(q);
+     const results = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
 
-    // selectedId.forEach(async item =>{
-    //  deleteDoc(doc(collection(firestore, "student")).Where("id","==",item)); 
-    // })
+     results.forEach(async result => {
+      if (tableType === 'Staff')
+        {docRef = doc(firestore, "staff", result.id);}
+      else
+        {docRef = doc(firestore, "student", result.id);}
+      await deleteDoc(docRef);
+      window.location.reload(false);
+     });
 
-
-    
-    // collection('student').doc(selectedId).delete()
-    //     .then(()=>{console.log("successfully deleted! ")})
-    //     .catch((error)=>{ console.log("Error removing document:", error)})
-    // window.location.reload(false);
+    });
   }       
         
       
