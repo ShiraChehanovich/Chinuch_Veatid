@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { addDoc, doc, setDoc, collection } from "firebase/firestore";
 import { firestore } from '../firebase/firebase';
+import { useAuth } from './context/AuthContext';
 
 
 const style = {
@@ -56,6 +57,7 @@ export default function ModalPage(t) {
   const addressRef = React.useRef()
   const gradeRef = React.useRef()
   const navigate = useNavigate()
+  const { currentUser,  } = useAuth()
 
 
   // async function handleSubmit(e){
@@ -120,6 +122,7 @@ export default function ModalPage(t) {
 
 
     const handleSubmitStudent = async () =>{
+      console.log(currentUser)
         // e.preventDefault()
       await setDoc(doc(collection(firestore, "student")),{
         // name: newName,
@@ -142,7 +145,7 @@ export default function ModalPage(t) {
     }
     const handleSubmitStaff = async () =>{
       // e.preventDefault()
-    await setDoc(doc(collection(firestore, "staff")),{
+    await setDoc(doc(collection(firestore, "staff", )),{
       // name: newName,
       // lastName: newLName,
       // id: newId,
