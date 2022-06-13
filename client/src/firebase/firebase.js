@@ -112,8 +112,8 @@ const firestore = getFirestore();
 
 const auth = firebase.auth();
  const provider = new firebase.auth.GoogleAuthProvider();
- export { auth, provider,firestore };
- export const storage = getStorage();
+ const storage = getStorage();
+ export { auth, provider,firestore, storage };
 
  //const colRef = collection(db, 'student');
  //const q = query(colRef, where('ID', '==', auth.currentUser));

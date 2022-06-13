@@ -34,23 +34,25 @@ import { Prev } from 'react-bootstrap/esm/PageItem';
 import ModalPage from './ModalPage';
 import StudentCell from './TableCells/StudentCell';
 import StaffCell from './TableCells/StaffCell';
-import { ro } from 'date-fns/locale';
+// import { ro } from 'date-fns/locale';
 import EnhancedTableHead from './EnhancedTableHead';
+// import EnhancedTableToolbar from './EnhancedTableToolbar';
+// import {search1} from ''
 
-import SearchTeachersAndStudent from './SearchTeachersAndStudent';
+// import SearchTeachersAndStudent from './SearchTeachersAndStudent';
 import { useNavigate } from 'react-router-dom';
 
-function createData(name,lastName, id, phone, email, address, age) {
-  return {
-    name,
-    lastName,
-    id,
-    phone,
-    email,
-    address,
-    age,
-  };
-}
+// function createData(name,lastName, id, phone, email, address, age) {
+//   return {
+//     name,
+//     lastName,
+//     id,
+//     phone,
+//     email,
+//     address,
+//     age,
+//   };
+// }
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -255,7 +257,7 @@ export default function EnhancedTable(prop) {
   tableType = prop.prop;
   condition = prop.prop2;
   const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('calories');
+  const [orderBy, setOrderBy] = React.useState('desc');
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
@@ -264,6 +266,25 @@ export default function EnhancedTable(prop) {
   const studentRef = collection(firestore, "student");
   const staffRef = collection(firestore, "staff");
   const classRef = collection(firestore, "classes");
+
+  // const [searchedVal, setSearchedVal] = React.useState("");
+
+  // const [search, setSearch] = React.useState('');
+  // const handleSearch = async (e) =>{
+  //   setSearch(e.target.value)
+  // };
+  // const data = {
+  //     studentObjects: studentObjects.filter((item) =>
+  //     item.name.toLowerCase().includes(search.toLowerCase())
+  //   ),
+  // };
+  // const [searchedVal, setSearchedVal] = React.useState("");
+  // function search(rows){
+  //   return rows.filter(row => row.name.toLowerCase().indexOf(searchedVal) > -1)
+  // };
+  // const handleSearch =  () => {
+  //   
+  // }
 
 const getData = async () => {
   var q ;
@@ -288,18 +309,16 @@ const getData = async () => {
       }
     
   ) 
-  
+
 }
 
 React.useEffect(()=>{getData()}, []);
+// React.useEffect(()=>{console.log(searchedVal)}, [searchedVal])
 React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
-    // console.log(isAsc);
     setOrder(isAsc ? 'desc' : 'asc');
-    console.log(order);
-    console.log(property);
     setOrderBy(property);
   };
 
@@ -354,9 +373,10 @@ React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
   return (
     <Box sx={{ height: '100%', width: '81%', minHeight: '50%' }}>
       <Paper sx={{ width: '100%', mb: 5 }}>
-        <EnhancedTableToolbar numSelected={selected.length} tt = {tableType}/>
+        <EnhancedTableToolbar numSelected={selected.length} tt = {tableType} sel = {selected}/>
         <TableContainer>
-          <Table
+          <Table 
+            // studentObjects={data}
             sx={{ minWidth: 750 }}
             aria-labelledby="tableTitle"
             size={dense ? 'small' : 'medium'}
@@ -374,20 +394,21 @@ React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
               {/* if you don't need to support IE11, you can replace the `stableSort` call with:
                  rows.slice().sort(getComparator(order, orderBy)) */}
               {
+                
               stableSort(studentObjects, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.name);
+                  const isItemSelected = isSelected(row.idUser);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.name)}
+                      onClick={(event) => handleClick(event, row.idUser)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.id}
+                      key={row.idUser}
                       selected={isItemSelected}
                     >
                       { tableType === 'Staff' ? (<TableCell align="right">{row.role}</TableCell>) : ( <TableCell align="right">{row.age}</TableCell>) }
@@ -395,7 +416,7 @@ React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
                       <TableCell align="right">{row.email}</TableCell>
                       <TableCell align="right">{row.phone}</TableCell>
                       { tableType == 'Staff' ? (<></>) : ( <TableCell align="right">{row.grade}</TableCell>) }
-                      <TableCell align="right">{row.id}</TableCell>
+                      <TableCell align="right">{row.idUser}</TableCell>
                        <TableCell align="right">{row.lastName}</TableCell>
                       <TableCell
                         component="th"

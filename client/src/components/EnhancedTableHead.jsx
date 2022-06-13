@@ -39,7 +39,7 @@ const headCells = [
     label: 'טלפון',
   },
   {
-    id: 'id',
+    id: 'idUser',
     numeric: true,
     disablePadding: false,
     label: 'תעודת זהות',
@@ -90,7 +90,7 @@ const headCells2 = [
     label: 'כיתה',
   },
   {
-    id: 'id',
+    id: 'idUser',
     numeric: true,
     disablePadding: false,
     label: 'תעודת זהות',
@@ -141,7 +141,7 @@ export default function EnhancedTableHead(props) {
                     active={orderBy === headCell.id}
                     direction={orderBy === headCell.id ? order : 'asc'}
                     onClick={createSortHandler(headCell.id)}
-                  >
+                  > 
                     {headCell.label}
                     {orderBy === headCell.id ? (
                       <Box component="span" sx={visuallyHidden}>

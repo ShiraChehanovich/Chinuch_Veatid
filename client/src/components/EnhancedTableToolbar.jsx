@@ -35,10 +35,14 @@ import StudentCell from './TableCells/StudentCell';
 import StaffCell from './TableCells/StaffCell';
 import { ro } from 'date-fns/locale';
 import { Link, useNavigate } from 'react-router-dom';
+import { deleteDoc, doc, setDoc } from "firebase/firestore";
+import firebase from 'firebase/compat/app';
 
 var tableType;
+var selectedId;
 
 export default function EnhancedTableToolbar(props) {
+  selectedId = props.sel;
   tableType = props.tt;
   const navigate = useNavigate()
   let p ={
@@ -46,123 +50,71 @@ export default function EnhancedTableToolbar(props) {
   type:"general",
   }
     
+        
+  const { numSelected } = props; 
+  const handleDelete = async () =>{
+    // const docRef = doc(firestore, "student", "1h0GqsjdkUvTwnp6AqXV");
+    // await deleteDoc(docRef);
 
-        const { numSelected } = props;
-      
-        // const handleClick2= (event)=> {
-        //   navigate("/student-page");
-        // }
+
+    const studentRef = collection(firestore, "student");
+    const staffRef = collection(firestore, "staff");
+    var q;
+    var docRef;
+    selectedId.forEach(async item=>{
+    if (tableType === 'Staff')
+      {q = query(staffRef, where("idUser", "==", item));}
+    else
+      {q = query(studentRef, where("idUser", "==", item));}
+
+     const snapshot = await getDocs(q);
+     const results = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+
+     results.forEach(async result => {
+      if (tableType === 'Staff')
+        {docRef = doc(firestore, "staff", result.id);}
+      else
+        {docRef = doc(firestore, "student", result.id);}
+      await deleteDoc(docRef);
+      window.location.reload(false);
+     });
+
+    });
+  }       
         
       
         return (
           <Toolbar
-            sx={{
-              pl: { sm: 2 },
-              pr: { xs: 1, sm: 1 },
-              ...(numSelected > 0 && {
-                bgcolor: (theme) =>
-                  alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
-              }),
-            }}
-          >
-            {numSelected > 1 ? (
-              <Typography
-                sx={{ flex: '1 1 100%' }}
-                color="inherit"
-                variant="subtitle1"
-                component="div"
-              >
-               {numSelected} מחק
-              </Typography>
-            ) : ( <></>
-              
-            )}
-      
-          {numSelected == 1 ? (
-              <Typography
-                sx={{ flex: '1 1 100%' }}
-                color="inherit"
-                variant="subtitle1"
-                component="div"
-              >
-                <div>
-                <ModalPage tableType={tableType}></ModalPage>
-                
-                </div>
-              </Typography>
-            ) : (<></>   
-             )}
-      
-            {numSelected > 1 ? (
-        
-            <div>  <Tooltip title="Delete">
-                <IconButton>
+          sx={{
+            pl: { sm: 2 },
+            pr: { xs: 1, sm: 1 },
+            ...(numSelected > 0 && {
+              bgcolor: (theme) =>
+                alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
+            }),
+          }}
+        >
+          {numSelected > 0 ? (
+            <div> <Typography
+              sx={{ flex: '1 1 100%' }}
+              color="inherit"
+              variant="subtitle1"
+              component="div"
+            >
+             {numSelected} מחק
+              <Tooltip title="Delete">
+                <IconButton onClick = {handleDelete}>
                   <DeleteIcon />
                 </IconButton>
       
-              </Tooltip></div>
-      
-            ) : (
-              <></>
-            )}
-      
-      
-      
-          {numSelected == 1 ? (
-            <div style={{display: 'flex' , flexWrap : 'nowrap'}}>
-      
-            <div>  <Tooltip title="Delete">
-                <IconButton>
-                  <DeleteIcon />
-                </IconButton>
-      
-              </Tooltip></div>
-      
-      
-            {/* <div ><Tooltip title="Edit" onClick={(event) => handleClick2(event)}> */}
-            <div ><Tooltip title="Edit" >
-              <Link to= "/student-page" property='1234345' >
-              <IconButton>
-                <EditIcon/>
-              </IconButton>
-              </Link>
-      
-              </Tooltip></div>
-              </div>
-            ) : (
-              // <Tooltip title="Filter list">
-              //   <IconButton>
-              //     <SearchOutlinedIcon />
-              //   </IconButton> 
-      
-              // </Tooltip>
-              <></>
-            )}
-            {numSelected == 0 ?(
-      
-              
-               <Typography
-               sx={{ flex: '1 1 100%' }}
-               variant="h6"
-               id="tableTitle"
-               component="div"
-             >
-               <div style={{display: 'flex' , flexWrap : 'nowrap'}}>
-               <div><ModalPage tableType={tableType}></ModalPage></div>
-      
-               <div><Tooltip title="Filter list">
-                 <IconButton>
-                   <SearchOutlinedIcon />
-                 </IconButton> 
-      
-               </Tooltip></div>
-               
-               </div>
-             </Typography> 
-      
-            ):(<></>)}
-      
-      
+              </Tooltip>
+            </Typography></div>
+          ) : ( 
+            <div>
+            <ModalPage tableType={tableType}></ModalPage>
+            </div>
+            
+          )}
           </Toolbar>
         );
       };

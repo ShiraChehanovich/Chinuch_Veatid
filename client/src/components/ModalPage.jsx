@@ -131,11 +131,11 @@ export default function ModalPage(t) {
         // address: newAddress,
         name: fnameRef.current.value,
         lastName: lNameRef.current.value,
-        id: IDRef.current.value,
+        idUser: parseInt(IDRef.current.value, 10),
         grade: gradeRef.current.value,
         email: emailRef.current.value,
         phone: phoneRef.current.value,  
-        age: ageRef.current.value,
+        age: parseInt(ageRef.current.value, 10),
        address: addressRef.current.value,
       });
       window.location.reload(false);
@@ -152,7 +152,7 @@ export default function ModalPage(t) {
       // address: newAddress,
       name: fnameRef.current.value,
       lastName: lNameRef.current.value,
-      id: IDRef.current.value,
+      idUser: parseInt(IDRef.current.value, 10),
       email: emailRef.current.value,
       phone: phoneRef.current.value,  
       role: roleRef.current.value,
@@ -198,7 +198,7 @@ export default function ModalPage(t) {
                 <Form.Label>מייל</Form.Label>
                 <Form.Control type="email" ref={emailRef} required />
                 </Form.Group>
-                <Form.Group id="ID">
+                <Form.Group id="idUser">
                 {/* <RegularTextField t = "תעודת זהות"  value = {newId} onChange={(event) => setNewId(event.target.value)}></RegularTextField> */}
                 <Form.Label>תעודת זהות</Form.Label>
                 <Form.Control type="number" ref={IDRef} required />
