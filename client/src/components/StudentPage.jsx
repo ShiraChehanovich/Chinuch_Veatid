@@ -11,8 +11,8 @@ import { useParams } from 'react-router-dom';
 var idS;
 var s;
 export default function StudentPage() {
-    const {item} = useParams();
-    console.log(item)
+    const {studentId} = useParams();
+    console.log(studentId)
     // idS = props.id;
     const studentRef = collection(firestore, "student");
     const [studentObjects, setStudentObjects] = useState([]);
@@ -26,7 +26,7 @@ export default function StudentPage() {
     function handleSubmit(){
 
     }
-
+    //paramps
     // id = props.id;
     const getData = async () => {
         var q  = query(studentRef, where("id", "==", "1234345"));
@@ -46,30 +46,28 @@ export default function StudentPage() {
     //   React.useEffect(()=>{getData()});
       React.useEffect(()=>{console.log(studentObjects)})
 
-    //   const setData = async () =>{
-    //     studentObjects.map((s)=>(
-    //         return(
-    //     fnameRef.current.value = s.name;
-    //     lNameRef.current.value = "hdcgjcs";
-    //     emailRef.current.value = "hdcgjcs";
-    //     IDRef.current.value = "hdcgjcs";
-    //     phoneRef.current.value = "hdcgjcs";
-    //     addressRef.current.value = "hdcgjcs";
-    //     )
-    //     )
-    // }
-
-    // React.useEffect(()=>{setData()});    
+      const setData = async () =>{
+        studentObjects.map((s)=>{
+        fnameRef.current.value = s.name;
+        lNameRef.current.value = s.lastName;
+        emailRef.current.value = s.email;
+        IDRef.current.value = s.id;
+        phoneRef.current.value = s.phone;
+        addressRef.current.value = s.address;
+        })
+    }
+    React.useEffect(()=>{getData()}, []);    
+    React.useEffect(()=>{setData()});    
 
   return (
-    <div>
+    <div style={{width:"100%"}}>
       <PopingMenu/>
       <div className="flex" style={{width:"100%"}}>
       <h2>עריכת סטודנט</h2>
       {/* {studentObjects.map((s)=>{ */}
           {/* return( */}
       <div>
-      <Form onSubmit={handleSubmit}>
+      <Form  width = "50%" onSubmit={handleSubmit}>
       <Form.Group id="first-name">
                     {/* <RegularTextField  t = "שם פרטי"  value = {newName} onChange={(event) => {console.log(event.target.value); setNewName(event.target.value)}}></RegularTextField> */}
                  <Form.Label>שם פרטי</Form.Label>

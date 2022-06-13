@@ -30,6 +30,8 @@ export default function PopingMenu() {
   const navigate = useNavigate()
   const [error, setError] = useState("")
   const { currentUser, logout  } = useAuth()
+  //||currentUser.email currentUser.password
+  //fathch
   async function handleLogout(index){
     if(index === 1){
     setError('')

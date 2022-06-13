@@ -5,6 +5,10 @@ import { useAuth } from './context/AuthContext'
 import { Link } from 'react-router-dom'
 import { AppBar, Toolbar, Typography } from '@mui/material'
 
+import { collection, getDocs, query, where } from 'firebase/firestore';
+// import { useAuth } from './context/AuthContext';
+import { firestore } from '../firebase/firebase';
+
 export default function Signup(){
     const emailRef = useRef()
     const passwordRef = useRef()
@@ -15,10 +19,35 @@ export default function Signup(){
     //const history = useHistory()
     const navigate = useNavigate()
 
+
+
+    const staffRef = collection(firestore, "staff");
+    const [classObject, setClassObject] = React.useState([]);
+    const { currentUser  } = useAuth();
+    const getData = async (email) => {
+            console.log(email);
+        var q = query(staffRef, where("email", "==",  email));
+        const snapshot = await getDocs(q);
+        const  result = snapshot.docs.map((doc) => ({...doc.data(), id: doc.id}));
+        // console.log(result[0]);
+        // grade = result[0].garde;
+        // console.log(grade);
+        return result; 
+         }      
+        //  React.useEffect(()=>{getData()});
+
+
+
+
     async function  handleSubmit(e) {
         e.preventDefault()
         if (passwordRef.current.value !== passwordConfirmRef.current.value) {
             return setError("Passwords do not match")
+        }
+        // console.log(getData(emailRef.current.value).result);
+        if((await getData(emailRef.current.value)).length === 0){
+
+            return setError("email doesnt exist")
         }
         try{
             setError("")
