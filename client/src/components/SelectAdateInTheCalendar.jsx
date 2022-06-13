@@ -19,7 +19,7 @@ export default function ResponsiveDatePickers({handleChange}) {
           onChange={(newValue) => {
             console.log(newValue)
             setValue(newValue);
-            handleChange(value)
+            handleChange(newValue)
           }}
           renderInput={(params) => <TextField {...params} />}
         />

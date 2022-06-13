@@ -51,8 +51,11 @@ export default function ModalPage(t) {
     const TaskDescriptionOfTesk = React.useRef()
 
     const handleSubmitStudent = async () =>{
+      // console.log("fff")
+      // console.log(dateTimeYear.current)
       await setDoc(doc(collection(firestore, "tasks")),{
-        // date: dateTimeYear.current.value,
+       
+        date: dateTimeYear.current,
         time: timeClock.current.value,
         TaskDescription: TaskDescriptionOfTesk.current.value, 
       });
@@ -85,7 +88,9 @@ export default function ModalPage(t) {
                      {/* <RegularTextField  t = "תאריך" ref={fnameRef} required></RegularTextField> */}
                      <EventNoteIcon/>                    
                  <Form.Label size = "small">תאריך</Form.Label>
+                 
                  <SelectAdateInTheCalendar type="text" handleChange={(date) => dateTimeYear.current = date}  required /> 
+                 
                  </Form.Group>
                  <Form.Group id="hour">
                  {/* <RegularTextField  t = "שעה" ref={lName} required></RegularTextField> */}
