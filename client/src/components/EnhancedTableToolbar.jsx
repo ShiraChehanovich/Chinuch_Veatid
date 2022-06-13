@@ -37,6 +37,8 @@ import { ro } from 'date-fns/locale';
 import { Link, useNavigate } from 'react-router-dom';
 import { deleteDoc, doc, setDoc } from "firebase/firestore";
 import firebase from 'firebase/compat/app';
+import AttachFileIcon from '@mui/icons-material/AttachFile';
+import Navigation from '@mui/icons-material/Navigation';
 
 var tableType;
 var selectedId;
@@ -49,7 +51,6 @@ export default function EnhancedTableToolbar(props) {
   id:"1234345",
   type:"general",
   }
-    
         
   const { numSelected } = props; 
   const handleDelete = async () =>{
@@ -80,9 +81,18 @@ export default function EnhancedTableToolbar(props) {
      });
 
     });
-  }       
-        
-      
+  }  
+  
+  const handleAttach = async () =>{
+    // selectedId
+
+    console.log(selectedId)
+    navigate(`/student-page/${selectedId}`);
+    // };
+  }
+
+
+
         return (
           <Toolbar
           sx={{
@@ -94,7 +104,29 @@ export default function EnhancedTableToolbar(props) {
             }),
           }}
         >
-          {numSelected > 0 ? (
+          {numSelected > 1 ? (
+            <div> <Typography
+              sx={{ flex: '1 1 100%' }}
+              color="inherit"
+              variant="subtitle1"
+              component="div"
+            >
+             {numSelected} מחק
+              <Tooltip title="Delete">
+                <IconButton onClick = {handleDelete}>
+                  <DeleteIcon />
+                </IconButton>
+      
+              </Tooltip>
+            </Typography></div>
+          ) : (  
+            <></>
+          )}  
+          {numSelected < 1 ? <div>
+            <ModalPage tableType={tableType}></ModalPage>
+            </div> : (<></>)}
+
+          {numSelected == 1 && tableType === 'Staff' ? (
             <div> <Typography
               sx={{ flex: '1 1 100%' }}
               color="inherit"
@@ -110,11 +142,31 @@ export default function EnhancedTableToolbar(props) {
               </Tooltip>
             </Typography></div>
           ) : ( 
-            <div>
-            <ModalPage tableType={tableType}></ModalPage>
-            </div>
-            
-          )}
+            <></>
+          )}  
+
+        {numSelected == 1 && tableType === 'Student' ? (
+          <div> <Typography
+          sx={{ flex: '1 1 100%' }}
+          color="inherit"
+          variant="subtitle1"
+          component="div"
+        >
+         {numSelected} מחק
+          <Tooltip title="Delete">
+            <IconButton onClick = {handleDelete}>
+              <DeleteIcon />
+            </IconButton>            
+          </Tooltip>
+          <Tooltip title="Attach">
+            <IconButton onClick = {handleAttach} >
+              <AttachFileIcon />
+            </IconButton>            
+          </Tooltip>
+
+        </Typography></div>):(<></>)}
+
+
           </Toolbar>
         );
       };
