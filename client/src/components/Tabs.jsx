@@ -12,22 +12,27 @@ import { firestore } from '../firebase/firebase';
 import StudentPage from './StudentPage';
 import Schedule_class_file from './Schedule_class_file'
 
+
+var grade;
 export default function Tabs() {
   const [value, setValue] = React.useState('1');
   const staffRef = collection(firestore, "staff");
     const [classObject, setClassObject] = React.useState([]);
     const { currentUser  } = useAuth();
-    const mail = currentUser.email
+    // const mail = currentUser.email
 
-    // const getData = async () => {
+    const getData = async () => {
         
-    //     var q = query(staffRef, where("email", "==",  {mail}));
-    //     const snapshot = await getDocs(q);
-    //     const  result = snapshot.docs.map((doc) => ({...doc.data(), id: doc.id}));
-    //     // console.log(result[0].grade);
-    //     return result[0]; 
-    //      }      
+        var q = query(staffRef, where("email", "==",  currentUser.email));
+        const snapshot = await getDocs(q);
+        const  result = snapshot.docs.map((doc) => ({...doc.data(), id: doc.id}));
+        console.log(result[0]);
+        grade = result[0].garde;
+        console.log(grade);
+        return result[0]; 
+         }      
     //   React.useEffect(()=>{getData()});
+    //   React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
