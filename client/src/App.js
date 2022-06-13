@@ -63,7 +63,7 @@ function App() {
               <Route path="/home-page" element={<HomePage />} />
               <Route path="/class" element={<ClassTable />} />
               <Route path="/schedule" element={<Schedule />} />
-              <Route path="/student-page" element={<StudentPage />} />
+              <Route path="/student-page/:id" element={<StudentPage />} />
               <Route path="/upload" element={<File />} />
               {/* <Route path="/FullCalendar" element={<FullCalendarComponent />} /> */}
             </Routes>

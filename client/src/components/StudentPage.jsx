@@ -6,11 +6,14 @@ import PopingMenu from './PopingMenu'
 import RegularTextField from './RegularTextField'
 import './ClassStyle.css'
 import { Button, Form } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
 
 var idS;
 var s;
-export default function StudentPage(props) {
-    idS = props.id;
+export default function StudentPage() {
+    const {item} = useParams();
+    console.log(item)
+    // idS = props.id;
     const studentRef = collection(firestore, "student");
     const [studentObjects, setStudentObjects] = useState([]);
     const fnameRef = useRef()
