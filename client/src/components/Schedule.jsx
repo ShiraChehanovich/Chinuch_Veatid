@@ -43,7 +43,7 @@ export default function StaticDatePickerLandscape() {
         </div>
         
 
-        <TaskModalPage/>
+        <TaskModalPge/>
 <div className="hellowU"> 
 <a><ReactBigCalendar/></a>
 <h3 className="space"></h3>
