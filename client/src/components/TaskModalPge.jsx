@@ -14,7 +14,7 @@ import EventNoteIcon from '@mui/icons-material/EventNote';
 import SelectAdateInTheCalendar from './SelectAdateInTheCalendar';
 import TimeDateClock from './TimeDateClock';
 import ModeIcon from '@mui/icons-material/Mode';
-
+import { getAuth } from "firebase/auth";
 import PopingMenu from './PopingMenu';
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
 // import EventNoteIcon from '@mui/icons-material/EventNote';
@@ -49,8 +49,17 @@ export default function ModalPage(t) {
   const dateTimeYear = React.useRef ()
     const timeClock = React.useRef()
     const TaskDescriptionOfTesk = React.useRef()
-
+    const userIdEmail = React.useRef()
+    // {< { userIdEmail.current = user} required /> } 
+    // {{userIdEmail.current = currentUser.email} }
     const handleSubmitStudent = async () =>{
+    // console.log("yaelb")
+    const auth = getAuth();
+    const IdEmail = auth.currentUser.email;
+
+      // console.log(IdEmail)
+  
+                
       // console.log("fff")
       // console.log(dateTimeYear.current)
       await setDoc(doc(collection(firestore, "tasks")),{
@@ -58,6 +67,7 @@ export default function ModalPage(t) {
         date: dateTimeYear.current,
         time: timeClock.current.value,
         TaskDescription: TaskDescriptionOfTesk.current.value, 
+        userId: userIdEmail.current=IdEmail ,
       });
       window.location.reload(false);
     }
@@ -84,6 +94,8 @@ export default function ModalPage(t) {
             <Form >
              
                 <div>
+               {/* {userIdEmail.current = IdEmail} */}
+                {/* {dateTimeYear.current=user}required */}
                 <Form.Group id="date">
                      {/* <RegularTextField  t = "תאריך" ref={fnameRef} required></RegularTextField> */}
                      <EventNoteIcon/>                    
