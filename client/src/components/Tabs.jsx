@@ -11,6 +11,9 @@ import { useAuth } from './context/AuthContext';
 import { firestore } from '../firebase/firebase';
 import StudentPage from './StudentPage';
 import Schedule_class_file from './Schedule_class_file'
+import 'firebase/compat/auth';
+import firebase from 'firebase/compat/app';
+import RollingList from './RolingList';
 
 
 var grade;
@@ -26,12 +29,12 @@ export default function Tabs() {
         var q = query(staffRef, where("email", "==",  currentUser.email));
         const snapshot = await getDocs(q);
         const  result = snapshot.docs.map((doc) => ({...doc.data(), id: doc.id}));
-        console.log(result[0]);
-        grade = result[0].garde;
-        console.log(grade);
-        return result[0]; 
+        console.log(result[0].grade);
+        // grade = result[0].grade;
+        // console.log(key);
+        return result[0].grade; 
          }      
-    //   React.useEffect(()=>{getData()});
+      // React.useEffect(()=>{getData()});
     //   React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
 
   const handleChange = (event, newValue) => {
@@ -51,30 +54,33 @@ export default function Tabs() {
             }
 
   return (
+    <div style={{width: "79%"}}>
+      <RollingList props = {currentUser.email} style={{marginButtom: "10px"}}/>
     <Box sx={{ width: '100%', typography: 'body1' }}>
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <TabList onChange={handleChange} aria-label="lab API tabs example" align="right">
-            <Tab label="מתן תרופות" value="1" />
-            <Tab label="מערכת" value="2" />
-            <Tab label="צוות הכיתה" value="3" />
-            <Tab label="תלמידים" value="4" />
+            {/* <Tab label="מתן תרופות" value="1" /> */}
+            <Tab label="מערכת" value="1" />
+            <Tab label="צוות הכיתה" value="2" />
+            <Tab label="תלמידים" value="3" />
           </TabList>
         </Box>
-        <TabPanel value="1">
+        {/* <TabPanel value="1">
         <MedicineList prop = {"1"}/>
-        </TabPanel>
-        <TabPanel value="2">
+        </TabPanel> */}
+        <TabPanel value="1">
         <Schedule_class_file/>
           {/* // */}
         </TabPanel>
-        <TabPanel value="3">
+        <TabPanel value="2">
             <Table prop = {props1.t} prop2 = {props1.p}></Table>
         </TabPanel>
-        <TabPanel value="4">
+        <TabPanel value="3">
             <Table prop = {props2.t} prop2 = {props2.p}></Table>
         </TabPanel>
       </TabContext>
     </Box>
+    </div>
   );
 }

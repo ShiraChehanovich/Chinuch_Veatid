@@ -67,8 +67,8 @@ export default function Schedule_class_file() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
+          {rows.map((row, index) => (
+            <StyledTableRow key={index}>
             
               <StyledTableCell align="right">{row.Hours}</StyledTableCell>
                <StyledTableCell align="right">{row.Sunday}</StyledTableCell>
