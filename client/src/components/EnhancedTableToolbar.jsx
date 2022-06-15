@@ -70,7 +70,6 @@ export default function EnhancedTableToolbar(props) {
 
      const snapshot = await getDocs(q);
      const results = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-
      results.forEach(async result => {
       if (tableType === 'Staff')
         {docRef = doc(firestore, "staff", result.id);}
@@ -84,11 +83,10 @@ export default function EnhancedTableToolbar(props) {
   }  
   
   const handleAttach = async () =>{
-    // selectedId
+    <link to ={`/student-page/${selectedId[0]}`}></link>
 
-    console.log(selectedId)
+    // console.log(selectedId)
     navigate(`/student-page/${selectedId}`);
-    // };
   }
 
 

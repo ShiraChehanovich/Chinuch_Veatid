@@ -7,13 +7,15 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import NavigationIcon from '@mui/icons-material/Navigation';
 
 export default function PlusButton() {
+
+  const handlePlus = async () =>{
+    
+  }
+
   return (
     <Box sx={{ '& > :not(style)': { m: 1 } }}>
       <Fab color="primary" aria-label="add">
-        <AddIcon />
-      </Fab>
-      <Fab color="secondary" aria-label="edit">
-        <EditIcon />
+        <AddIcon onClick = {handlePlus}/>
       </Fab>
       {/* <Fab variant="extended">
         <NavigationIcon sx={{ mr: 1 }} />
