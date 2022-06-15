@@ -7,6 +7,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { collection, getDocs, limit, query, where } from 'firebase/firestore';
 import { firestore } from '../firebase/firebase';
 
+
 var staffEmail;
 export default function RollingList(props) {
   staffEmail = props.props;
@@ -14,6 +15,10 @@ export default function RollingList(props) {
   const [gradeArray, setGrade] = useState([]);
   const [age, setAge] = useState('');
   const staffRef = collection(firestore, "staff");
+  
+  const handleChange = (event) => {
+      setAge(event.target.value);
+    }
 
   const getData = async () => {//here
     var q = query(staffRef, limit(1),where("email", "==",  staffEmail));
@@ -22,8 +27,10 @@ export default function RollingList(props) {
     snapshot.forEach(async doc =>
       {  
         setClassObject(prev => [...prev, doc.data()])
-        }
+      }
       )
+
+
     // const  results = snapshot.docs.map((doc) => ({...doc.data(), id: doc.id}));
 
     // setClassObject(results[0]);
@@ -43,31 +50,25 @@ export default function RollingList(props) {
   //    }
      React.useEffect(()=>{getData()}, []);
     //  React.useEffect(()=>{setGradeArray()}, []);
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
-
+    
+  let array = classObject.map((n) => n.grade);
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">כיתה</InputLabel>
-        {console.log("rtyuio" + classObject.map((n) => n.grade[0]))}
-
-        {/* {condclassObject[1])} */}
-
-       {/* return( */}
-        {/* <Select */}
-    {/* //       labelId="demo-simple-select-label"
-    //       id="demo-simple-select"
-    //       value={classIndex}
-    //       label="class"
-    //       onChange={handleChange}
-    //     >
-    //       <MenuItem value={classIndex = classIndex +1}>{`${s}`}</MenuItem>
-    //       {/* <MenuItem value={20}>Twenty</MenuItem>
-    //       <MenuItem value={30}>Thirty</MenuItem> */}
-         {/* </Select>) */}
-     {/* })} } */}
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={age}
+          label="Age"
+          onChange={handleChange}
+        >
+        {/* {(classObject.map((n) => n.grade[0])).forEach(item => {<MenuItem value={item}>{item}</MenuItem>})} */}
+        {/* {array.forEach(item => {<MenuItem value={item}>{item}</MenuItem>})} */}
+        {/* {array.forEach(item => {<MenuItem value={item}>{item}</MenuItem>})} */}
+         {/* {<MenuItem value={item}>{item}</MenuItem>} */}
+         <MenuItem value={30}>{}</MenuItem>
+        </Select>
       </FormControl>
     </Box>
   );
