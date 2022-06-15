@@ -40,8 +40,7 @@ export default function StudentPage() {
              setStudentObjects(prev => [...prev, doc.data()])
             }
           
-        )
-        
+        )        
       }
     //   React.useEffect(()=>{getData()}, []);    
     //   React.useEffect(()=>{getData()});

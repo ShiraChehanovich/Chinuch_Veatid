@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useRef, useState } from 'react'
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -10,31 +10,31 @@ import { firestore } from '../firebase/firebase';
 var staffEmail;
 export default function RollingList(props) {
   staffEmail = props.props;
-  const [classObject, setClassObject] = React.useState([]);
-  const [gradeArray, setGrade] = React.useState([]);
-  const [age, setAge] = React.useState('');
+  const [classObject, setClassObject] = useState([]);
+  const [gradeArray, setGrade] = useState([]);
+  const [age, setAge] = useState('');
   const staffRef = collection(firestore, "staff");
 
   const getData = async () => {//here
-    console.log(staffEmail)
     var q = query(staffRef, limit(1),where("email", "==",  staffEmail));
 
     const snapshot = await getDocs(q);
-    const  results = snapshot.docs.map((doc) => ({...doc.data(), id: doc.id}));
-    // console.log(results)
-    setClassObject(results[0]);
-    console.log(classObject)
-    // console.log(classObject[0])
+    snapshot.forEach(async doc =>
+      {  
+        setClassObject(prev => [...prev, doc.data()])
+        }
+      )
+    // const  results = snapshot.docs.map((doc) => ({...doc.data(), id: doc.id}));
+
+    // setClassObject(results[0]);
+
 
     // (classObject.at(0).grade).forEach(doc => {
     //       setGrade(prev => [...prev, doc])
     //     });
-    // console.log(classObject); //to here
-    
-
-    // console.log(results)
     // console.log(classObject)
   }      
+  
   // const setGradeArray = async()=>{
     
   //   (classObject.at(0).grade).forEach(doc => {
@@ -51,10 +51,7 @@ export default function RollingList(props) {
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">כיתה</InputLabel>
-    {(gradeArray).map((s)=>{
-      console.log(s)
-        // let classIndex = 0;
-        })}
+        {console.log("rtyuio" + classObject.map((n) => n.grade[0]))}
 
         {/* {condclassObject[1])} */}
 
