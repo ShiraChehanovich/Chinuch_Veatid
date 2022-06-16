@@ -54,14 +54,13 @@ export default function RollingList(props) {
     
   // let array = classObject.map((n) => console.log(n.grade[0]));
 
-    const printGrade = (array, index) => {
-       return <div><MenuItem key = {index} value={array[0]}>{array[0]}</MenuItem> <MenuItem key = {index} value={array[0]}>{array[0]}</MenuItem></div>
-      // array.forEach(item =>{
-      //   console.log(item)
-      //   return <MenuItem key = {index} value={item}>{item}</MenuItem>
-      // })
-    };
-  var i=0;
+    // const printGrade = (array, index) => {
+    //    return <div><MenuItem key = {index} value={array[0]}>{array[0]}</MenuItem> <MenuItem key = {index} value={array[0]}>{array[0]}</MenuItem></div>
+    //   // array.forEach(item =>{
+    //   //   console.log(item)
+    //   //   return <MenuItem key = {index} value={item}>{item}</MenuItem>
+    //   // })
+    // };
   return (
     <div style={{width:"82%"}}>
     <Box sx={{ minWidth: 120 }}>
@@ -81,13 +80,13 @@ export default function RollingList(props) {
         {/* {array.forEach(item => {<MenuItem value={item}>{item}</MenuItem>})} */}
         {/* {array.forEach(item => {<MenuItem value={item}>{item}</MenuItem>})} */}
          {/* {array.forEach(item => {<MenuItem value={item}>{item}</MenuItem>})} */}
-         {/* <MenuItem value={30}>thurtee</MenuItem>
-         {classObject.map( (n)=>{console.log(n.grade)})}  
+         {/* <MenuItem value={30}>thurtee</MenuItem> */}
+         {/* {classObject.map( (n)=>{console.log(n.grade)})}  
          {classObject.map( (n)=><MenuItem value={n.grade[0]}>{n.grade[0]}</MenuItem> )} */}
         </Select>
       </FormControl>
     </Box>
-    <Tabs/>
+    <Tabs grade = {grade}/>
     </div>
   );
 }

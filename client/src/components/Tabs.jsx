@@ -17,7 +17,9 @@ import RollingList from './RolingList';
 
 
 var grade;
-export default function Tabs() {
+export default function Tabs(grade) {
+  grade = grade.grade;
+  // console.log("grfhdjsxkvbfcnj    " + grade)
   const [value, setValue] = React.useState('1');
   const staffRef = collection(firestore, "staff");
     const [classObject, setClassObject] = React.useState([]);
@@ -42,17 +44,12 @@ export default function Tabs() {
   };
   let props1 = {
     t:"Staff",
-    p:"none"
+    p:grade,
     }
-    let props2= {
-        t:"Student",
-        p:"1"
-        }
-        let props3= {
-            id: "1234345",
-            p:"Student"
-            }
-
+  let props2= {
+    t:"Student",
+    p:grade,
+    }
   return (
     <div style={{width: "100%"}}>
       {/* <RollingList props = {currentUser.email} style={{marginButtom: "10px"}}/> */}
