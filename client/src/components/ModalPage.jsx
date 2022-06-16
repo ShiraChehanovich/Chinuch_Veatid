@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom'
 import { addDoc, doc, setDoc, collection } from "firebase/firestore";
 import { firestore } from '../firebase/firebase';
 import { useAuth } from './context/AuthContext';
+import SelectedRolingList from './SelectedRolingList'
 
 
 const style = {
@@ -56,6 +57,7 @@ export default function ModalPage(t) {
   const roleRef = React.useRef ()
   const addressRef = React.useRef()
   const gradeRef = React.useRef()
+  const  childRef = React.useRef()
   const navigate = useNavigate()
   const { currentUser,  } = useAuth()
 
@@ -145,7 +147,7 @@ export default function ModalPage(t) {
     }
     const handleSubmitStaff = async () =>{
       // e.preventDefault()
-    await setDoc(doc(collection(firestore, "staff", )),{
+    await setDoc(doc(collection(firestore, "staff" )),{
       // name: newName,
       // lastName: newLName,
       // id: newId,
@@ -156,6 +158,7 @@ export default function ModalPage(t) {
       name: fnameRef.current.value,
       lastName: lNameRef.current.value,
       idUser: parseInt(IDRef.current.value, 10),
+      grade: childRef.current.value,
       email: emailRef.current.value,
       phone: phoneRef.current.value,  
       role: roleRef.current.value,
@@ -210,8 +213,8 @@ export default function ModalPage(t) {
                 <div>
                 <Form.Group id="grade">
                 {/* <RegularTextField t = "כיתה"  value = {newGrade onChange={(event) => setNewAge(event.target.value)}></RegularTextField> */}
-                {tableType.tableType == 'Staff' ? null : (<Form.Label>כיתה</Form.Label>)}
-                {tableType.tableType == 'Staff' ? null : (<Form.Control type="text" ref={gradeRef} required />)}
+                {tableType.tableType == 'Staff' ? null: (<Form.Label>כיתה</Form.Label>)}
+                {tableType.tableType == 'Staff' ? <SelectedRolingList ></SelectedRolingList> : (<Form.Control type="text" ref={gradeRef} required />)}
                 </Form.Group>
                 <Form.Group id="phone">
                 {/* <RegularTextField t = "טלפון"  value = {newPhone} onChange={(event) => setNewPhone(event.target.value)}></RegularTextField> */}

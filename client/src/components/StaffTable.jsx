@@ -13,13 +13,13 @@ export default function StaffTable() {
     p:"none"
     }
   return (
-    (user === null)?<div >
+    (user === null)?(<div >
     אתה לא מחובר... <Link to = "/login">היכנס</Link>
- </div>:
-    <div>
+ </div>):
+    (<div>
       {/* <Search/> */}
       <PopingMenu/>
       <Table prop = {props1.t} prop2 = {props1.p}></Table>
-    </div>
-  )
+    </div>)
+  );
 }

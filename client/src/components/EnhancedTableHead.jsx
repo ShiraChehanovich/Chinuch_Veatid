@@ -39,6 +39,12 @@ const headCells = [
     label: 'טלפון',
   },
   {
+    id: 'grade',
+    numeric: true,
+    disablePadding: false,
+    label: 'כיתה',
+  },
+  {
     id: 'idUser',
     numeric: true,
     disablePadding: false,

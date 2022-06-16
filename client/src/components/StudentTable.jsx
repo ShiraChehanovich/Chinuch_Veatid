@@ -12,12 +12,12 @@ export default function StudentTable() {
     p:"none"
     }
   return (
-    (user === null)?<div >
+    (user === null)?(<div >
     אתה לא מחובר... <Link to = "/">היכנס</Link>
- </div>:
-    <div>
+ </div>):
+    (<div>
       <PopingMenu/>
       <Table prop = {props1.t} prop2 = {props1.p}></Table>
-    </div>
-  )
+    </div>)
+  );
 }

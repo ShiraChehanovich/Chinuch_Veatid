@@ -193,6 +193,14 @@ React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
     setDense(event.target.checked);
   };
 
+  const printGrades = (array) => {
+    var res='';
+    array.forEach(item =>{
+      res = res + item + ", "
+    })
+    return res
+  };
+
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
   // Avoid a layout jump when reaching the last page with empty rows.
@@ -244,7 +252,9 @@ React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
                       <TableCell align="right">{row.address}</TableCell>
                       <TableCell align="right">{row.email}</TableCell>
                       <TableCell align="right">{row.phone}</TableCell>
-                      { tableType == 'Staff' ? (<></>) : ( <TableCell align="right">{row.grade}</TableCell>) }
+                      {/* {row.grade.forEach(item => {})} */}
+                      {/* <TableCell align="right">{row.grade.forEach(item => {item + ", "})}</TableCell> */}
+                      { tableType == 'Staff' ? (<TableCell align="right">{printGrades(row.grade)}</TableCell>) : ( <TableCell align="right">{row.grade}</TableCell>) }
                       <TableCell align="right">{row.idUser}</TableCell>
                        <TableCell align="right">{row.lastName}</TableCell>
                       <TableCell

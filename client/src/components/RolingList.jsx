@@ -6,18 +6,18 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { collection, getDocs, limit, query, where } from 'firebase/firestore';
 import { firestore } from '../firebase/firebase';
+import { render } from 'react-dom';
 
 
 var staffEmail;
 export default function RollingList(props) {
   staffEmail = props.props;
   const [classObject, setClassObject] = useState([]);
-  const [gradeArray, setGrade] = useState([]);
-  const [age, setAge] = useState('');
+  const [grade, setGrade] = useState('');
   const staffRef = collection(firestore, "staff");
   
   const handleChange = (event) => {
-      setAge(event.target.value);
+      setGrade(event.target.value);
     }
 
   const getData = async () => {//here
@@ -51,7 +51,16 @@ export default function RollingList(props) {
      React.useEffect(()=>{getData()}, []);
     //  React.useEffect(()=>{setGradeArray()}, []);
     
-  let array = classObject.map((n) => n.grade);
+  // let array = classObject.map((n) => console.log(n.grade[0]));
+
+    const printGrade = (array, index) => {
+       return <div><MenuItem key = {index} value={array[0]}>{array[0]}</MenuItem> <MenuItem key = {index} value={array[0]}>{array[0]}</MenuItem></div>
+      // array.forEach(item =>{
+      //   console.log(item)
+      //   return <MenuItem key = {index} value={item}>{item}</MenuItem>
+      // })
+    };
+  var i=0;
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
@@ -59,15 +68,20 @@ export default function RollingList(props) {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={age}
+          value={grade}
           label="Age"
           onChange={handleChange}
         >
+          {/* {classObject.map((n, index) => <MenuItem key={index} value={n.grade[0]}>{n.grade[0]}</MenuItem>)} */}
+          { classObject.map((n) => n.grade.map((item, index) => <MenuItem key={index} value={item}>{item}</MenuItem>))}
+          {/* {(classObject.map((n) => n.grade.forEach(item => {<MenuItem value={item}>{item}</MenuItem>})))} */}
         {/* {(classObject.map((n) => n.grade[0])).forEach(item => {<MenuItem value={item}>{item}</MenuItem>})} */}
         {/* {array.forEach(item => {<MenuItem value={item}>{item}</MenuItem>})} */}
         {/* {array.forEach(item => {<MenuItem value={item}>{item}</MenuItem>})} */}
-         {/* {<MenuItem value={item}>{item}</MenuItem>} */}
-         <MenuItem value={30}>{}</MenuItem>
+         {/* {array.forEach(item => {<MenuItem value={item}>{item}</MenuItem>})} */}
+         {/* <MenuItem value={30}>thurtee</MenuItem>
+         {classObject.map( (n)=>{console.log(n.grade)})}  
+         {classObject.map( (n)=><MenuItem value={n.grade[0]}>{n.grade[0]}</MenuItem> )} */}
         </Select>
       </FormControl>
     </Box>

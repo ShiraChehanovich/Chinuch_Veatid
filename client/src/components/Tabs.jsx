@@ -54,33 +54,33 @@ export default function Tabs() {
             }
 
   return (
-    <div style={{width: "79%"}}>
+    <div style={{width: "100%"}}>
       <RollingList props = {currentUser.email} style={{marginButtom: "10px"}}/>
     <Box sx={{ width: '100%', typography: 'body1' }}>
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <TabList onChange={handleChange} aria-label="lab API tabs example" align="right">
             {/* <Tab label="מתן תרופות" value="1" /> */}
-            <Tab label="מערכת" value="1" />
-            <Tab label="צוות הכיתה" value="2" />
-            <Tab label="תלמידים" value="3" />
+            {/* <Tab label="מערכת" value="1" /> */}
+            <Tab label="צוות הכיתה" value="1" />
+            <Tab label="תלמידים" value="2" />
           </TabList>
         </Box>
         {/* <TabPanel value="1">
         <MedicineList prop = {"1"}/>
         </TabPanel> */}
-        <TabPanel value="1">
-        <Schedule_class_file/>
+        {/* <TabPanel value="1">
+        <Schedule_class_file/> */}
           {/* // */}
-        </TabPanel>
-        <TabPanel value="2">
+        {/* </TabPanel> */}
+        <TabPanel value="1">
             <Table prop = {props1.t} prop2 = {props1.p}></Table>
         </TabPanel>
-        <TabPanel value="3">
+        <TabPanel value="2">
             <Table prop = {props2.t} prop2 = {props2.p}></Table>
         </TabPanel>
       </TabContext>
     </Box>
-    </div>
+   </div>
   );
 }
