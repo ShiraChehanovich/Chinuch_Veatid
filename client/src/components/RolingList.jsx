@@ -63,7 +63,7 @@ export default function RollingList(props) {
     };
   var i=0;
   return (
-    <div style={{width:"81%"}}>
+    <div style={{width:"82%"}}>
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">כיתה</InputLabel>

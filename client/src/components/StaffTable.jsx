@@ -19,7 +19,9 @@ export default function StaffTable() {
     (<div>
       {/* <Search/> */}
       <PopingMenu/>
+      <div  style={{width:"82%"}}>
       <Table prop = {props1.t} prop2 = {props1.p}></Table>
+      </div>
     </div>)
   );
 }

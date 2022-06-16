@@ -17,7 +17,9 @@ export default function StudentTable() {
  </div>):
     (<div>
       <PopingMenu/>
+      <div  style={{width:"81%"}}>
       <Table prop = {props1.t} prop2 = {props1.p}></Table>
+      </div>
     </div>)
   );
 }
