@@ -8,11 +8,20 @@ import './ClassStyle.css'
 import { Button, Form } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { height } from '@mui/system';
+import FileCard from './FileCard';
 
 var idS;
 var s;
 export default function StudentPage() {
     const {studentId} = useParams();
+    let fileType = {
+      one: "1",
+      two: "2",
+      three: "3",
+      four: "4",
+      five: "5",
+      id: `${studentId}`,
+    }
     // console.log(studentId)
     // idS = props.id;
     const studentRef = collection(firestore, "student");
@@ -62,12 +71,23 @@ export default function StudentPage() {
   return (
     <div style={{width:"100%"}}>
       <PopingMenu/>
+      {studentObjects.map((n) =>{
+      return(
       <div className="flex" style={{width:"100%", height:"10%"}}>
-          <h6>{studentObjects.map((n) => n.name)}</h6>
-      <div style={{width:"100%", height:"90%"}}>
+          <h6>{ n.name}</h6>
+          <h6>{ n.lastName}</h6>
+          </div>
+      )})}
+      <div style={{width:"82%", height:"90%"}}>
       <h2>הוספת מסמכים</h2>
-         <PlusButton />
+      <div className="flex" style={{width:"100%", height:"20%"}}>
+          <FileCard props = {fileType.one} propsId = {fileType.id}/>
+          <FileCard props = {fileType.two} propsId = {fileType.id}/>
+          <FileCard props = {fileType.three} propsId = {fileType.id}/>
+          <FileCard props = {fileType.four} propsId = {fileType.id}/>
+          <FileCard props = {fileType.five} propsId = {fileType.id}/>
       </div>
+         <PlusButton />
       </div>
     </div>
   )

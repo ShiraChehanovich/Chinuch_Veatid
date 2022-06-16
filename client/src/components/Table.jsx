@@ -208,7 +208,8 @@ React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - studentObjects.length) : 0;
 
   return (
-    <Box sx={{ height: '100%', width: '81%', minHeight: '50%' }}>
+    <div>
+          <Box sx={{ height: '100%', width: '100%', minHeight: '50%' }}>
       <Paper sx={{ width: '100%', mb: 5 }}>
         <EnhancedTableToolbar numSelected={selected.length} tt = {tableType} sel = {selected}/>
         <TableContainer>
@@ -305,5 +306,7 @@ React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
         label="שורות צפופות"
       /> */}
     </Box>
+    </div>
+
   );
 }

@@ -55,7 +55,7 @@ export default function Tabs() {
 
   return (
     <div style={{width: "100%"}}>
-      <RollingList props = {currentUser.email} style={{marginButtom: "10px"}}/>
+      {/* <RollingList props = {currentUser.email} style={{marginButtom: "10px"}}/> */}
     <Box sx={{ width: '100%', typography: 'body1' }}>
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>

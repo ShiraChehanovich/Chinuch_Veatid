@@ -7,6 +7,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { collection, getDocs, limit, query, where } from 'firebase/firestore';
 import { firestore } from '../firebase/firebase';
 import { render } from 'react-dom';
+import Tabs from './Tabs';
 
 
 var staffEmail;
@@ -62,6 +63,7 @@ export default function RollingList(props) {
     };
   var i=0;
   return (
+    <div style={{width:"81%"}}>
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">כיתה</InputLabel>
@@ -85,6 +87,8 @@ export default function RollingList(props) {
         </Select>
       </FormControl>
     </Box>
+    <Tabs/>
+    </div>
   );
 }
 

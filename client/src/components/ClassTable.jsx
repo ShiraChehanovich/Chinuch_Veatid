@@ -7,6 +7,7 @@ import Tabs from './Tabs'
 import './ClassStyle.css'
 import firebase from 'firebase/compat/app';
 import { Link } from 'react-router-dom'
+import RollingList from './RolingList'
 
 export default function ClassTable() {
     const user = firebase.auth().currentUser;  
@@ -21,7 +22,7 @@ export default function ClassTable() {
             <ComboBox />
           </div>
             <div> */}
-                <Tabs></Tabs>
+                <RollingList props = {user.email}/>
             {/* </div> */}
       </div>
     </div>

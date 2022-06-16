@@ -68,7 +68,8 @@ export default function PopingMenu() {
       <CssBaseline />
       <AppBar
         position="fixed"
-        sx={{ width: `calc(100% - ${drawerWidth}px)`, mr: `${drawerWidth}px` }}
+        // `calc(100% - ${drawerWidth}px)`, mr: `${drawerWidth}px` 
+        sx={{ width: "100%"}}
       >
         <Toolbar>
           <Typography variant="h6" noWrap component="div">
@@ -93,7 +94,7 @@ export default function PopingMenu() {
           width: drawerWidth,
           flexShrink: 0,
           '& .MuiDrawer-paper': {
-            width: "20%",
+            width: "18%",
             boxSizing: 'border-box',
           },
         }}
