@@ -117,18 +117,21 @@ export default function EnhancedTable(prop) {
 
 const getData = async () => {
   var q ;
-    if (tableType === 'Staff')
-    q = query(staffRef);
-  else if(tableType === 'Student'){
-    if(condition != "none"){
-      // console.log(condition);
+  if (tableType === 'Staff' && condition != "none"){
+      q = query(staffRef, where("grade","array-contains-any",[condition]));
+  }
+  else if (tableType === 'Staff'){
+      q = query(staffRef);
+  }
+  else if(tableType === 'Student' && condition != "none"){
       q = query(studentRef, where("grade", "==", condition));
-    }
-      else
+  }
+  else if(tableType === 'Student'){
       q = query(studentRef);
   }
-    else
+  else{
     q = query(classRef);
+  }
   
   const snapshot = await getDocs(q)
   snapshot.forEach(doc =>
@@ -209,7 +212,7 @@ React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
 
   return (
     <div>
-          <Box sx={{ height: '100%', width: '100%', minHeight: '50%' }}>
+      <Box sx={{ height: '100%', width: '100%', minHeight: '50%' }}>
       <Paper sx={{ width: '100%', mb: 5 }}>
         <EnhancedTableToolbar numSelected={selected.length} tt = {tableType} sel = {selected}/>
         <TableContainer>
