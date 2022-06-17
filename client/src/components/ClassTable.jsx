@@ -8,6 +8,7 @@ import './ClassStyle.css'
 import firebase from 'firebase/compat/app';
 import { Link } from 'react-router-dom'
 import RollingList from './RolingList'
+import PlusButton from './PlusButton'
 
 export default function ClassTable() {
     const user = firebase.auth().currentUser;  
@@ -25,6 +26,7 @@ export default function ClassTable() {
                 <RollingList props = {user.email}/>
             {/* </div> */}
       </div>
+                {/* <PlusButton/> */}
     </div>
   )
 }

@@ -8,6 +8,8 @@ import { collection, getDocs, limit, query, where } from 'firebase/firestore';
 import { firestore } from '../firebase/firebase';
 import { render } from 'react-dom';
 import Tabs from './Tabs';
+import PlusButton from './PlusButton';
+import ClassModal from './ClassModel';
 
 
 var staffEmail;
@@ -16,6 +18,7 @@ export default function RollingList(props) {
   const [classObject, setClassObject] = useState([]);
   const [grade, setGrade] = useState('');
   const staffRef = collection(firestore, "staff");
+
   
   const handleChange = (event) => {
       setGrade(event.target.value);
@@ -61,9 +64,14 @@ export default function RollingList(props) {
     //   //   return <MenuItem key = {index} value={item}>{item}</MenuItem>
     //   // })
     // };
-  return (
-    <div style={{width:"82%"}}>
+    return (
+      <div style={{width:"82%"}}>
     <Box sx={{ minWidth: 120 }}>
+      <div style={{ display: 'flex'}}>
+        <div style={{marginRight: "5%"}}>
+      {/* <PlusButton onClick = {handleClick}/> */}
+      <ClassModal/>
+        </div>
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">כיתה</InputLabel>
         <Select
@@ -72,7 +80,7 @@ export default function RollingList(props) {
           value={grade}
           label="Age"
           onChange={handleChange}
-        >
+          >
           {/* {classObject.map((n, index) => <MenuItem key={index} value={n.grade[0]}>{n.grade[0]}</MenuItem>)} */}
           { classObject.map((n) => n.grade.map((item, index) => <MenuItem key={index} value={item}>{item}</MenuItem>))}
           {/* {(classObject.map((n) => n.grade.forEach(item => {<MenuItem value={item}>{item}</MenuItem>})))} */}
@@ -85,6 +93,8 @@ export default function RollingList(props) {
          {classObject.map( (n)=><MenuItem value={n.grade[0]}>{n.grade[0]}</MenuItem> )} */}
         </Select>
       </FormControl>
+      </div>
+      
     </Box>
     <Tabs grade = {grade}/>
     </div>
