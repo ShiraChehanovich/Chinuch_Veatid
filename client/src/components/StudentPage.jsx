@@ -74,8 +74,7 @@ export default function StudentPage() {
       {studentObjects.map((n) =>{
       return(
       <div className="flex" style={{width:"100%", height:"10%"}}>
-          <h6>{ n.name} </h6>
-          <h6>{ n.lastName}</h6>
+          <h6 style={{textAlign: 'right'}}>{ n.name}  { n.lastName}</h6>
           </div>
       )})}
       <div style={{width:"82%", height:"90%"}}>
@@ -87,7 +86,7 @@ export default function StudentPage() {
           <FileCard props = {fileType.four} propsId = {fileType.id}/>
           <FileCard props = {fileType.five} propsId = {fileType.id}/>
       </div>
-         <PlusButton />
+         {/* <PlusButton /> */}
       </div>
     </div>
   )

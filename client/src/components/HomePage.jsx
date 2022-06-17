@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useAuth } from './context/AuthContext'
 import Images from './Images'
+import Sentence from './Sentence'
 import PopingMenu from './PopingMenu'
 import Search from './Search'
 import firebase from 'firebase/compat/app';
@@ -28,10 +29,14 @@ export default function HomePage() {
   return (
     (user === null)?<div >
     אתה לא מחובר... <Link to = "/login">היכנס</Link>
+    
  </div>:
      ( <div>
+      
         <PopingMenu/>
-        <Images/>
+        <Sentence/>
+        {/* <div> <h1><b>תנו לילד חינוך ועתיד</b></h1></div> */}
+        {/* <Images/> */}
       </div>)
   )
   // }
