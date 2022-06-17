@@ -58,7 +58,7 @@ export default function ModalPage(t) {
   const addressRef = React.useRef()
   const gradeRef = React.useRef()
   const gradeStaffRef = React.useRef()
-  const  childRef = React.useRef()
+  const  arr = React.useRef()
   const navigate = useNavigate()
   const { currentUser,  } = useAuth()
 
@@ -149,6 +149,7 @@ export default function ModalPage(t) {
     const handleSubmitStaff = async () =>{
       // console.log("seted to: "+ gradeRef.current)
       var array = ((gradeRef.current).toString()).split(',')
+      // arr = ((gradeRef.current).toString()).split(',')
       console.log( array)
       // e.preventDefault()
     await setDoc(doc(collection(firestore, "staff" )),{
@@ -168,7 +169,7 @@ export default function ModalPage(t) {
         
       // });
       grade: array,
-      email: emailRef.current,
+      email: emailRef.current.value,
       phone: phoneRef.current.value,  
       role: roleRef.current.value,
      address: addressRef.current.value,
