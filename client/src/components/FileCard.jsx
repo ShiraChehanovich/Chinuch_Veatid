@@ -6,6 +6,9 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import File from './File';
+import { storage } from '../firebase/firebase';
+import { useNavigate } from 'react-router-dom';
+import { getDownloadURL, ref } from 'firebase/storage';
 
 
 var fileType;
@@ -13,6 +16,25 @@ var selectedId;
 export default function FileCard(props) {
     fileType = props.props
     selectedId = props.propsId
+    const navigate = useNavigate()
+function handleClick(){
+//     const imageRef = ref(storage, `${selectedId}/${fileType==="1"?"Briut":fileType==="2"?"Sodiut":fileType==="3"?"hok":fileType==="4"?"Medicine":"Accept"}`);
+//    imageRef.getDownloadURL().then(function(url){
+//         console.log(url);
+//    });
+    // navigate(`/document/${selectedId}/${fileType}`);
+}
+
+// const downloadFile = () => {
+//     const imageRef = ref(storage, `${selectedId}/${fileType==="1"?"Briut":fileType==="2"?"Sodiut":fileType==="3"?"hok":fileType==="4"?"Medicine":"Accept"}`);
+//     uploadBytes(imageRef, imageUpload).then((snapshot) => {
+//       getDownloadURL(snapshot.ref).then((url) => {
+//         setImageUrls((prev) => [...prev, url]);
+//       });
+//       alert("הועלה בהצלחה");
+//     });
+//   };
+
       return (
     <Card sx={{width: "19%" }}>
       <CardMedia
@@ -22,11 +44,11 @@ export default function FileCard(props) {
         alt="green iguana"
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography gutterBottom variant="h5" component="div"  onClick = {handleClick}>
           {fileType==="1"?"הצהרת בריאות":fileType==="2"?"ויתור סודיות":fileType==="3"?"הוראת קבע":fileType==="4"?"טיפול תרופתי":"קבלת תלמיד"}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
+          Lizards are a widespread
         </Typography>
       </CardContent>
       <CardActions>

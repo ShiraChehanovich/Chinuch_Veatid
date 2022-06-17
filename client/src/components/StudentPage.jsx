@@ -74,7 +74,7 @@ export default function StudentPage() {
       {studentObjects.map((n) =>{
       return(
       <div className="flex" style={{width:"100%", height:"10%"}}>
-          <h6>{ n.name}</h6>
+          <h6>{ n.name} </h6>
           <h6>{ n.lastName}</h6>
           </div>
       )})}
