@@ -4,7 +4,7 @@ import moment from "moment";
 import events from "./events";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { getAuth } from "firebase/auth";
-import { addDoc, doc, setDoc, collection, query, where, getDocs } from "firebase/firestore";
+import { addDoc, doc, setDoc, collection, query, where, getDocs, deleteDoc } from "firebase/firestore";
 // import { addDoc, doc, setDoc, collection } from "firebase/firestore";
 import { firestore } from '../firebase/firebase';
 // import QueryBuilderIcon from '@mui/icons-material/QueryBuilder';
@@ -46,7 +46,7 @@ export default function ReactBigCalendar({eventsData, setEventsData}) {
     getData()
   }, [])
 
-
+  
   // const handleSelect = ({ start, end }) => {
   //   console.log(start);//the day of the task
   //   // console.log("start");
@@ -62,6 +62,34 @@ export default function ReactBigCalendar({eventsData, setEventsData}) {
   //       }
   //     ]);
   // };
+  const newO = async (sam) => {
+      // const docRef = doc(firestore, "student", "1h0GqsjdkUvTwnp6AqXV");
+      // await deleteDoc(docRef);
+  
+      
+      const studentRef = collection(firestore, "tasks");
+      
+      // const staffRef = collection(firestore, "staff");
+      var q;
+      var docRef;
+      {q = query(studentRef, where("TaskDescription", "==", sam));}
+        const snapshot = await getDocs(q);
+      console.log("me")
+      snapshot.forEach(async item=>{
+        console.log("q")
+      
+       const results = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+       console.log(results)
+       results.forEach(async result => {
+        {docRef = doc(firestore, "tasks", result.id);}
+        await deleteDoc(docRef);
+        window.location.reload(false);
+       });
+  
+      });
+    
+
+  }
   return (
     <div className="App">
       <Calendar
@@ -73,8 +101,9 @@ export default function ReactBigCalendar({eventsData, setEventsData}) {
         events={eventsData}
         style={{ height: "100vh" }}
         
-        onSelectEvent={(event) => {console.log(event[0]);alert(event.title)}}
-        
+        onSelectEvent={(event) => {alert(event.title);newO(event.title) }}
+     
+    //  {<Button className="w-100" type="submit" onClick={handleSubmitStudent}>הוספה</Button>}
         // onSelectSlot={setEventsData}
       />
     </div>

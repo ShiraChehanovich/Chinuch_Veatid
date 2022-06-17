@@ -38,7 +38,7 @@ export default function StaticDatePickerLandscape() {
     <div>
       <div>
         <div>
-        <div><h1 className="day">יומן אישי</h1></div>
+        {/* <div><h1 className="day">יומן אישי</h1></div> */}
         <PopingMenu/>
        
         
