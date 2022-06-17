@@ -41,8 +41,8 @@ const style = {
 };
 
 var tableType;
-export default function ModalPage(t) {
-  tableType = t;
+export default function ModalPage({setEventsData}) {
+  // tableType = t;
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -50,26 +50,32 @@ export default function ModalPage(t) {
     const timeClock = React.useRef()
     const TaskDescriptionOfTesk = React.useRef()
     const userIdEmail = React.useRef()
+    const navigate = useNavigate();
     // {< { userIdEmail.current = user} required /> } 
     // {{userIdEmail.current = currentUser.email} }
     const handleSubmitStudent = async () =>{
     // console.log("yaelb")
     const auth = getAuth();
     const IdEmail = auth.currentUser.email;
-
+    let time = timeClock.current
+    let hours = parseInt(time[0]) * 10 + parseInt(time[1])
+    let minutes=parseInt(time[3]) * 10 + parseInt(time[4])
+    dateTimeYear.current = new Date(dateTimeYear.current.setHours(hours,minutes))
       // console.log(IdEmail)
   
                 
       // console.log("fff")
       // console.log(dateTimeYear.current)
-      await setDoc(doc(collection(firestore, "tasks")),{
-       
+      const newTask = {
         date: dateTimeYear.current,
-        time: timeClock.current.value,
+        // time: timeClock.current.value,
         TaskDescription: TaskDescriptionOfTesk.current.value, 
         userId: userIdEmail.current=IdEmail ,
-      });
+      }
+      await setDoc(doc(collection(firestore, "tasks")), newTask);
+      // setEventsData(prev => [...prev, newTask])
       window.location.reload(false);
+      // window.location.reload(false);
     }
 
   return (
@@ -89,8 +95,8 @@ export default function ModalPage(t) {
           {/* <Card>
             <Card.Body> */}
 
-            {tableType.tableType == 'Staff' ? (<div><h2 className="text-center mb-4">הוספת משימה</h2></div>) : (<div><h2 className="text-center mb-4">הוספת משימה</h2></div>)}
-                {tableType.tableType == 'Staff' ? (<Button className="w-100" type="submit" onClick={handleSubmitStudent}>הוספה</Button>) : (<Button className="w-100" type="submit" onClick={handleSubmitStudent}>הוספה</Button>)}
+             <div><h2 className="text-center mb-4">הוספת משימה</h2></div>
+                <Button className="w-100" type="submit" onClick={handleSubmitStudent}>הוספה</Button>
             <Form >
              
                 <div>
@@ -107,7 +113,9 @@ export default function ModalPage(t) {
                  <Form.Group id="hour">
                  {/* <RegularTextField  t = "שעה" ref={lName} required></RegularTextField> */}
                  <Form.Label>שעה</Form.Label>
-                 <Form.Control ref={timeClock} required />
+                 <TimeDateClock type="text" handleChange={(time) => timeClock.current=time}  required /> 
+                
+                 {/* <Form.Control ref={timeClock} required /> */}
                  {}
                  {/* <TimeDateClock type="text" ref={timeClock} required /> */}
                  </Form.Group>

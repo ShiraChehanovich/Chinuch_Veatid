@@ -6,9 +6,13 @@ a {
    zoom:70%; 
   flex-wrap: wrap;
 }
-h1{
-  font-size: larger;
-text-align: center;
+h1.day{
+  top:15%;
+  font-size: 200%;
+  
+  left:40%; 
+  position:absolute;
+  /* top:2px */
 
 }
 div.hellowU{
@@ -17,7 +21,7 @@ div.hellowU{
   flex: 1;
 }
 h6.words {
-  width: 25%;
+  width: 15%;
   /* border: 0.3px solid black; */
   display: flex;
    zoom:70%; 
@@ -25,5 +29,5 @@ h6.words {
 
 }
 h3.space{
-  width: 5%; 
+  width: 15%; 
 }

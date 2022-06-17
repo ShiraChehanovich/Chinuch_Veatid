@@ -15,6 +15,7 @@ import TaskModalPge from './TaskModalPge';
 
 export default function StaticDatePickerLandscape() {
   const [value, setValue] = React.useState(new Date());
+  const [eventsData, setEventsData] = React.useState([]);
 
   return (
     // <Stack direction="row-reverse"
@@ -37,17 +38,24 @@ export default function StaticDatePickerLandscape() {
     <div>
       <div>
         <div>
+        <div><h1 className="day">יומן אישי</h1></div>
         <PopingMenu/>
-          <h1>
-          יומן אישי</h1>
+       
+        
         </div>
         
 
-        <TaskModalPge/>
+        
 <div className="hellowU"> 
-<a><ReactBigCalendar/></a>
-<h3 className="space"></h3>
-  <h6 className="words">hjhjh</h6>
+
+<h3 className="space"><TaskModalPge/></h3>
+
+<a>
+  
+  <div><ReactBigCalendar eventsData={eventsData} setEventsData={setEventsData}/></div>
+  </a>
+ 
+   <h6 className="words"></h6>
   </div>
       </div>
       {/* <TaskModalPage />
