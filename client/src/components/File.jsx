@@ -31,6 +31,7 @@ export default function File(props) {
       getDownloadURL(snapshot.ref).then((url) => {
         setImageUrls((prev) => [...prev, url]);
       });
+      alert("הועלה בהצלחה");
     });
   };
 
@@ -45,19 +46,19 @@ export default function File(props) {
   // }, []);
 
   return (
-    <div className="App">
+    <div className="App" style={{width: "50%"}}>
       <input
         type="file"
         onChange={(event) => {
           setImageUpload(event.target.files[0]);
         }}
       />
-      <IconButton onClick={uploadFile}> 
-      <DownloadDoneIcon>אישור</DownloadDoneIcon>    
+      {/* {imageUrls.map((url) => {
+        return <img src={url} style = {{width: "100%"}} />;
+      })} */}
+      <IconButton onClick={uploadFile}> אישור
+      <DownloadDoneIcon></DownloadDoneIcon>    
         </IconButton>
-      {imageUrls.map((url) => {
-        return <img src={url} />;
-      })}
     </div>
   );
   

@@ -39,6 +39,7 @@ import FullCalendar from './components/FullCalendarComponent';
 import FullCalendarComponent from './components/FullCalendarComponent';
 import StudentPage from './components/StudentPage';
 import File from './components/File';
+import Documents from './components/Documents';
 
 
 
@@ -65,6 +66,7 @@ function App() {
               <Route path="/schedule" element={<Schedule />} />
               <Route path="/upload" element={<File />} />
               <Route path="/student-page/:studentId" element={<StudentPage />} />
+              <Route path="/document/:selectedId/:fileType" element={<Documents />} />
               {/* <Route path="/FullCalendar" element={<FullCalendarComponent />} /> */}
             </Routes>
           </AuthProvider>
