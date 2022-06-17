@@ -1,50 +1,34 @@
-import React from 'react';
-import Particles from "react-tsparticles";
+import * as React from 'react';
 import "../style/image1.css"
-// import "../style/image.js"
-export default function Design() {
-    return (
-        <Particles
-        params={{
-          background: {
-            color: {
-              value: "#AFEEEE"
-            }
-          },
-          particles: {
-            number: {
-              value: 160,
-              density: {
-                enable: false
-              }
-            },
-            size: {
-              value: 10,
-              random: true
-            },
-            move: {
-              direction: "bottom",
-              outMode: "out"
-            },
-            links: {
-              enable: false
-            }
-          },
-          interactivity: {
-            events: {
-              onClick: {
-                enable: true,
-                mode: "remove"
-              }
-            },
-            modes: {
-              remove: {
-                quantity: 10
-              }
-            }
-          }
-        }}
-      />
-    );
-}
+import Design from './Design'
 
+
+
+export default function sentence() {
+  return (
+    <div>
+      <Design />
+
+      <div className="flex-container">
+        <div className="flex-container4">
+          
+        </div>
+        <div> <p className='font11'>לצפיה במידע היעזרו בכפתורי הניווט</p></div>
+        <div  className='font11' > <img src="https://www.hamila.biz/first/" alt="" /></div>
+      </div>   
+      <div className="flex-container">
+        <div className="flex-container4">
+          
+        </div>
+        <div><h1 className='font1'>לילד</h1></div>
+        <div><h1 className='font1'>תנו </h1></div>
+      </div>
+      <div className="flex-container2">
+        <div className="flex-container3">
+          <div><h1 className='font2'>ועתיד</h1></div>
+          <div><h1 className='font2'>חינוך </h1></div>
+        </div>
+      </div>
+    </div>
+  )
+}
