@@ -104,6 +104,7 @@ export default function EnhancedTable(prop) {
   tableType = prop.prop;
   condition = prop.prop2;
   const [order, setOrder] = React.useState('asc');
+  const [reRender, setReRender] = React.useState(0);
   const [orderBy, setOrderBy] = React.useState('desc');
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
@@ -115,7 +116,7 @@ export default function EnhancedTable(prop) {
   const classRef = collection(firestore, "classes");
 
 
-const getData = async () => {
+  const getData = async () => {
   var q ;
   if (tableType === 'Staff' && condition != "none"){
       q = query(staffRef, where("grade","array-contains-any",[condition]));
@@ -209,7 +210,7 @@ React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - studentObjects.length) : 0;
-
+    
   return (
     <div>
       <Box sx={{ height: '100%', width: '100%', minHeight: '50%' }}>
@@ -217,7 +218,6 @@ React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
         <EnhancedTableToolbar numSelected={selected.length} tt = {tableType} sel = {selected}/>
         <TableContainer>
           <Table 
-            // studentObjects={data}
             sx={{ minWidth: 750 }}
             aria-labelledby="tableTitle"
             size={dense ? 'small' : 'medium'}
@@ -232,10 +232,10 @@ React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
               rowCount={studentObjects.length}
             />
             <TableBody >
+              {React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])}
               {/* if you don't need to support IE11, you can replace the `stableSort` call with:
                  rows.slice().sort(getComparator(order, orderBy)) */}
               {
-                
               stableSort(studentObjects, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
