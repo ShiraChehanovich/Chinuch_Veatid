@@ -1,7 +1,7 @@
 import React from 'react';
 import Particles from "react-tsparticles";
 import "../style/image1.css"
-import "../style/image.js"
+
 export default function Design() {
     return (
         <Particles

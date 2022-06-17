@@ -62,6 +62,16 @@ animation-name: mymove;
 animation-duration: 5s;
 }
 
+.font11{
+    font-size: 25px;
+    color: white;
+      text-shadow: 40px 40px 1000px #4169E1;
+    position: relative;
+    position: absolute;
+    right: 340px;
+    top: 100px;
+    }
+
 .font2{
     font-size: 130px;
     font-weight: bold;
@@ -83,7 +93,7 @@ animation-duration: 5s;
     
     @keyframes mymove {
       from {right: 0px;}
-      to {right: 480px;}
+      to {right: 1070px;}
     }
     
     
