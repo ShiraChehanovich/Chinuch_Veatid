@@ -59,12 +59,12 @@
 font-size: 100px;
 position: relative;
 animation-name: mymove;
-animation-duration: 5s;
+animation-duration: 45s;
 }
 
 .font11{
     font-size: 25px;
-    color: white;
+    color: black;
       text-shadow: 40px 40px 1000px #4169E1;
     position: relative;
     position: absolute;
@@ -78,12 +78,12 @@ animation-duration: 5s;
     margin-left: 80px;
       position: relative;
       animation-name: mymove;
-      animation-duration: 5s;
+      animation-duration: 45s;
   
     }
 
     h1 {
-      color: white;
+      color: gray;
       text-shadow: 4px 4px 35px #4169E1;
       animation-name: example;
       animation-duration: 4s;

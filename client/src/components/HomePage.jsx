@@ -31,9 +31,9 @@ export default function HomePage() {
     אתה לא מחובר... <Link to = "/login">היכנס</Link>
     
  </div>:
-     ( <div>
+     ( <div >
       
-        <PopingMenu/>
+        <PopingMenu />
         <Sentence/>
         {/* <div> <h1><b>תנו לילד חינוך ועתיד</b></h1></div> */}
         {/* <Images/> */}

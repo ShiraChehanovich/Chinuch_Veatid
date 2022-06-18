@@ -10,7 +10,7 @@ export default function Design() {
             color: {
               value: "#AFEEEE"
             }
-          },
+            },
           particles: {
             number: {
               value: 160,

@@ -14,17 +14,20 @@ import Schedule_class_file from './Schedule_class_file'
 import 'firebase/compat/auth';
 import firebase from 'firebase/compat/app';
 import RollingList from './RolingList';
+import { useState } from 'react';
 
 
-var grade;
-export default function Tabs(grade) {
-  grade = grade.grade;
+export default function Tabs(prop) {
   // console.log("grfhdjsxkvbfcnj    " + grade)
   const [value, setValue] = React.useState('1');
+  const[grade, setGrade] = useState('')
+  React.useEffect(()=>{setGrade(prop.grade)});
   const staffRef = collection(firestore, "staff");
     const [classObject, setClassObject] = React.useState([]);
     const { currentUser  } = useAuth();
     // const mail = currentUser.email
+
+
 
     const getData = async () => {
         
@@ -36,7 +39,6 @@ export default function Tabs(grade) {
         // console.log(key);
         return result[0].grade; 
          }      
-      // React.useEffect(()=>{getData()});
     //   React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
 
   const handleChange = (event, newValue) => {
@@ -71,10 +73,10 @@ export default function Tabs(grade) {
           {/* // */}
         {/* </TabPanel> */}
         <TabPanel value="1">
-            <Table prop = {props1.t} prop2 = {props1.p}></Table>
+            <Table prop = {props1.t} prop2 = {grade}></Table>
         </TabPanel>
         <TabPanel value="2">
-            <Table prop = {props2.t} prop2 = {props2.p}></Table>
+            <Table prop = {props2.t} prop2 = {grade}></Table>
         </TabPanel>
       </TabContext>
     </Box>

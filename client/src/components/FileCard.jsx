@@ -18,15 +18,15 @@ export default function FileCard(props) {
     fileType = props.props
     selectedId = props.propsId
     const navigate = useNavigate()
-    const[url, setUrl] = useState();
+    const[url, setUrl] = useState(); 
     const setU=()=>{
         const imageRef = ref(storage, `${selectedId}/${fileType==="1"?"Briut":fileType==="2"?"Sodiut":fileType==="3"?"hok":fileType==="4"?"Medicine":"Accept"}`);
-        getDownloadURL(imageRef).then(function(u){
-            setUrl(u);
-        }).catch(error=>{
-            setUrl('');
-        });
-    };
+            getDownloadURL(imageRef).then(function(u){
+                setUrl(u);
+            }).catch(error=>{
+                setUrl('');
+            });
+        };
     React.useEffect(()=>{setU()});    
     // function handleClick(obj){
     //      const imageRef = ref(storage, `${selectedId}/${fileType==="1"?"Briut":fileType==="2"?"Sodiut":fileType==="3"?"hok":fileType==="4"?"Medicine":"Accept"}`);
@@ -58,9 +58,10 @@ export default function FileCard(props) {
       <CardContent>
         
           <Typography gutterBottom variant="h5" component="div" >
-        <a target='_blank' href={url} >
+        {url===""?<h5>          {fileType==="1"?"הצהרת בריאות":fileType==="2"?"ויתור סודיות":fileType==="3"?"הוראת קבע":fileType==="4"?"טיפול תרופתי":"קבלת תלמיד"}
+</h5>:(<a target='_blank' href={url} >
           {fileType==="1"?"הצהרת בריאות":fileType==="2"?"ויתור סודיות":fileType==="3"?"הוראת קבע":fileType==="4"?"טיפול תרופתי":"קבלת תלמיד"}
-        </a>
+        </a>)}
             </Typography>
       
         
