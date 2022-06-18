@@ -157,8 +157,9 @@ React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = studentObjects.map((n) => n.name);
+      const newSelecteds = studentObjects.map((n) => n.idUser);
       setSelected(newSelecteds);
+      console.log(selected)
       return;
     }
     setSelected([]);
@@ -189,6 +190,7 @@ React.useEffect(()=>{console.log(studentObjects)}, [studentObjects])
   };
 
   const handleChangeRowsPerPage = (event) => {
+    console.log("jhgfd")
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
