@@ -7,6 +7,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { firestore } from '../firebase/firebase';
+import TextField from '@mui/material/TextField';
 
 
 
@@ -31,7 +32,7 @@ function getStyles(grade, staffGrade, theme) {
   };
 }
 
- export default function SelectedRolingList() { 
+ export default function SelectedRolingList({handleChange}) { 
   const theme = useTheme();
   const [staffGrade, setStaffGrade] = React.useState([]);
   const [classesObjects, setClassesObjects] = React.useState([]);
@@ -51,7 +52,7 @@ function getStyles(grade, staffGrade, theme) {
   }
   React.useEffect(()=>{getData()}, []);
 
-  const handleChange = (event) => {
+  const handleChange1 = (event) => {
     const {
       target: { value },
     } = event;
@@ -59,6 +60,8 @@ function getStyles(grade, staffGrade, theme) {
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value,
     );
+    // console.log(staffGrade)
+    // handleChange(staffGrade)
   };
 //   useImperativeHandle(ref, () => ({
 
@@ -77,7 +80,7 @@ function getStyles(grade, staffGrade, theme) {
           id="demo-multiple-name"
           multiple
           value={staffGrade}
-          onChange={handleChange}
+          onChange={handleChange1}
           input={<OutlinedInput label="Name" />}
           MenuProps={MenuProps}
         >
@@ -90,10 +93,13 @@ function getStyles(grade, staffGrade, theme) {
               {grade}
             </MenuItem>
           ))} */}
+
           {classesObjects.map((n, index) => <MenuItem key ={index} value={n.grade}
               style={getStyles(n.grade, staffGrade, theme)}>{n.grade}</MenuItem>)}
+              
         </Select>
       </FormControl>
+      {handleChange(staffGrade)}
     </div>
   );
 }

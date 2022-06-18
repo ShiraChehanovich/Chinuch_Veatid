@@ -57,9 +57,71 @@ export default function ModalPage(t) {
   const roleRef = React.useRef ()
   const addressRef = React.useRef()
   const gradeRef = React.useRef()
-  const  childRef = React.useRef()
+  const gradeStaffRef = React.useRef()
+  const  arr = React.useRef()
   const navigate = useNavigate()
   const { currentUser,  } = useAuth()
+
+
+  // async function handleSubmit(e){
+  //   e.preventDefault()
+  //           //console.log(fnameRef.current.value)
+  //           //await add(fnameRef.current.value, lNameRef.current.value,IDRef.current.value, emailRef.current.value, phoneRef.current.value, ageRef.current.value, addressRef.current.value)
+  //           //firestore.collection("student").add({fnameRef, lNameRef,IDRef, emailRef, phoneRef, ageRef, addressRef})
+  //           // const DocRef = await setDoc(collection(firestore, "student"), {
+  //           //   name: fnameRef.current.value,
+  //           //   lastName: lNameRef.current.value,
+  //           //   id: IDRef.current.value,
+  //           //   email: emailRef.current.value,
+  //           //   phone: phoneRef.current.value,
+  //           //   age: ageRef.current.value,
+  //           //   address: addressRef.current.value,
+  //           // });
+  //           // console.log("Document written with ID: ", DocRef.id);
+
+  //         //   useEffect (() => {
+  //         //     if(collection) { 
+  //         //       var q;
+  //         //       //const newcoll = col(projectFirestore, collection);
+  //               const studentRef = collection(firestore, "student");
+  //         //       // const q = query(studentRef, orderBy('createdAt', 'desc'));
+  //         //       // const unsub = onSnapshot(q, (snapshot) => {
+  //         //         q = query(studentRef);
+  //         //         const snapshot = await setDoc(q)
+  //         //         let documents = [];
+  //         //         snapshot.forEach(doc => {
+  //         //            documents.push({...doc.data(), id: doc.id})
+  //         //         // })
+  //         //         //setDocs(documents);
+  //         //       });
+           
+  //         //       return unsub;
+  //         //    }
+  //         //  },[collection]);
+  //         //const docRef = firestore.collection(firestore, "student").doc();
+  //         //const newId = docRef.id;
+  //         const newId = firestore.newId;
+  //         firestore.studentRef.doc(newId).set({
+  //           name: fnameRef.current.value,
+  //             lastName: lNameRef.current.value,
+  //             id: IDRef.current.value,
+  //             email: emailRef.current.value,
+  //             phone: phoneRef.current.value,
+  //             age: ageRef.current.value,
+  //             address: addressRef.current.value,
+  //         })
+
+  //           navigate("/students")
+  //         }
+    // const studentRef = collection(firestore,"student");
+    // const [newName,setNewName] = React.useState("")
+    // const [newLName,setNewLName] = React.useState("")
+    // const [newId,setNewId] = React.useState(0)
+    // const [newEmail,setNewEmail] = React.useState("")
+    // const [newPhone,setNewPhone] = React.useState(0)
+    // const [newAge,setNewAge] = React.useState(0)
+    // const [newAddress,setNewAddress] = React.useState("")
+
 
 
     const handleSubmitStudent = async () =>{
@@ -85,12 +147,28 @@ export default function ModalPage(t) {
       window.location.reload(false);
     }
     const handleSubmitStaff = async () =>{
+      // console.log("seted to: "+ gradeRef.current)
+      var array = ((gradeRef.current).toString()).split(',')
+      // arr = ((gradeRef.current).toString()).split(',')
+      console.log( array)
       // e.preventDefault()
     await setDoc(doc(collection(firestore, "staff" )),{
+      // name: newName,
+      // lastName: newLName,
+      // id: newId,
+      // email: newEmail, 
+      // phone: newPhone,
+      // age: newAge,
+      // address: newAddress,
       name: fnameRef.current.value,
       lastName: lNameRef.current.value,
       idUser: parseInt(IDRef.current.value, 10),
-      grade: childRef.current.value,
+      // grade.forEach(element => {
+      //   grade[i]:gradeStaffRef.current,
+      //   i++
+        
+      // });
+      grade: array,
       email: emailRef.current.value,
       phone: phoneRef.current.value,  
       role: roleRef.current.value,
@@ -146,7 +224,7 @@ export default function ModalPage(t) {
                 <Form.Group id="grade">
                 {/* <RegularTextField t = "כיתה"  value = {newGrade onChange={(event) => setNewAge(event.target.value)}></RegularTextField> */}
                 {tableType.tableType == 'Staff' ? null: (<Form.Label>כיתה</Form.Label>)}
-                {tableType.tableType == 'Staff' ? <SelectedRolingList ></SelectedRolingList> : (<Form.Control type="text" ref={gradeRef} required />)}
+                {tableType.tableType == 'Staff' ? <SelectedRolingList handleChange={(grade) => {gradeRef.current = grade; console.log("change to:  " + gradeRef.current )}} ></SelectedRolingList> : (<Form.Control type="text" ref={gradeRef} required />)}
                 </Form.Group>
                 <Form.Group id="phone">
                 {/* <RegularTextField t = "טלפון"  value = {newPhone} onChange={(event) => setNewPhone(event.target.value)}></RegularTextField> */}
