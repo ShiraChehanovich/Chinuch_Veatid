@@ -7,8 +7,9 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import File from './File';
 import { storage } from '../firebase/firebase';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getDownloadURL, ref } from 'firebase/storage';
+import { useState } from 'react';
 
 
 var fileType;
@@ -17,13 +18,24 @@ export default function FileCard(props) {
     fileType = props.props
     selectedId = props.propsId
     const navigate = useNavigate()
-function handleClick(){
-//     const imageRef = ref(storage, `${selectedId}/${fileType==="1"?"Briut":fileType==="2"?"Sodiut":fileType==="3"?"hok":fileType==="4"?"Medicine":"Accept"}`);
-//    imageRef.getDownloadURL().then(function(url){
-//         console.log(url);
-//    });
-    // navigate(`/document/${selectedId}/${fileType}`);
-}
+    const[url, setUrl] = useState();
+    const setU=()=>{
+        const imageRef = ref(storage, `${selectedId}/${fileType==="1"?"Briut":fileType==="2"?"Sodiut":fileType==="3"?"hok":fileType==="4"?"Medicine":"Accept"}`);
+        getDownloadURL(imageRef).then(function(u){
+            setUrl(u);
+        }).catch(error=>{
+            setUrl('');
+        });
+    };
+    React.useEffect(()=>{setU()});    
+    // function handleClick(obj){
+    //      const imageRef = ref(storage, `${selectedId}/${fileType==="1"?"Briut":fileType==="2"?"Sodiut":fileType==="3"?"hok":fileType==="4"?"Medicine":"Accept"}`);
+    //      getDownloadURL(imageRef).then(function(url){
+    //         alert(url);
+    //      return url;
+    //     });
+        // navigate(`/document/${selectedId}/${fileType}`);
+    
 
 // const downloadFile = () => {
 //     const imageRef = ref(storage, `${selectedId}/${fileType==="1"?"Briut":fileType==="2"?"Sodiut":fileType==="3"?"hok":fileType==="4"?"Medicine":"Accept"}`);
@@ -44,18 +56,20 @@ function handleClick(){
         alt="green iguana"
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div"  onClick = {handleClick}>
+        
+          <Typography gutterBottom variant="h5" component="div" >
+        <a target='_blank' href={url} >
           {fileType==="1"?"הצהרת בריאות":fileType==="2"?"ויתור סודיות":fileType==="3"?"הוראת קבע":fileType==="4"?"טיפול תרופתי":"קבלת תלמיד"}
-        </Typography>
+        </a>
+            </Typography>
+      
+        
         <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread
+          
         </Typography>
       </CardContent>
       <CardActions>
-        {/* <Button size="small">בחר קובץ */}
         <File propsId = {selectedId} propsType = {fileType}/>
-        {/* </Button> */}
-        {/* <Button size="small">העלאה</Button> */}
       </CardActions>
     </Card>
   );

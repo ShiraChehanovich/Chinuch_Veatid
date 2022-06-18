@@ -6,9 +6,11 @@ import PopingMenu from './PopingMenu'
 import RegularTextField from './RegularTextField'
 import './ClassStyle.css'
 import { Button, Form } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { height } from '@mui/system';
 import FileCard from './FileCard';
+import firebase from 'firebase/compat/app';
+
 
 var idS;
 var s;
@@ -32,6 +34,8 @@ export default function StudentPage() {
     const IDRef = useRef()
     const phoneRef = useRef()
     const addressRef = useRef()
+    const user = firebase.auth().currentUser;  
+
 
     function handleSubmit(){
 
@@ -69,6 +73,9 @@ export default function StudentPage() {
     // React.useEffect(()=>{setData()});    
 
   return (
+    (user === null)?<div >
+    אתה לא מחובר... <Link to = "/login">היכנס</Link>
+ </div>:
     <div style={{width:"100%"}}>
       <PopingMenu/>
       {studentObjects.map((n) =>{

@@ -44,7 +44,8 @@ h1{
 
   
   span {
-      font-size: 25px;
+      font-size: 18px;
+      font-weight: bold;
       text-align: center;
       font-family:Verdana, Geneva, Tahoma, sans-serif
     }
