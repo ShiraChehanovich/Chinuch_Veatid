@@ -31,7 +31,8 @@ export default function File(props) {
       getDownloadURL(snapshot.ref).then((url) => {
         setImageUrls((prev) => [...prev, url]);
       });
-      alert("הועלה בהצלחה");
+      alert("הקובץ הועלה בהצלחה");
+      window.location.reload(false);
     });
   };
   const getFileUrl = (userId, fileType) => {

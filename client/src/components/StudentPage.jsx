@@ -78,9 +78,9 @@ export default function StudentPage() {
  </div>:
     <div style={{width:"100%"}}>
       <PopingMenu/>
-      {studentObjects.map((n) =>{
+      {studentObjects.map((n, index) =>{ 
       return(
-      <div className="flex" style={{width:"100%", height:"10%"}}>
+      <div className="flex" style={{width:"100%", height:"10%"}} key ={index}>
           <h6 style={{textAlign: 'right'}}>{ n.name}  { n.lastName}</h6>
           </div>
       )})}

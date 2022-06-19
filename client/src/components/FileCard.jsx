@@ -6,10 +6,20 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import File from './File';
-import { storage } from '../firebase/firebase';
+// import { storage } from '../firebase/firebase';
 import { Link, useNavigate } from 'react-router-dom';
-import { getDownloadURL, ref } from 'firebase/storage';
+import { getDownloadURL, ref, refFromURL } from 'firebase/storage';
 import { useState } from 'react';
+import Tooltip from '@mui/material/Tooltip';
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
+import { getStorage, deleteObject } from "firebase/storage";
+import firebase from 'firebase/compat/app';
+import { storage } from "../firebase/firebase.js";
+
+
+
+
 
 
 var fileType;
@@ -18,16 +28,27 @@ export default function FileCard(props) {
     fileType = props.props
     selectedId = props.propsId
     const navigate = useNavigate()
-    const[url, setUrl] = useState(); 
+    const[url, setUrl] = useState();
+  
+
     const setU=()=>{
         const imageRef = ref(storage, `${selectedId}/${fileType==="1"?"Briut":fileType==="2"?"Sodiut":fileType==="3"?"hok":fileType==="4"?"Medicine":"Accept"}`);
-            getDownloadURL(imageRef).then(function(u){
-                setUrl(u);
-            }).catch(error=>{
-                setUrl('');
-            });
-        };
-    React.useEffect(()=>{setU()});    
+        getDownloadURL(imageRef).then(function(u){
+            setUrl(u);
+        }).catch(error=>{
+            setUrl('');
+        });
+    };
+    React.useEffect(()=>{setU()});  
+    
+    // const deleteFromFirebase = () => {
+    //   //1.
+    //   let pictureRef = storage.refFromURL(url);
+    //  //2.
+    //   pictureRef.delete()
+    // };
+
+
     // function handleClick(obj){
     //      const imageRef = ref(storage, `${selectedId}/${fileType==="1"?"Briut":fileType==="2"?"Sodiut":fileType==="3"?"hok":fileType==="4"?"Medicine":"Accept"}`);
     //      getDownloadURL(imageRef).then(function(url){
@@ -47,6 +68,17 @@ export default function FileCard(props) {
 //     });
 //   };
 
+    const handleDeleteFile =  async () =>{ 
+      const fileRef = ref(storage, url);
+      deleteObject(fileRef).then(function () {
+        alert("הקובץ נמחק בהצלחה");
+        window.location.reload(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
       return (
     <Card sx={{width: "19%" }}>
       <CardMedia
@@ -63,15 +95,31 @@ export default function FileCard(props) {
           {fileType==="1"?"הצהרת בריאות":fileType==="2"?"ויתור סודיות":fileType==="3"?"הוראת קבע":fileType==="4"?"טיפול תרופתי":"קבלת תלמיד"}
         </a>)}
             </Typography>
+
+
+            <div><Typography
+              sx={{ flex: '1 1 100%' }}
+              color="inherit"
+              variant="subtitle1"
+              component="div"
+            >
+             {url!==""? <Tooltip title="Delete">
+                <IconButton onClick={handleDeleteFile}>
+                  <DeleteIcon />
+                </IconButton>
+      
+              </Tooltip>:(<></>)}
+            </Typography></div>
       
         
         <Typography variant="body2" color="text.secondary">
-          
         </Typography>
+
       </CardContent>
       <CardActions>
         <File propsId = {selectedId} propsType = {fileType}/>
       </CardActions>
+
     </Card>
   );
 }
