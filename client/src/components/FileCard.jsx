@@ -90,8 +90,8 @@ export default function FileCard(props) {
       <CardContent>
         
           <Typography gutterBottom variant="h5" component="div" >
-        {url===""?<h5>          {fileType==="1"?"הצהרת בריאות":fileType==="2"?"ויתור סודיות":fileType==="3"?"הוראת קבע":fileType==="4"?"טיפול תרופתי":"קבלת תלמיד"}
-</h5>:(<a target='_blank' href={url} >
+        {url===""?<h5 >          {fileType==="1"?"הצהרת בריאות":fileType==="2"?"ויתור סודיות":fileType==="3"?"הוראת קבע":fileType==="4"?"טיפול תרופתי":"קבלת תלמיד"}
+</h5>:(<a target='_blank' href={url}>
           {fileType==="1"?"הצהרת בריאות":fileType==="2"?"ויתור סודיות":fileType==="3"?"הוראת קבע":fileType==="4"?"טיפול תרופתי":"קבלת תלמיד"}
         </a>)}
             </Typography>
