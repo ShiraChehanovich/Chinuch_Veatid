@@ -64,7 +64,7 @@ export default function PopingMenu() {
     }
   }
   return (
-    <Box sx={{ display: 'flex' }} >
+    <Box sx={{ display: 'flex' }}  >
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -73,7 +73,7 @@ export default function PopingMenu() {
       >
         <Toolbar>
           <Typography variant="h6" noWrap component="div">
-            סטודנטים
+            {/* סטודנטים */}
           </Typography>
         </Toolbar>
       </AppBar>

@@ -37,6 +37,7 @@
     "react": "^18.0.0",
     "react-big-calendar": "^0.40.1",
     "react-bootstrap": "^2.4.0",
+    "react-bucket": "^0.0.11",
     "react-calendar": "^3.7.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.3.0",

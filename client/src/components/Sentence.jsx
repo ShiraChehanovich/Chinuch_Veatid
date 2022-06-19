@@ -13,7 +13,7 @@ export default function sentence() {
         <div className="flex-container4">
           
         </div>
-        <div> <p className='font11'>לצפיה במידע היעזרו בכפתורי הניווט</p></div>
+        {/* <div> <p className='font11'>לצפיה במידע היעזרו בכפתורי הניווט={'>'}</p></div> */}
         <div  className='font11' > <img src="https://www.hamila.biz/first/" alt="" /></div>
       </div>   
       <div className="flex-container">

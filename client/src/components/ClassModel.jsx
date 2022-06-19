@@ -79,7 +79,7 @@ export default function ClassModal() {
           {/* <Card>
             <Card.Body> */}
 
-            <div><h2 className="text-center mb-4">הוספת איש צוות</h2></div>
+            <div><h2 className="text-center mb-4">הוספת כיתה</h2></div>
                 <Button className="w-100" type="submit" onClick={handleSubmitStaff}>הוספה</Button>
             <Form >
                 <div style={{display: 'flex' , flexWrap : 'nowrap'}}>

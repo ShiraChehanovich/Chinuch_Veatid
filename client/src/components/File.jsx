@@ -19,20 +19,24 @@ var fileType;
 export default function File(props) {
   selectedId = props.propsId;
   fileType = props.propsType;
-  console.log(selectedId)
+  // console.log(selectedId)
   const [imageUpload, setImageUpload] = useState(null);
   const [imageUrls, setImageUrls] = useState([]);
 
   const imagesListRef = ref(storage, selectedId+"/");
   const uploadFile = () => {
     if (imageUpload == null) return;
-    const imageRef = ref(storage, `${selectedId}/${fileType==="1"?"Briut":fileType==="2"?"Sodiut":fileType==="3"?"hok":fileType==="4"?"Medicine":"Accept"}`);
+    const imageRef = getFileUrl(selectedId, fileType); 
     uploadBytes(imageRef, imageUpload).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
         setImageUrls((prev) => [...prev, url]);
       });
-      alert("הועלה בהצלחה");
+      alert("הקובץ הועלה בהצלחה");
+      window.location.reload(false);
     });
+  };
+  const getFileUrl = (userId, fileType) => {
+    return ref(storage, `${userId}/${fileType==="1"?"Briut":fileType==="2"?"Sodiut":fileType==="3"?"hok":fileType==="4"?"Medicine":"Accept"}`);
   };
 
   // useEffect(() => {
@@ -53,7 +57,7 @@ export default function File(props) {
           setImageUpload(event.target.files[0]);
         }}
       />
-      {/* {imageUrls.map((url) => {
+            {/* {imageUrls.map((url) => {
         return <img src={url} style = {{width: "100%"}} />;
       })} */}
       <IconButton onClick={uploadFile}> אישור
