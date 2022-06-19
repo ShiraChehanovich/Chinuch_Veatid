@@ -8,6 +8,10 @@ import { addDoc, doc, setDoc, collection, query, where, getDocs, deleteDoc } fro
 // import { addDoc, doc, setDoc, collection } from "firebase/firestore";
 import { firestore } from '../firebase/firebase';
 // import QueryBuilderIcon from '@mui/icons-material/QueryBuilder';
+import "./styles.css";
+import { confirmAlert } from "react-confirm-alert"; // Import
+import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
+
 
 moment.locale("en-GB");
 const localizer = momentLocalizer(moment);
@@ -90,6 +94,44 @@ export default function ReactBigCalendar({eventsData, setEventsData}) {
     
 
   }
+  const handleClickBasic = (indexToRemove) => {
+    confirmAlert({
+     
+      message: indexToRemove,
+      buttons: [
+        {
+          label: "למחיקה לחץ כאן",
+          onClick: () => newO(indexToRemove)
+        },
+        {
+          label: "לאישור לחץ כאן",
+          // onClick: () => alert("Click No")
+        }
+      ]
+    });
+  };
+
+  const handleClickCustom = (indexToRemove) => {
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return (
+          <div className="custom-ui">
+            <h1>Are you sure?</h1>
+            <p>You want to delete this file?</p>
+            <button onClick={onClose}>No</button>
+            <button
+              onClick={() => {
+                // removeRecord(indexToRemove)
+                onClose();
+              }}
+            >
+              Yes, Delete it!
+            </button>
+          </div>
+        );
+      }
+    });
+  };
   return (
     <div className="App">
       <Calendar
@@ -101,7 +143,7 @@ export default function ReactBigCalendar({eventsData, setEventsData}) {
         events={eventsData}
         style={{ height: "100vh" }}
         
-        onSelectEvent={(event) => {alert(event.title);newO(event.title) }}
+        onSelectEvent={(event) => {handleClickBasic(event.title) }}
      
     //  {<Button className="w-100" type="submit" onClick={handleSubmitStudent}>הוספה</Button>}
         // onSelectSlot={setEventsData}
